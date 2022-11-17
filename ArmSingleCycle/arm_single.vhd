@@ -60,6 +60,7 @@ begin
   end process;
 end;
 
+
 library IEEE; 
 use IEEE.STD_LOGIC_1164.all; use IEEE.NUMERIC_STD_UNSIGNED.all;
 entity top is -- top-level design for testing
@@ -68,7 +69,10 @@ entity top is -- top-level design for testing
        MemWrite:             buffer STD_LOGIC);
 end;
 
-architecture test of top is
+
+arc
+,
+hitecture test of top is
   component arm 
     port(clk, reset:        in  STD_LOGIC;
          PC:                out STD_LOGIC_VECTOR(31 downto 0);

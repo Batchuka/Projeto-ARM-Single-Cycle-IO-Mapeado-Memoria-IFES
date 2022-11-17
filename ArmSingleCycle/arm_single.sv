@@ -414,7 +414,6 @@ module mux2 #(parameter WIDTH = 8)
   assign y = s ? d1 : d0; 
 endmodule
 
-
 module alu(input  logic [31:0] a, b,
            input  logic [1:0]  ALUControl,
            output logic [31:0] Result,
