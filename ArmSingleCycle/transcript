@@ -1,3 +1,34 @@
 # Reading C:/intelFPGA_pro/19.4/modelsim_ase/tcl/vsim/pref.tcl
 # OpenFile C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IO-Mapeado-Memoria-IFES/ArmSingleCycle/arm_single.sv
-# Load canceled
+project open C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IO-Mapeado-Memoria-IFES/ArmSingleCycle/ArmSingleCycle
+# Loading project ArmSingleCycle
+# Compile of arm_single.sv was successful.
+vsim -gui work.testbench
+# vsim -gui work.testbench 
+# Start time: 19:31:31 on Nov 22,2022
+# Loading sv_std.std
+# Loading work.testbench
+# Loading work.top
+# Loading work.arm
+# Loading work.controller
+# Loading work.decoder
+# Loading work.condlogic
+# Loading work.flopenr
+# Loading work.condcheck
+# Loading work.datapath
+# Loading work.mux2
+# Loading work.flopr
+# Loading work.adder
+# Loading work.regfile
+# Loading work.extend
+# Loading work.alu
+# Loading work.imem
+# Loading work.dmem
+add wave -position end sim:/testbench/dut/*
+run -all
+# Simulation succeeded
+# ** Note: $stop    : C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IO-Mapeado-Memoria-IFES/ArmSingleCycle/arm_single.sv(105)
+#    Time: 205 ps  Iteration: 1  Instance: /testbench
+# Break in Module testbench at C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IO-Mapeado-Memoria-IFES/ArmSingleCycle/arm_single.sv line 105
+# End time: 20:07:05 on Nov 22,2022, Elapsed time: 0:35:34
+# Errors: 2, Warnings: 0
