@@ -1,0 +1,42 @@
+# Reading C:/intelFPGA_pro/19.4/modelsim_ase/tcl/vsim/pref.tcl
+# OpenFile C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IO-Mapeado-Memoria-IFES/ArmPipeCycle/arm_pipelined.sv
+project open C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IO-Mapeado-Memoria-IFES/ArmPipeCycle/ArmPipeCycle
+# Loading project ArmPipeCycle
+# reading C:/intelFPGA_pro/19.4/modelsim_ase/win32aloem/../modelsim.ini
+project open C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IO-Mapeado-Memoria-IFES/ArmPipeCycle/ArmPipeCycle
+# Loading project ArmPipeCycle
+# Compile of arm_pipelined.sv was successful.
+vsim -gui work.testbench
+# vsim -gui work.testbench 
+# Start time: 15:25:48 on Nov 27,2022
+# Loading sv_std.std
+# Loading work.testbench
+# Loading work.top
+# Loading work.arm
+# Loading work.controller
+# Loading work.floprc
+# Loading work.flopr
+# Loading work.conditional
+# Loading work.datapath
+# Loading work.mux2
+# Loading work.flopenr
+# Loading work.adder
+# Loading work.flopenrc
+# Loading work.regfile
+# Loading work.extend
+# Loading work.mux3
+# Loading work.alu
+# Loading work.eqcmp
+# Loading work.hazard
+# Loading work.imem
+# Loading work.dmem
+add wave -position end sim:/testbench/*
+run -continue
+restart -f
+run -all
+# Simulation succeeded
+# ** Note: $stop    : C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IO-Mapeado-Memoria-IFES/ArmPipeCycle/arm_pipelined.sv(106)
+#    Time: 375 ps  Iteration: 1  Instance: /testbench
+# Break in Module testbench at C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IO-Mapeado-Memoria-IFES/ArmPipeCycle/arm_pipelined.sv line 106
+# End time: 16:10:13 on Nov 27,2022, Elapsed time: 0:44:25
+# Errors: 0, Warnings: 0

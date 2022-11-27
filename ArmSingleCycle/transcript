@@ -3,9 +3,10 @@
 project open C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IO-Mapeado-Memoria-IFES/ArmSingleCycle/ArmSingleCycle
 # Loading project ArmSingleCycle
 # Compile of arm_single.sv was successful.
+# Compile of arm_single.sv was successful.
 vsim -gui work.testbench
 # vsim -gui work.testbench 
-# Start time: 19:31:31 on Nov 22,2022
+# Start time: 15:01:14 on Nov 27,2022
 # Loading sv_std.std
 # Loading work.testbench
 # Loading work.top
@@ -24,11 +25,201 @@ vsim -gui work.testbench
 # Loading work.alu
 # Loading work.imem
 # Loading work.dmem
-add wave -position end sim:/testbench/dut/*
+run
+add wave -position end sim:/testbench/*
 run -all
 # Simulation succeeded
 # ** Note: $stop    : C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IO-Mapeado-Memoria-IFES/ArmSingleCycle/arm_single.sv(105)
 #    Time: 205 ps  Iteration: 1  Instance: /testbench
 # Break in Module testbench at C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IO-Mapeado-Memoria-IFES/ArmSingleCycle/arm_single.sv line 105
-# End time: 20:07:05 on Nov 22,2022, Elapsed time: 0:35:34
+add wave -position end sim:/testbench/dut/imem/*
+restart -f
+run -all
+# GetModuleFileName: Não foi possível encontrar o módulo especificado.
+# 
+# 
+# Simulation succeeded
+# ** Note: $stop    : C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IO-Mapeado-Memoria-IFES/ArmSingleCycle/arm_single.sv(105)
+#    Time: 205 ps  Iteration: 1  Instance: /testbench
+# Break in Module testbench at C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IO-Mapeado-Memoria-IFES/ArmSingleCycle/arm_single.sv line 105
+write format wave -window .main_pane.wave.interior.cs.body.pw.wf C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IO-Mapeado-Memoria-IFES/ArmSingleCycle/wave.do
+quit -sim
+# End time: 15:06:07 on Nov 27,2022, Elapsed time: 0:04:53
+# Errors: 3, Warnings: 0
+# reading C:/intelFPGA_pro/19.4/modelsim_ase/win32aloem/../modelsim.ini
+# Loading project ArmMultiCycle
+# Compile of arm_multi.sv was successful.
+vsim -gui work.testbench
+# vsim -gui work.testbench 
+# Start time: 15:08:03 on Nov 27,2022
+# Loading sv_std.std
+# Loading work.testbench
+# Loading work.top
+# Loading work.arm
+# Loading work.controller
+# Loading work.decoder
+# Loading work.mainfsm
+# Loading work.condlogic
+# Loading work.flopenr
+# Loading work.condcheck
+# Loading work.flopr
+# Loading work.datapath
+# Loading work.mux2
+# Loading work.regfile
+# Loading work.extend
+# Loading work.mux3
+# Loading work.alu
+# Loading work.mem
+# Load canceled
+run -all
+# ** Warning: (vsim-7) Failed to open readmem file "memfile.dat" in read mode.
+# No such file or directory. (errno = ENOENT)    : C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IO-Mapeado-Memoria-IFES/MultiAndPipeline/arm_multi.sv(134)
+#    Time: 0 ps  Iteration: 0  Instance: /testbench/dut/mem
+add wave -position end sim:/testbench/*
+# Break key hit
+# Simulation stop requested.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Load canceled
+quit -sim
+# End time: 15:09:04 on Nov 27,2022, Elapsed time: 0:01:01
 # Errors: 2, Warnings: 0
+vsim -gui work.testbench
+# vsim -gui work.testbench 
+# Start time: 15:09:16 on Nov 27,2022
+# Loading sv_std.std
+# Loading work.testbench
+# Loading work.top
+# Loading work.arm
+# Loading work.controller
+# Loading work.decoder
+# Loading work.mainfsm
+# Loading work.condlogic
+# Loading work.flopenr
+# Loading work.condcheck
+# Loading work.flopr
+# Loading work.datapath
+# Loading work.mux2
+# Loading work.regfile
+# Loading work.extend
+# Loading work.mux3
+# Loading work.alu
+# Loading work.mem
+add wave -position end sim:/testbench/*
+run -all
+# ** Warning: (vsim-7) Failed to open readmem file "memfile.dat" in read mode.
+# No such file or directory. (errno = ENOENT)    : C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IO-Mapeado-Memoria-IFES/MultiAndPipeline/arm_multi.sv(134)
+#    Time: 0 ps  Iteration: 0  Instance: /testbench/dut/mem
+# Break key hit
+# Simulation stop requested.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+run
+# GetModuleFileName: Não foi possível encontrar o módulo especificado.
+# 
+# 
+# ** Warning: (vsim-7) Failed to open readmem file "memfile.dat" in read mode.
+# No such file or directory. (errno = ENOENT)    : C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IO-Mapeado-Memoria-IFES/MultiAndPipeline/arm_multi.sv(134)
+#    Time: 0 ps  Iteration: 0  Instance: /testbench/dut/mem
+# Break key hit
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+run -all
+# GetModuleFileName: Não foi possível encontrar o módulo especificado.
+# 
+# 
+# ** Warning: (vsim-7) Failed to open readmem file "memfile.dat" in read mode.
+# No such file or directory. (errno = ENOENT)    : C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IO-Mapeado-Memoria-IFES/MultiAndPipeline/arm_multi.sv(134)
+#    Time: 0 ps  Iteration: 0  Instance: /testbench/dut/mem
+# Break key hit
+# Break in Module mux3 at C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IO-Mapeado-Memoria-IFES/MultiAndPipeline/arm_multi.sv line 475
+quit -sim
+# End time: 15:12:00 on Nov 27,2022, Elapsed time: 0:02:44
+# Errors: 0, Warnings: 1
+vsim -gui work.testbench
+# vsim -gui work.testbench 
+# Start time: 15:12:14 on Nov 27,2022
+# Loading sv_std.std
+# Loading work.testbench
+# Loading work.top
+# Loading work.arm
+# Loading work.controller
+# Loading work.decoder
+# Loading work.mainfsm
+# Loading work.condlogic
+# Loading work.flopenr
+# Loading work.condcheck
+# Loading work.flopr
+# Loading work.datapath
+# Loading work.mux2
+# Loading work.regfile
+# Loading work.extend
+# Loading work.mux3
+# Loading work.alu
+# Loading work.mem
+add wave -position end sim:/testbench/dut/arm/*
+add wave -position end sim:/testbench/*
+step -current
+# ** Error: (vsim-12081) The specified scope, sim:/testbench, is not a process or thread.
+# 
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Load canceled
+run -all
+# GetModuleFileName: Não foi possível encontrar o módulo especificado.
+# 
+# 
+# ** Warning: (vsim-7) Failed to open readmem file "memfile.dat" in read mode.
+# No such file or directory. (errno = ENOENT)    : C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IO-Mapeado-Memoria-IFES/MultiAndPipeline/arm_multi.sv(134)
+#    Time: 0 ps  Iteration: 0  Instance: /testbench/dut/mem
+# WARNING: No extended dataflow license exists
+# Break key hit
+# Break in Module alu at C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IO-Mapeado-Memoria-IFES/MultiAndPipeline/arm_multi.sv line 500
+quit -sim
+# End time: 15:13:51 on Nov 27,2022, Elapsed time: 0:01:37
+# Errors: 5, Warnings: 2
+# Load canceled
+# Break key hit
+# Break key hit
+vsim -gui work.testbench
+# vsim -gui work.testbench 
+# Start time: 15:14:48 on Nov 27,2022
+# Loading sv_std.std
+# Loading work.testbench
+# Loading work.top
+# Loading work.arm
+# Loading work.controller
+# Loading work.decoder
+# Loading work.mainfsm
+# Loading work.condlogic
+# Loading work.flopenr
+# Loading work.condcheck
+# Loading work.flopr
+# Loading work.datapath
+# Loading work.mux2
+# Loading work.regfile
+# Loading work.extend
+# Loading work.mux3
+# Loading work.alu
+# Loading work.mem
+run -all
+# Simulation succeeded
+# ** Note: $stop    : C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IO-Mapeado-Memoria-IFES/MultiAndPipeline/arm_multi.sv(105)
+#    Time: 755 ps  Iteration: 1  Instance: /testbench
+# Break in Module testbench at C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IO-Mapeado-Memoria-IFES/MultiAndPipeline/arm_multi.sv line 105
+add wave -position end sim:/testbench/*
+restart -f
+run -all
+# GetModuleFileName: Não foi possível encontrar o módulo especificado.
+# 
+# 
+# Simulation succeeded
+# ** Note: $stop    : C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IO-Mapeado-Memoria-IFES/MultiAndPipeline/arm_multi.sv(105)
+#    Time: 755 ps  Iteration: 1  Instance: /testbench
+# Break in Module testbench at C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IO-Mapeado-Memoria-IFES/MultiAndPipeline/arm_multi.sv line 105
+# Break key hit
+quit -sim
+# End time: 15:17:24 on Nov 27,2022, Elapsed time: 0:02:36
+# Errors: 0, Warnings: 0
+# reading C:/intelFPGA_pro/19.4/modelsim_ase/win32aloem/../modelsim.ini
+# Loading project ArmPipeCycle
