@@ -30,7 +30,14 @@ AROUND
   	ADD R2, R0, #10		; shouldn't happen			  
 END	STR R2, [R0, #100] 	; mem[100] = 7                  	
 
-
+MOV: Pega um valor que está no imediado (na memória de instrução) e move para o registrador;
+CMP: Compara o valor de dois registradores através de uma subtração e setta quatro flags, não armazena em nenhum.
+TST: 
+EOR: 
+MVN: 
+LSL: 
+ASR:
+LDRB e STRB.
 
 // MAIN	 SUB R0, R15, R15 	        ; R0 = 0				
 	1110 000 0010 0 1111 0000 0000 0000 1111 E04F000F 0x00
