@@ -416,7 +416,6 @@ module mux2 #(parameter WIDTH = 8)
 endmodule
 
 
-
 module alu(input  logic [31:0] a, b,
            input  logic [1:0]  ALUControl,
            output logic [31:0] Result,
@@ -434,8 +433,6 @@ module alu(input  logic [31:0] a, b,
       2'b0?: Result = sum;
       2'b10: Result = a & b;
       2'b11: Result = a | b;
-	
-	// O que preciso adicionar aqui 
     endcase
 
   assign neg      = Result[31];
