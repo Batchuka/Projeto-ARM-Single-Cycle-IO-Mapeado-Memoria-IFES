@@ -1,4 +1,4 @@
-# 1 — ARM Single Cycle (AS-IS)
+# 1 — ARM SINGLE CYCLE (AS-IS)
 
 O processador desenvolvido nesse projeto trata-se de um ARM 32 bits — isto é, suas instruções possuem frames de 32 bits. A interpretação desses frames por parte do hardware pode ser entendido se pensarmos em dois grandes fluxos de sinal: 
 
@@ -73,6 +73,32 @@ Assim, o ALU recebe dois operandos: ${SrcA}$, proveniente do *Register File* e $
 
 ${ALUResult}$ fornecer endereço, queremos ler dados. Quando fornecer dados, queremos gravar na memória. ${WriteEnable}$ é o sinal que controla essa dança. Finalmente, o que temos é o ${Result}$ que poderá ser ${ALUResult}$ ou ${ReadData}$ do *Data Memory*.
 
-# 2 — ARM com novas instruções (TO-BE)
+## 1.2 — Control
 
-Agora temos tudo que precisamos para poder discutir as modifcações necessárias para as instruções que queremos implementar. 
+O *control* é a circuitaria, majoritariamente, combinacional —  em grande parte, não depende do clock — para orquestrar os estados dos circuitos que compôem o *Datapath*. Ele, somente depende do: 
+- Cabeçalho da instrução;
+- Registrador de destino, $Rd$ ; e
+- Flags
+
+O controle tem dois sub-blocos, o ${Decoder}$  que é responsável por gerar os sinais de controle com base no cabeçalho e ${Conditional Logic}$, que mantém o valor das flags e executa baseado em condições relacionadas a elas.
+
+### 1.2.1 — Decoder
+
+É constituído pelo *Main Decoder* que é o principal gerador de sinais para controle e o *ALUDecoder*, que usará o campo ${Funct}$ para determinar o tipo de instrução *Data-processing*. Há também um controle para atualizar o valor de PC, chamado ${PCSrc}$. Considerando que são circuitos combinacionais, temos a vantagem de poder usar tabelas-verdade para sua implementação.
+
+![image](https://user-images.githubusercontent.com/66538880/207778472-627997a4-2efe-4d88-89c9-3c36182e290c.png)
+
+### 1.2.2 — Conditional Check
+
+O que é produzido pelo *Decoder* não necessariamente é transmitido, pois há condições para a execução de uma instrução em muitos casos. Com efeito, a interpretação das instuções fica em prontidão para transmissão a depender do sinal ${CondEx}$ que "abre as portas" para os outros sinais condicionalmente. *Conditional Check* depende do clock, o que faz sentido visto que são comandos que devem ser dados de maneira sincronizada ao estado arquitetural do *Datapath*.
+
+![image](https://user-images.githubusercontent.com/66538880/207780798-e3ca60fe-f899-4d81-a8c1-e1001fb9107d.png)
+
+# 2 — ARM NOVAS INSTRUÇÕES (TO-BE)
+
+Agora temos tudo que precisamos para poder discutir as modificações necessárias para as instruções que queremos implementar. O primeiro passo é saber exatamente como é o frame de cada uma dessas instruções
+
+##
+
+# TABELA DE SINAIS SUGERIDA
+
