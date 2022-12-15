@@ -1,7 +1,9 @@
 # Summary
 [1. ARM SINGLE CYCLE (AS-IS)](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/edit/main/README.md#1--arm-single-cycle-as-is)
-[2. ARM NOVAS INSTRUÇÕES (TO-BE)](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/edit/main/README.md#1--arm-novas-instrucoes-to-be)
-[3. TABELA DE SINAIS SUGERIDA](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/edit/main/README.md#1--tabela-de-sinais-sugerida)
+
+[2. ARM NOVAS INSTRUÇÕES (TO-BE)](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/edit/main/README.md#2--arm-novas-instru%C3%A7%C3%B5es-to-be)
+
+[3. TABELA DE SINAIS SUGERIDA](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/edit/main/README.md#tabela-de-sinais-sugerida)
 
 
 # 1 — ARM SINGLE CYCLE (AS-IS)
@@ -148,5 +150,5 @@ Agora temos tudo que precisamos para poder discutir as modificações necessári
 
 # TABELA DE SINAIS SUGERIDA
 
-![image](https://user-images.githubusercontent.com/66538880/207860537-5b1ab6dc-07c7-40f0-8e31-2c24c24d921c.png)
+![image](https://user-images.githubusercontent.com/66538880/207990174-2ba57a76-1611-42e4-95b8-4bff6d1f7c4f.png)
 
