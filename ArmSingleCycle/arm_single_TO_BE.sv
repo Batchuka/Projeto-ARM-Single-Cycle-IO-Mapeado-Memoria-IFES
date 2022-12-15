@@ -225,13 +225,14 @@ module decoder(input  logic [1:0] Op,
   assign {RegSrc, ImmSrc, ALUSrc, MemtoReg, 
           RegW, MemW, Branch, ALUOp} = controls; 
           
-  // ALU Decoder             
+  // ALU Decoder 
+            
   always_comb
     if (ALUOp) begin                 // which DP Instr?
       case(Funct[4:1]) 
   	    4'b0100: ALUControl = 2'b00; // ADD
   	    4'b0010: ALUControl = 2'b01; // SUB
-          4'b0000: ALUControl = 2'b10; // AND
+            4'b0000: ALUControl = 2'b10; // AND
   	    4'b1100: ALUControl = 2'b11; // ORR
   	    default: ALUControl = 2'bx;  // unimplemented
       endcase
