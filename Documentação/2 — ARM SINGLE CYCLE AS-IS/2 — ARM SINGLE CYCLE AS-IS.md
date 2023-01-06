@@ -1,4 +1,4 @@
-# 2 — ARM SINGLE CYCLE (AS-IS)
+# ARM SINGLE CYCLE (AS-IS)
 
 O processador desenvolvido nesse projeto trata-se de um ARM 32 bits — isto é, suas instruções possuem frames de 32 bits. A manipulação desses frames, por parte do hardware, pode ser entendido se pensarmos em dois grandes fluxos de sinal: datapath e o control. A partir de agora, irei explicar o [projeto AS-IS](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/ArmSingleCycle/arm_single_AS_IS.sv) do ARM. O projeto é baseado no ARM Single-Cycle do livro [*Digital Design and Computer Architecture, ARM Edition*](https://www.amazon.com.br/Digital-Design-Computer-Architecture-English-ebook/dp/B00XHN8RI4/ref=sr_1_3?__mk_pt_BR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=2O6BFDVAZ5RH&keywords=harris+assembly+arm&qid=1672873390&sprefix=harris+assembly+ar%2Caps%2C230&sr=8-3), de Sarah L. Harris e David Harris.
 
@@ -6,7 +6,7 @@ O processador desenvolvido nesse projeto trata-se de um ARM 32 bits — isto é,
 
 ![image](https://user-images.githubusercontent.com/66538880/210674620-4de346a3-292b-405a-9565-33519ffe27f7.png)
 
-## 2.1 — ARM
+## ARM
 
 
 O módulo **arm** instancia dois outros módulos, "controller" e "datapath". O módulo "controller" controla o fluxo de dados e as operações do processador, enquanto o módulo "datapath" implementa as operações lógicas e aritméticas do processador. Juntos, os módulos "arm", "controller" e "datapath" modelam o comportamento do processador ARM.
