@@ -224,3 +224,5 @@ A lógica do ALU (Arithmetic Logic Unit) é responsável por realizar operaçõe
 A operação a ser realizada é determinada pelos dois bits menos significativos de "ALUControl". Se os dois bits forem "00", então a soma de "SrcA" e "SrcB" é calculada e armazenada em "Result". Se os dois bits forem "10", então a operação lógica "E" (and) é realizada sobre "SrcA" e "SrcB" e o resultado é armazenado em "Result". Se os dois bits forem "11", então a operação lógica "OU" (or) é realizada sobre "SrcA" e "SrcB" e o resultado é armazenado em "Result".
 
 Além disso, o ALU também calcula algumas flags de estado baseadas no resultado da operação. A flag "neg" é "1" se o bit mais significativo de "Result" for "1", o que indica um número negativo. A flag "zero" é "1" se "Result" for igual a zero. A flag "carry" é "1" se houver um carry-out na operação de soma. A flag "overflow" é "1" se houver um overflow na operação de soma. Todas essas flags são armazenadas em "ALUFlags".
+
+$\leftarrow$ [voltar](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES#sum%C3%A1rio)
