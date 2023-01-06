@@ -1,4 +1,4 @@
-# Summary
+# Sumário
 
 [INTRODUÇÃO](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/1%20%E2%80%94%20INTRODU%C3%87%C3%83O%20e%20APENDICES/1%20%E2%80%94%20INTRODU%C3%87%C3%83O.md#1--introdu%C3%A7%C3%A3o)
 
