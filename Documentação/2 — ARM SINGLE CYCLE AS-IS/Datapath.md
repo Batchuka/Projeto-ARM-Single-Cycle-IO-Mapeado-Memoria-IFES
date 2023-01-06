@@ -1,3 +1,5 @@
+# Datapath
+
 ## Macros do Datapath
 
 Para entender o que acontece no módulo **datapath**, é necessário entender as macros que ele instancia, a saber:
@@ -141,7 +143,7 @@ O comportamento da ALU é determinado pelo valor dos 2 bits de controle ALUContr
 Antes de calcular a soma, o código calcula o operando b invertido, condicionalmente, de acordo com o primeiro bit de ALUControl. Isso é feito através da linha "assign condinvb = ALUControl[0] ? ~b : b;". Depois, a soma é calculada como a soma de a, b invertido e o primeiro bit de ALUControl, através da linha "assign sum = a + condinvb + ALUControl[0];".
 
 
-## Datapath
+## Lógica do Datapath
 
 O **Datapath** representa todos os barramentos por onde sinais de dados podem passar. Aqui, é importante que se diga que o projeto atual implementa um single-cycle baseado na arquitetura de Harvard — isto é, a memória de instrução está separada da memória de dados. Abaixo, as entradas, saídas e variáveis internas:
 
