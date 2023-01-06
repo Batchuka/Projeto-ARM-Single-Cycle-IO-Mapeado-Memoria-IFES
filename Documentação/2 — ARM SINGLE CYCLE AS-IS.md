@@ -2,7 +2,7 @@
 
 O processador desenvolvido nesse projeto trata-se de um ARM 32 bits — isto é, suas instruções possuem frames de 32 bits. A manipulação desses frames, por parte do hardware, pode ser entendido se pensarmos em dois grandes fluxos de sinal: datapath e o control. A partir de agora, irei explicar o [projeto AS-IS](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/ArmSingleCycle/arm_single_AS_IS.sv) do ARM. O projeto é baseado no ARM Single-Cycle do livro [*Digital Design and Computer Architecture, ARM Edition*](https://www.amazon.com.br/Digital-Design-Computer-Architecture-English-ebook/dp/B00XHN8RI4/ref=sr_1_3?__mk_pt_BR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=2O6BFDVAZ5RH&keywords=harris+assembly+arm&qid=1672873390&sprefix=harris+assembly+ar%2Caps%2C230&sr=8-3), de Sarah L. Harris e David Harris.
 
-> <sub>! DICA :  recomenda-se a leitura dessa parte observando-se atentamente a imagem do Single-Cycle abaixo. A explicação será dada tomando como referência o código (cima -> baixo) e a imagem (esquerda -> direita).</sub>
+> <sub>! DICA :  recomenda-se a leitura dessa parte observando-se atentamente a imagem do Single-Cycle abaixo.</sub>
 
 ![image](https://user-images.githubusercontent.com/66538880/210674620-4de346a3-292b-405a-9565-33519ffe27f7.png)
 
@@ -18,27 +18,23 @@ module arm(
   // Entradas do processador
   input  logic        clk,        // Clock
   input  logic        reset,      // Reset
+  input  logic [31:0] Instr,      // Instrução atual
+  input  logic [31:0] ReadData    // Dados lidos da memória
   
   // Saídas do processador
   output logic [31:0] PC,         // Contador de programa
-  
-  // Entradas do processador
-  input  logic [31:0] Instr,      // Instrução atual
- 
- // Saídas do processador
   output logic        MemWrite,   // Escrever na memória
   output logic [31:0] ALUResult,  // Resultado da ALU
   output logic [31:0] WriteData,  // Dados a serem escritos
-  
-  // Entradas do processador
-  input  logic [31:0] ReadData    // Dados lidos da memória
 );
   
-  // Instância os módulos de controle e caminho de dados do processador
+  // Instância o módulo Controller
   controller c(clk, reset, Instr[31:12], ALUFlags, 
                RegSrc, RegWrite, ImmSrc, 
                ALUSrc, ALUControl,
                MemWrite, MemtoReg, PCSrc);
+  
+  // Instância o módulo datapath
   datapath dp(clk, reset, 
               RegSrc, RegWrite, ImmSrc,
               ALUSrc, ALUControl,
@@ -48,45 +44,13 @@ module arm(
 endmodule
 ```
 
-## 2.2 — Datapath
-
-O **Datapath** representa todos os barramentos por onde sinais de dados podem passar. Aqui, é importante que se diga que o projeto atual implementa um single-cycle baseado na arquitetura de Harvard — isto é, a memória de instrução está separada da memória de dados. Abaixo, as entradas, saídas e variáveis internas:
-
-```
-// Este módulo implementa as operações lógicas e aritméticas do processador
-module datapath(
-  
-  // Entradas do processador
-  input  logic        clk,        // Clock
-  input  logic        reset,      // Reset
-  input  logic [1:0]  RegSrc,     // Seleção de registrador
-  input  logic        RegWrite,   // Habilita a escrita no banco de registradores
-  input  logic [1:0]  ImmSrc,     // Seleção de imediato
-  input  logic        ALUSrc,     // Seleção de operando da ALU
-  input  logic [1:0]  ALUControl, // Controle da ALU
-  input  logic        MemtoReg,   // Habilita a leitura da memória
-  input  logic        PCSrc,      // Seleção do próximo PC
-  input  logic [31:0] Instr,      // Instrução atual
-  input  logic [31:0] ReadData    // Dados lidos da memória
-  
-  // Saídas do processador
-  output logic [3:0]  ALUFlags,
-  output logic [31:0] PC,          // Contador de programa
-  output logic [31:0] ALUResult,   // Resultado da ALU
-  output logic [31:0] WriteData,   // Dados a serem escritos
-)
-
-// Declara algumas variáveis internas
-  logic [31:0] PCNext, PCPlus4, PCPlus8;
-  logic [31:0] ExtImm, SrcA, SrcB, Result;
-  logic [3:0]  RA1, RA2;
-```
+## 2.2 — Macros do Datapath
 
 Para entender o que acontece no módulo **datapath**, é necessário entender as macros que ele instancia, a saber:
 
 > <sub>! DICA :  uma macro é uma espécie de atalho para um trecho de código que é usado comumente..</sub>
 
-#### mux2 ####
+####  	$\rightarrow$ mux2 ####
 ```
 module mux2 #(parameter WIDTH = 8)
              (input  logic [WIDTH-1:0] d0, d1, 
@@ -102,7 +66,7 @@ Esse é o código de uma macro que implementa uma porta multiplexadora de 2 entr
 A linha "assign y = s ? d1 : d0;" é a implementação da lógica da porta multiplexadora. Ela diz que a saída "y" deve assumir o valor de "d1" se "s" for verdadeiro e o valor de "d0" caso contrário.
 
 
-#### flopr ####
+#### $\rightarrow$ flopr ####
 
 ```
 module flopr #(parameter WIDTH = 8)
@@ -123,7 +87,7 @@ A declaração "always_ff @(posedge clk, posedge reset)" indica que a lógica do
 A lógica do flip-flop é implementada no bloco "if (reset) q <= 0; else q <= d;". Ela diz que a saída "q" deve ser configurada para 0 se "reset" for verdadeiro e para o valor da entrada "d" caso contrário.
 
 
-#### adder ####
+#### $\rightarrow$ adder ####
 
 ```
 module adder #(parameter WIDTH=8)
@@ -137,7 +101,7 @@ Esse é o código de uma macro que implementa um somador. O somador tem duas ent
 
 A linha "assign y = a + b;" é a implementação da lógica do somador. Ela diz que a saída "y" deve assumir o valor da soma de "a" e "b".
 
-#### regfile
+#### $\rightarrow$ regfile ### 
 ```
 module regfile(input  logic        clk, 
                input  logic        we3, 
@@ -159,7 +123,7 @@ Em resumo, essa é uma macro que implementa um registrador de arquivo com duas e
 
 Quando há uma transição positiva no sinal de clock e "we3" é verdadeiro, o registrador de arquivo escreve o valor especificado por "wd3" no registrador especificado por "wa3". As saídas de leitura "rd1" e "rd2" são combinatoriamente ligadas aos registradores especificados por "ra1" e "ra2", respectivamente. Se "ra1" ou "ra2" são iguais a 15, as saídas de leitura "rd1" e "rd2" são configuradas para o valor especificado por "r15".
 
-#### extend ####
+#### $\rightarrow$ extend ####
 ```
 module extend(input  logic [23:0] Instr,
               input  logic [1:0]  ImmSrc,
@@ -186,7 +150,7 @@ Essa é uma macro que estende um valor imediato de 24 bits para um valor de 32 b
 
 Se o sinal "ImmSrc" assumir qualquer outro valor, o sinal de saída "ExtImm" é configurado para um valor indefinido ("x" na notação Verilog).
 
-#### alu ####
+#### $\rightarrow$ alu ####
 
 ```
 module alu(input  logic [31:0] a, b,
@@ -224,10 +188,47 @@ O comportamento da ALU é determinado pelo valor dos 2 bits de controle ALUContr
 Antes de calcular a soma, o código calcula o operando b invertido, condicionalmente, de acordo com o primeiro bit de ALUControl. Isso é feito através da linha "assign condinvb = ALUControl[0] ? ~b : b;". Depois, a soma é calculada como a soma de a, b invertido e o primeiro bit de ALUControl, através da linha "assign sum = a + condinvb + ALUControl[0];".
 
 
-Com isso, pode-se entender o **datapath**.
+## 2.3 — Datapath
+
+O **Datapath** representa todos os barramentos por onde sinais de dados podem passar. Aqui, é importante que se diga que o projeto atual implementa um single-cycle baseado na arquitetura de Harvard — isto é, a memória de instrução está separada da memória de dados. Abaixo, as entradas, saídas e variáveis internas:
 
 ```
-// Lógica para o próximo PC
+// Este módulo implementa as operações lógicas e aritméticas do processador
+module datapath(
+  
+  // Entradas do processador
+  input  logic        clk,        // Clock
+  input  logic        reset,      // Reset
+  input  logic [1:0]  RegSrc,     // Seleção de registrador
+  input  logic        RegWrite,   // Habilita a escrita no banco de registradores
+  input  logic [1:0]  ImmSrc,     // Seleção de imediato
+  input  logic        ALUSrc,     // Seleção de operando da ALU
+  input  logic [1:0]  ALUControl, // Controle da ALU
+  input  logic        MemtoReg,   // Habilita a leitura da memória
+  input  logic        PCSrc,      // Seleção do próximo PC
+  input  logic [31:0] Instr,      // Instrução atual
+  input  logic [31:0] ReadData    // Dados lidos da memória
+  
+  // Saídas do processador
+  output logic [3:0]  ALUFlags,
+  output logic [31:0] PC,          // Contador de programa
+  output logic [31:0] ALUResult,   // Resultado da ALU
+  output logic [31:0] WriteData,   // Dados a serem escritos
+)
+
+// Declara algumas variáveis internas
+  logic [31:0] PCNext, PCPlus4, PCPlus8;
+  logic [31:0] ExtImm, SrcA, SrcB, Result;
+  logic [3:0]  RA1, RA2;
+```
+
+Com isso, temos as lógicas que criam várias instancias dessas macros para construir componentes que atuem como os hardwares descritos na imagem.
+
+#### $\rightarrow$ Lógica para o próximo PC ####
+
+Por exemplo:
+
+```
   mux2 #(32)  pcmux(PCPlus4, Result, PCSrc, PCNext);
   flopr #(32) pcreg(clk, reset, PCNext, PC);
   adder #(32) pcadd1(PC, 32'b100, PCPlus4);
@@ -237,8 +238,9 @@ Com isso, pode-se entender o **datapath**.
 
 O trecho de código acima é responsável por atualizar o valor do PC (Program Counter) na CPU. O mux2 "pcmux" é um multiplexador de 2 entradas que escolhe qual valor deve ser passado para o próximo PC, dependendo da entrada "PCSrc". Se "PCSrc" for 0, o próximo PC será o valor armazenado em "PCPlus4". Se "PCSrc" for 1, o próximo PC será o valor armazenado em "Result". O próximo PC é então armazenado no flip-flop "pcreg". Os dois adders, "pcadd1" e "pcadd2", são responsáveis por somar 4 e 8, respectivamente, ao valor atual do PC e armazenar o resultado em "PCPlus4" e "PCPlus8".
 
+
+#### $\rightarrow$ Lógica do banco de registradores ####
 ```
-// Lógica do banco de registradores
   mux2 #(4)   ra1mux(Instr[19:16], 4'b1111, RegSrc[0], RA1);
   mux2 #(4)   ra2mux(Instr[3:0], Instr[15:12], RegSrc[1], RA2);
   regfile     rf(clk, RegWrite, RA1, RA2,
@@ -248,13 +250,22 @@ O trecho de código acima é responsável por atualizar o valor do PC (Program C
   extend      ext(Instr[23:0], ImmSrc, ExtImm);
 ```
 
+Esse trecho de código é responsável por gerenciar o banco de registradores do processador. 
 
+A função mux2 ra1mux seleciona o endereço de um registrador a ser lido baseado na entrada RegSrc[0] e no campo de endereço de registrador presente na instrução (Instr[19:16]). 
+
+A saída desse multiplexador é usada como endereço do registrador na entrada ra1 da regfile. O mesmo ocorre com a função mux2 ra2mux, que seleciona o endereço de outro registrador a ser lido baseado em RegSrc[1] e Instr[15:12]. A regfile é a instância do banco de registradores propriamente dito e é responsável por realizar as leituras nos endereços fornecidos por ra1 e ra2 e escrever no endereço fornecido por Instr[15:12] caso we3 (RegWrite) esteja ativo. 
+
+O resultado da leitura do endereço ra1 é armazenado em SrcA e o resultado da leitura do endereço ra2 é armazenado em WriteData. O multiplexador resmux seleciona o valor a ser armazenado na saída Result baseado em MemtoReg e em ALUResult ou ReadData. A extend é uma instância que extende o valor presente em Instr[23:0] para 32 bits de acordo com o valor de ImmSrc e armazena o resultado em ExtImm.
+
+#### $\rightarrow$ Lógica da ALU ####
 ```
-// Lógica da ALU
   mux2 #(32)  srcbmux(WriteData, ExtImm, ALUSrc, SrcB);
   alu         alu(SrcA, SrcB, ALUControl, 
                   ALUResult, ALUFlags);
-  
-  
 ```
+A lógica do ALU (Arithmetic Logic Unit) é responsável por realizar operações aritméticas e lógicas sobre os operandos. No caso deste código, o ALU recebe dois operandos, "SrcA" e "SrcB", e um controlador "ALUControl" que determina qual operação deve ser realizada.
 
+A operação a ser realizada é determinada pelos dois bits menos significativos de "ALUControl". Se os dois bits forem "00", então a soma de "SrcA" e "SrcB" é calculada e armazenada em "Result". Se os dois bits forem "10", então a operação lógica "E" (and) é realizada sobre "SrcA" e "SrcB" e o resultado é armazenado em "Result". Se os dois bits forem "11", então a operação lógica "OU" (or) é realizada sobre "SrcA" e "SrcB" e o resultado é armazenado em "Result".
+
+Além disso, o ALU também calcula algumas flags de estado baseadas no resultado da operação. A flag "neg" é "1" se o bit mais significativo de "Result" for "1", o que indica um número negativo. A flag "zero" é "1" se "Result" for igual a zero. A flag "carry" é "1" se houver um carry-out na operação de soma. A flag "overflow" é "1" se houver um overflow na operação de soma. Todas essas flags são armazenadas em "ALUFlags".
