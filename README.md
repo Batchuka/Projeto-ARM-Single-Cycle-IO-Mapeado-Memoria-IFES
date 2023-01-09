@@ -1,4 +1,10 @@
+# Introdução
+
+A partir de agora, irei explicar o [projeto AS-IS](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/ArmSingleCycle/arm_single_AS_IS.sv) do ARM. O projeto é baseado no ARM Single-Cycle do livro [*Digital Design and Computer Architecture, ARM Edition*](https://www.amazon.com.br/Digital-Design-Computer-Architecture-English-ebook/dp/B00XHN8RI4/ref=sr_1_3?__mk_pt_BR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=2O6BFDVAZ5RH&keywords=harris+assembly+arm&qid=1672873390&sprefix=harris+assembly+ar%2Caps%2C230&sr=8-3), de Sarah L. Harris e David Harris.
+
 # Sumário
+
+- [INTRODUÇÃO](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/1%20%E2%80%94%20INTRODU%C3%87%C3%83O%20e%20APENDICES/1%20%E2%80%94%20INTRODU%C3%87%C3%83O.md#1--introdu%C3%A7%C3%A3o)
 
 - [ARM SINGLE CYCLE (AS-IS)](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/2%20%E2%80%94%20ARM%20SINGLE%20CYCLE%20AS-IS/2%20%E2%80%94%20ARM%20SINGLE%20CYCLE%20AS-IS.md#arm-single-cycle-as-is)
   - [Datapath](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/2%20%E2%80%94%20ARM%20SINGLE%20CYCLE%20AS-IS/Datapath.md#datapath)
