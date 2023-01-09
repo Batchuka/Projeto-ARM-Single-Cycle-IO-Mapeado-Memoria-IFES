@@ -1,7 +1,5 @@
 # Sumário
 
-- [INTRODUÇÃO](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/1%20%E2%80%94%20INTRODU%C3%87%C3%83O%20e%20APENDICES/1%20%E2%80%94%20INTRODU%C3%87%C3%83O.md#1--introdu%C3%A7%C3%A3o)
-
 - [ARM SINGLE CYCLE (AS-IS)](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/2%20%E2%80%94%20ARM%20SINGLE%20CYCLE%20AS-IS/2%20%E2%80%94%20ARM%20SINGLE%20CYCLE%20AS-IS.md#arm-single-cycle-as-is)
   - [Datapath](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/2%20%E2%80%94%20ARM%20SINGLE%20CYCLE%20AS-IS/Datapath.md#datapath)
   - [Controller](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/2%20%E2%80%94%20ARM%20SINGLE%20CYCLE%20AS-IS/Controller.md#controler)
