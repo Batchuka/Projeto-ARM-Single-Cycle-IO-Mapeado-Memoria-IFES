@@ -1,6 +1,6 @@
 # ARM SINGLE CYCLE (AS-IS)
 
-O processador desenvolvido nesse projeto trata-se de um ARM 32 bits — isto é, suas instruções possuem frames de 32 bits. A manipulação desses frames, por parte do hardware, pode ser entendido se pensarmos em dois grandes fluxos de sinal: datapath e o control. 
+O processador desenvolvido nesse projeto trata-se de um ARM 32 bits — isto é, suas instruções possuem frames de 32 bits. A manipulação desses frames, por parte do hardware, pode ser entendida se pensarmos em dois grandes fluxos de sinal: datapath e o control. 
 
 > <sub>! DICA :  recomenda-se a leitura dessa parte observando-se atentamente a imagem do Single-Cycle abaixo.</sub>
 
