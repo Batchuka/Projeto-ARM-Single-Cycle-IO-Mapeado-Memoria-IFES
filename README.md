@@ -81,4 +81,4 @@ Calcula um endereço a partir de um valor de registrador base e um valor de regi
 Armazena um byte de um registrador na memória. 
 O valor do registrador de deslocamento pode opcionalmente ser deslocado.
 
-$\leftarrow$ [voltar](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES#sum%C3%A1rio)
+$\leftarrow$ [voltar](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/README.md#sum%C3%A1rio)
