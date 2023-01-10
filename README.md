@@ -80,3 +80,5 @@ Armazenar byte de registrador (registro);
 Calcula um endereço a partir de um valor de registrador base e um valor de registrador de deslocamento 
 Armazena um byte de um registrador na memória. 
 O valor do registrador de deslocamento pode opcionalmente ser deslocado.
+
+$\leftarrow$ [voltar](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES#sum%C3%A1rio)
