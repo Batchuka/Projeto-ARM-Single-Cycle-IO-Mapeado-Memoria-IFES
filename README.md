@@ -14,7 +14,7 @@
 
 - [TABELA - FRAME VS. COMPOENTE](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/B%20%E2%80%94%20TABELA%20-%20FRAME%20VS.%20COMPOENTE.md#b--tabela---frame-vs-componente)
 
-# Projeto
+# PROJETO & OBJETIVO
 
 O projeto em questão é implementação de um ARM 32 bits Single Cycle, capaz de executar as seguintes instruções:
 
