@@ -45,5 +45,5 @@ endmodule
 ```
 
 
-$\leftarrow$ [Projeto & Objetivo](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES#projeto--objetivo) | [sumário](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES#sum%C3%A1rio) | [datapath](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/2%20%E2%80%94%20ARM%20SINGLE%20CYCLE%20AS-IS/Datapath.md#datapath) $\rightarrow$
-
+| $\leftarrow$ [Projeto & Objetivo](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES#projeto--objetivo) | [sumário](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES#sum%C3%A1rio) | [datapath](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/2%20%E2%80%94%20ARM%20SINGLE%20CYCLE%20AS-IS/Datapath.md#datapath) $\rightarrow$ |
+|-|-|-|
