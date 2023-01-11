@@ -18,12 +18,15 @@ Demaneira análoga, faremos a análise das macros utilizadas no Controller. Come
 
 ### $\rightarrow$ condcheck
 ```
+// Recebem dois inputs de 4 bits e um retorno de tamanho indefinido
 module condcheck(input  logic [3:0] Cond,
                  input  logic [3:0] Flags,
                  output logic       CondEx);
   
+  // cinco sinais internos
   logic neg, zero, carry, overflow, ge;
   
+  // duas estruturas baseadas nos sinais. Uma chamada 'Flags' e outra 'ge' (greater or equal)
   assign {neg, zero, carry, overflow} = Flags;
   assign ge = (neg == overflow);
                   
