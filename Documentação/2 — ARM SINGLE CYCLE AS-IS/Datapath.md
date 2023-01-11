@@ -1,10 +1,11 @@
 # Datapath
 
-## Macros do Datapath
-
 Para entender o que acontece no módulo **datapath**, é necessário entender as macros que ele instancia, a saber:
 
 > <sub>! DICA :  uma macro é uma espécie de atalho para um trecho de código que é usado comumente..</sub>
+
+
+## Macros do Datapath
 
 ### $\rightarrow$ mux2
 ```
