@@ -8,7 +8,6 @@ O *controller* é a circuitaria, majoritariamente, combinacional —  em grande 
 - Registrador de destino, $Rd$ ; e
 - Flags
 
-O controle tem dois sub-blocos, o ${Decoder}$  que é responsável por gerar os sinais de controle com base no cabeçalho e ${Conditional Logic}$, que mantém o valor das flags e executa baseado em condições relacionadas a elas.
 
 Demaneira análoga, faremos a análise das macros utilizadas no Controller
 
