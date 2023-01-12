@@ -1,5 +1,25 @@
 # A - NOVAS INSTRUÇÕES
 
+CMP (compare): compara dois valores e atualiza os registradores de status N, Z e C para indicar se o primeiro é menor, igual ou maior que o segundo.
+
+MOV (move): move o valor de uma fonte para um destino.
+
+TST (test): faz uma operação "E" bit a bit entre um operando e os registradores de status e atualiza os registradores de status N, Z
+
+MVN (move not): move o valor de negação de uma fonte para um destino.
+
+EOR (exclusive or): faz uma operação "OU exclusivo" bit a bit entre dois operandos e armazena o resultado no primeiro operando
+
+LSL (logical shift left): desloca os bits de um operando para a esquerda por uma determinada quantidade, preenchendo os bits vazios com zeros.
+
+ASR (Arithmetic shift right): desloca os bits de um operando para a direita por uma determinada quantidade, mantendo o sinal do operando original.
+
+LDRB (load byte): Carrega um byte da memória para um registrador. A localização de memória é especificada por um endereço e pode ser deslocada com base em um valor contido em outro registrador.
+
+STRB (store byte): armazena o valor contido em um registrador em uma localização de memória especificada. A localização de memória é especificada por um endereço e pode ser deslocada com base em um valor contido em outro registrador.
+
+A principal diferença entre LDR e LDRB, e STR e STRB é que as instruções LDR e STR acessam 4 bytes de memória, enquanto LDRB e STRB acessam somente 1 byte.
+
 ## 2.1 — MOV
 
 ![image](https://user-images.githubusercontent.com/66538880/207912543-ea973fdc-6bf1-44d4-afbc-11b054015c38.png)
