@@ -30,13 +30,13 @@ Este é um módulo chamado flopenr que tem uma entrada WIDTH como parâmetro, po
 
 As entradas são:
 
-    clk e reset : são sinais de entrada para o relógio e o reset do sistema, respectivamente.
-    en : é um sinal de entrada lógico que habilita ou desabilita a escrita no registrador.
-    d : é um sinal de entrada de WIDTH bits, que contém o dado que será escrito no registrador.
+- clk e reset : são sinais de entrada para o relógio e o reset do sistema, respectivamente.
+- en : é um sinal de entrada lógico que habilita ou desabilita a escrita no registrador.
+- d : é um sinal de entrada de WIDTH bits, que contém o dado que será escrito no registrador.
 
 E as saídas são:
 
-    q : é um sinal de saída de WIDTH bits, que contém o dado armazenado no registrador.
+- q : é um sinal de saída de WIDTH bits, que contém o dado armazenado no registrador.
 
 O módulo flopenr é uma implementação de um registrador de deslocamento. O registrador contém uma porta de entrada para o dado, uma porta de entrada para o clock, e uma porta de entrada para o reset. A saída do registrador é conectada ao dado armazenado. O registrador é implementado usando uma porta lógica always com uma cláusula de sincronização @(posedge clk, posedge reset). A porta lógica sempre verifica se o relógio e o reset estão em nível alto. Se o reset estiver em nível alto, o registrador é redefinido para 0. Caso contrário, se o en estiver em nível alto, o dado é escrito no registrador.
 
