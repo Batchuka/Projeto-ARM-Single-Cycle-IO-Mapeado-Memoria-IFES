@@ -9,8 +9,6 @@ O *controller* é a circuitaria, majoritariamente, combinacional —  em grande 
 - Flags
 
 
-Demaneira análoga, faremos a análise das macros utilizadas no Controller
-
 ## Macros do Controller
 
 Demaneira análoga, faremos a análise das macros utilizadas no Controller. Começaremos pela mais interna
