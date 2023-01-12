@@ -3,7 +3,7 @@
 
 O módulo "controller" instancia outro módulo, chamado "decoder", que é responsável por decodificar a instrução fornecida e produzir sinais de controle adequados. O módulo "condlogic" é usado para implementar a lógica de condição do processador. Juntos, os módulos "controller", "decoder" e "condlogic" implementam a lógica de controle do processador ARM.
 
-O *control* é a circuitaria, majoritariamente, combinacional —  em grande parte, não depende do clock — para orquestrar os estados dos circuitos que compôem o *Datapath*. Ele, somente depende do: 
+O *controller* é a circuitaria, majoritariamente, combinacional —  em grande parte, não depende do clock — para orquestrar os estados dos circuitos que compôem o *Datapath*. Ele, somente depende do: 
 - Cabeçalho da instrução;
 - Registrador de destino, $Rd$ ; e
 - Flags
