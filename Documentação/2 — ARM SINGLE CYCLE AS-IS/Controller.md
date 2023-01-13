@@ -38,7 +38,18 @@ endmodule
 Este é um módulo Verilog chamado "controlador" que recebe várias entradas: 
 
 - um sinal de clock (clk), um sinal de reset;
-- um vetor de 20 bits chamado "Instr" e um vetor de 4 bits chamado "ALUFlags". Ele também possui várias saídas: um vetor de 2 bits chamado "RegSrc", um sinal de 1 bit chamado "RegWrite", um vetor de 2 bits chamado "ImmSrc", um sinal de 1 bit chamado "ALUSrc", um vetor de 2 bits chamado "ALUControl", um sinal de 1 bit chamado "MemWrite", um sinal de 1 bit chamado "MemtoReg" e um sinal de 1 bit chamado "PCSrc".
+- um vetor de 20 bits chamado "Instr" e um vetor de 4 bits chamado "ALUFlags". 
+
+Ele também possui várias saídas: 
+
+- um vetor de 2 bits chamado "RegSrc", 
+- um sinal de 1 bit chamado "RegWrite", 
+- um vetor de 2 bits chamado "ImmSrc", 
+- um sinal de 1 bit chamado "ALUSrc", 
+- um vetor de 2 bits chamado "ALUControl", 
+- um sinal de 1 bit chamado "MemWrite", 
+- um sinal de 1 bit chamado "MemtoReg" e 
+- um sinal de 1 bit chamado "PCSrc".
 
 O módulo instancia dois sub-módulos "decodificador" e "condlogic", passando alguns dos inputs e algumas das saídas dos sub-módulos para as entradas e saídas do "controlador".
 
@@ -99,12 +110,22 @@ Aqui simplesmente declaramos variáveis internas e argumentos de entrada e saíd
 
 Aqui temos uma parte muito importante — e na verdade, é por ela que devemos começar a conceber novas instruções. Este trecho de código implementa uma lógica combinacional para definir como interpretar as instruções.
 
-Ele usa o Opcode para determinar se é uma instrução de processamento de dados imediato, registrador, carregamento, armazenamento, salto, ou não implementada, e atribui valores diferentes ao controls dependendo do Opcode . Dependendo do valor do Funct e do Opcode, ele atribui valores diferentes ao controls que são usados para controlar as operações do datapath do processador.
+Ele usa o Opcode para determinar se é uma instrução de:
+- processamento de dados imediato, 
+- registrador, 
+- carregamento, 
+- armazenamento, 
+- salto, ou 
+- não implementada, 
 
-Ele também possui uma entrada de default (padrão) que é ativada quando nenhuma das outras entradas são ativadas, isso é usado para lidar com casos de instruções não implementadas e geralmente é configurado para atribuir um valor indeterminado (x) ao sinal de controle controls nesses casos.
+Dependendo do valor do Funct e do Opcode, ele atribui valores diferentes ao controls que são usados para controlar as operações do datapath do processador.
 
-A partir desses valores de controls é possível determinar quais sinais de controle devem ser ativados para executar a instrução corretamente. O código faz isso através da linha de atribuição assign {RegSrc, ImmSrc, ALUSrc, MemtoReg, RegW, MemW, Branch, ALUOp} = controls;
+Ele também possui uma entrada de default (padrão) que é ativada quando nenhuma das outras entradas são ativadas, isso é usado para lidar com casos de instruções não implementadas e geralmente é configurado para atribuir um valor indeterminado (x) ao sinal de controle $controls$ nesses casos.
 
+A partir desses valores de $controls$ é possível determinar quais sinais de controle devem ser ativados para executar a instrução corretamente. O código faz isso através da linha de atribuição 
+```
+assign {RegSrc, ImmSrc, ALUSrc, MemtoReg, RegW, MemW, Branch, ALUOp} = controls;
+```
 Onde controls são usados para configurar esses sinais de controle que garantem que as instruções são executadas corretamente.
 
 ```
