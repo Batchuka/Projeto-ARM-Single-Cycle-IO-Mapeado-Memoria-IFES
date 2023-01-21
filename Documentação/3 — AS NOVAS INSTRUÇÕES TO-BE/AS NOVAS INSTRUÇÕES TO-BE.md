@@ -16,21 +16,8 @@ Além disso, é preciso ter em mente:
 
 Para pensar com clareza a respeito de como implementar essas instruções, é importante saber o que não é responsabilidade delas. Tomemos como exemplo a primeira instrução que faremos, MOV. Não é responsabilidade de MOV obter os operandos. Isso pode parecer óbvio, mas é um ideia singela que pode confundir os incaltos: *as instruções partem do pressuposto que os operandos estão disponíveis!* Não há o que se pensar a respeito de como "pegar" a matéria prima para executar a operação, só devemos pensar na operação. Então, precisamos pensar ou levar em consideração os registradores em si, só precisamos dizer se a operação envolve ou não registradores, imediatos, etc.
 
-## O significado de cada sinal de controller
 
-|Sinal       |Descrição                                                                 |
-|------------|--------------------------------------------------------------------------|
-|FlagW:      |Controla se as flags devem ser atualizadas.                               |
-|PCS:        |Controla se o PC deve ser atualizado.                                     |
-|RegW:       |Controla se o registrador deve ser escrito.                               |
-|MemW:       |Controla se a memória deve ser escrita.                                   |
-|MemtoReg:   |Controla se o valor de memória deve ser carregado para o registrador.     |
-|ALUSrc:     |Controla se o operando da ALU é proveniente do registrador ou do imediato.|
-|ImmSrc:     |Controla qual conjunto de bits do imediato devem ser usados.              |
-|RegSrc:     |Controla qual registrador deve ser usado como operando.                   |
-|ALUControl: |Controla qual operação a ALU deve realizar.                               |
-|Branch:     |Controla se deve haver desvio de fluxo de programa.                       |
-|ALUOp:      |Controla se a operação é uma operação de processamento de dados ou não.   |
+## Implementando as funções
 
 > [Implementando MOV](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/3%20%E2%80%94%20AS%20NOVAS%20INSTRU%C3%87%C3%95ES%20TO-BE/mov.md#implementando-mov)
 
@@ -54,16 +41,6 @@ Agora vamos para  principal diferença entre LDR e LDRB, e STR e STRB é que as 
 
 
 
-
-
-```
-4'b0101: begin
-  ALUControl = 3'b000; // ADD (mas é usado para movimentar)
-  NoWrite = 1'b0; // Escreva o resultado no registrador
-end
-```
-
-A instrução MOV move um operando para outro, então eu configurei o controlador ALU para realizar uma operação de adição (que é usada para copiar um operando para outro registrador), mas eu configurei a flag NoWrite para 0, para indicar que o resultado deve ser escrito em um registrador.
 
 ```
 4'b0110: begin
