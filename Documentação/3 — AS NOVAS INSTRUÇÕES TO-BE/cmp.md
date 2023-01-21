@@ -1,4 +1,4 @@
-# Implementando MOV
+# Implementando CMP
 
 - **CMP** (compare): compara dois valores e atualiza os registradores de status N, Z e C para indicar se o primeiro é menor, igual ou maior que o segundo.
 
@@ -6,16 +6,22 @@
 ![image](https://user-images.githubusercontent.com/66538880/207985785-60acf438-9fd4-4fd3-9a87-9004325fb854.png)
 ![image](https://user-images.githubusercontent.com/66538880/207985811-e11e54b8-ee15-402f-a1cf-15bda3063a92.png)
 
+A Instrução CMP (compare), compara dois valores e atualiza os registradores de status N, Z e C para indicar se o primeiro é menor, igual ou maior que o segundo. Assim, precisaremos configurar:
 
-Acontece que o nosso processador não oferece uma forma para podermos obter o valor de um imediato, visto que o datapath sempre utiliza o ALUResult. Para resolver esse problema, adicionamos um mux que é controlado pela flag 'MovFlag'.
+- o sinal $FlagW$ para indicar que as flags devem ser atualizadas;
+- o $ALUControl$ para realizar a operação de subtração;
+- o sinal $RegWrite$ para não atualizar o registrador e;
+- será bom assinalar o sinal $MemtoReg$ para '0', para garantir que o resultado da operação não seja escrito em um endereço de memória. 
 
-* ${MovFlag = 0 \rightarrow }$ a saída a ser considerada é o ALUResult;
-* ${MovFlag = 1 \rightarrow }$ a saída a ser considerada é o imediato;
 
-![image](https://user-images.githubusercontent.com/66538880/213033234-13cf85dc-850b-4225-bde3-c3169649be90.png)
+```
+4'b1010: begin
+  ALUControl = 3'b100; // CMP
+  NoWrite = 1'b1; // Não escreva o resultado no registrador
+end
+```
 
-Para decodificar uma instrução MOV
-
+A instrução CMP compara dois operandos e não armazena o resultado, por isso, eu configurei o controlador ALU para realizar uma operação de subtração (que é usada para comparar dois operandos) e configurei a flag NoWrite para 1, para indicar que o resultado não deve ser escrito em um registrador.
 
 
 
