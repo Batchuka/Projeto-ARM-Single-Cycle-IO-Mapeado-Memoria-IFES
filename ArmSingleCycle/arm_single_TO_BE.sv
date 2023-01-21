@@ -207,6 +207,8 @@ module decoder(input  logic [1:0] Op,
   // Main Decoder
   
   always_comb
+	
+	// verificação dos dois bits: tipo de operação
   	case(Op)
   	                        // Data processing immediate
   	  2'b00: if (Funct[5])  controls = 10'b0000101001; 
@@ -228,7 +230,9 @@ module decoder(input  logic [1:0] Op,
   // ALU Decoder 
             
   always_comb
-    if (ALUOp) begin                 // which DP Instr?
+    if (ALUOp) begin                 
+	
+	// Descobrir qual instrução de processamento de dados
       case(Funct[4:1]) 
   	    4'b0100: ALUControl = 2'b00; // ADD
   	    4'b0010: ALUControl = 2'b01; // SUB
@@ -236,7 +240,8 @@ module decoder(input  logic [1:0] Op,
   	    4'b1100: ALUControl = 2'b11; // ORR
   	    default: ALUControl = 2'bx;  // unimplemented
       endcase
-      // update flags if S bit is set 
+      ]
+	// update flags if S bit is set 
 	// (C & V only updated for arith instructions)
       FlagW[1]      = Funct[0]; // FlagW[1] = S-bit
 	// FlagW[0] = S-bit & (ADD | SUB)
@@ -415,8 +420,6 @@ module mux2 #(parameter WIDTH = 8)
   assign y = s ? d1 : d0; 
 endmodule
 
-
-
 module alu(input  logic [31:0] a, b,
            input  logic [1:0]  ALUControl,
            output logic [31:0] Result,
@@ -446,5 +449,3 @@ module alu(input  logic [31:0] a, b,
                     (a[31] ^ sum[31]); 
   assign ALUFlags    = {neg, zero, carry, overflow};
 endmodule
-
-

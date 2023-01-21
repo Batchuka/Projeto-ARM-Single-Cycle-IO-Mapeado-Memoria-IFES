@@ -42,6 +42,8 @@ Para pensar com clareza a respeito de como implementar essas instruções, é im
 
 > [Implementando EOR]()
 
+Agora vamos para  principal diferença entre LDR e LDRB, e STR e STRB é que as instruções LDR e STR acessam 4 bytes de memória, enquanto LDRB e STRB acessam somente 1 byte.
+
 > [Implementando LSL]()
 
 > [Implementando ASR]()

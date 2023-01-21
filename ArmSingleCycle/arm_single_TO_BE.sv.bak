@@ -228,21 +228,31 @@ module decoder(input  logic [1:0] Op,
   // ALU Decoder 
             
   always_comb
-    if (ALUOp) begin                 // which DP Instr?
-      case(Funct[4:1]) 
-  	    4'b0100: ALUControl = 2'b00; // ADD
-  	    4'b0010: ALUControl = 2'b01; // SUB
-            4'b0000: ALUControl = 2'b10; // AND
-  	    4'b1100: ALUControl = 2'b11; // ORR
+   
+ if (ALUOp) begin                 // which DP Instr?
+      
+	case(Funct[4:1])
+		4'b01010:begin
+			if (I == 1 || Var == 8'b000000000)
+				begin
+			ALUControl = 3'b001
+		4'b0100: ALUControl = 2'b00; // ADD
+  	    	4'b0010: ALUControl = 2'b01; // SUB
+            	4'b0000: ALUControl = 2'b10; // AND
+  	    	4'b1100: ALUControl = 2'b11; // ORR
   	    default: ALUControl = 2'bx;  // unimplemented
       endcase
-      // update flags if S bit is set 
+      
+
+	// update flags if S bit is set 
 	// (C & V only updated for arith instructions)
       FlagW[1]      = Funct[0]; // FlagW[1] = S-bit
 	// FlagW[0] = S-bit & (ADD | SUB)
       FlagW[0]      = Funct[0] & 
         (ALUControl == 2'b00 | ALUControl == 2'b01); 
     end else begin
+
+
       ALUControl = 2'b00; // add for non-DP instructions
       FlagW      = 2'b00; // don't update Flags
     end
@@ -415,7 +425,6 @@ module mux2 #(parameter WIDTH = 8)
   assign y = s ? d1 : d0; 
 endmodule
 
-
 module alu(input  logic [31:0] a, b,
            input  logic [1:0]  ALUControl,
            output logic [31:0] Result,
@@ -433,6 +442,8 @@ module alu(input  logic [31:0] a, b,
       2'b0?: Result = sum;
       2'b10: Result = a & b;
       2'b11: Result = a | b;
+	
+	// O que preciso adicionar aqui 
     endcase
 
   assign neg      = Result[31];
