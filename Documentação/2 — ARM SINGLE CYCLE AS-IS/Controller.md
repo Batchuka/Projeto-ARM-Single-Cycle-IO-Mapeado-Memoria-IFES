@@ -8,9 +8,29 @@ O *controller* é a circuitaria, majoritariamente, combinacional —  em grande 
 - Registrador de destino, $Rd$ ; e
 - $AluFlags$
 
+![image](https://user-images.githubusercontent.com/66538880/213886119-cfc1c9d1-a41f-4e1a-a3e2-e7c39ebce5ee.png)
+
+
 ## A lógica do Controller
 
-![image](https://user-images.githubusercontent.com/66538880/207778472-627997a4-2efe-4d88-89c9-3c36182e290c.png)
+Este é um módulo Verilog chamado "controlador" que recebe várias entradas: 
+
+- um sinal de clock (clk), um sinal de reset;
+- um vetor de 20 bits chamado "Instr" — que é a composição de $Cond$, $Funct$, $Op$ e $Rd$ — e um vetor de 4 bits chamado "ALUFlags". 
+
+Ele também possui várias saídas: 
+
+- um vetor de 2 bits chamado "RegSrc", 
+- um sinal de 1 bit chamado "RegWrite", 
+- um vetor de 2 bits chamado "ImmSrc", 
+- um sinal de 1 bit chamado "ALUSrc", 
+- um vetor de 2 bits chamado "ALUControl", 
+- um sinal de 1 bit chamado "MemWrite", 
+- um sinal de 1 bit chamado "MemtoReg" e 
+- um sinal de 1 bit chamado "PCSrc".
+
+O módulo serve basicamente para "chamar" dois sub-módulos "decoder" e "condlogic", passando alguns dos inputs e algumas das saídas dos sub-módulos para as entradas e saídas do "controller". Em linhas gerais, o objetivo é decodificar a instrução e interpretar as condições em que elas devem ser executadas para elas serem executadas.
+
 
 ```
 module controller(input  logic         clk, reset,
@@ -35,35 +55,35 @@ module controller(input  logic         clk, reset,
                PCSrc, RegWrite, MemWrite);
 endmodule
 ```
-Este é um módulo Verilog chamado "controlador" que recebe várias entradas: 
+|![image](https://user-images.githubusercontent.com/66538880/207778472-627997a4-2efe-4d88-89c9-3c36182e290c.png)|![image](https://user-images.githubusercontent.com/66538880/213886168-b97d2c3b-f52d-4fe7-a6bd-a756e09bc3a5.png)|
+|-|-|
 
-- um sinal de clock (clk), um sinal de reset;
-- um vetor de 20 bits chamado "Instr" e um vetor de 4 bits chamado "ALUFlags". 
-
-Ele também possui várias saídas: 
-
-- um vetor de 2 bits chamado "RegSrc", 
-- um sinal de 1 bit chamado "RegWrite", 
-- um vetor de 2 bits chamado "ImmSrc", 
-- um sinal de 1 bit chamado "ALUSrc", 
-- um vetor de 2 bits chamado "ALUControl", 
-- um sinal de 1 bit chamado "MemWrite", 
-- um sinal de 1 bit chamado "MemtoReg" e 
-- um sinal de 1 bit chamado "PCSrc".
-
-O módulo instancia dois sub-módulos "decodificador" e "condlogic", passando alguns dos inputs e algumas das saídas dos sub-módulos para as entradas e saídas do "controlador".
-
-O módulo "decodificador" recebe os valores de "Instr[27:26]", "Instr[25:20]" e "Instr[15:12]" como entradas, e produz várias saídas: "FlagW", "PCS", "RegW", "MemW", "MemtoReg", "ALUSrc", "ImmSrc", "RegSrc" e "ALUControl".
-
-O módulo "condlogic" recebe os valores de "clk", "reset", "Instr[31:28]" e "ALUFlags como entradas, e as saídas de "FlagW", "PCS", "RegW" e "MemW" do módulo "decodificador" como entrada, ele também produz saídas: "PCSrc", "RegWrite" e "MemWrite".
-
-O módulo "controlador" combina a funcionalidade dos módulos "decodificador" e "condlogic" para produzir as saídas finais do controlador. Ele combina as saídas do decodificador, verificando as condições e flags correspondentes e atua como um intermediário entre a entrada e as saídas finais.
 
 ## Macros do Controller
 
 ### $\rightarrow$ decoder
 
-![image](https://user-images.githubusercontent.com/66538880/211954858-eb908b5e-6e6d-44cf-9492-e1ca1d866af4.png)
+O módulo "decoder" recebe os valores:
+- "Instr[27:26]" ( $Op$ ) 
+- "Instr[25:20]" ( $Funct$ ) e 
+- "Instr[15:12]" ( $Rd$ ) 
+
+como entradas, e produz várias saídas: 
+
+|Sinal       |Descrição                                                                 |
+|------------|--------------------------------------------------------------------------|
+|FlagW:      |Controla se as flags devem ser atualizadas.                               |
+|PCS:        |Controla se o PC deve ser atualizado.                                     |
+|RegW:       |Controla se o registrador deve ser escrito.                               |
+|MemW:       |Controla se a memória deve ser escrita.                                   |
+|MemtoReg:   |Controla se o valor de memória deve ser carregado para o registrador.     |
+|ALUSrc:     |Controla se o operando da ALU é proveniente do registrador ou do imediato.|
+|ImmSrc:     |Controla qual conjunto de bits do imediato devem ser usados.              |
+|RegSrc:     |Controla qual registrador deve ser usado como operando.                   |
+|ALUControl: |Controla qual operação a ALU deve realizar.                               |
+
+
+Então, primeiramente declaramos os sinais de entrada e saída, bem como os sinais internos.
 
 ```
 module decoder(input  logic [1:0] Op,
@@ -77,19 +97,28 @@ module decoder(input  logic [1:0] Op,
   logic [9:0] controls;
   logic       Branch, ALUOp;
 ```
-Aqui simplesmente declaramos variáveis internas e argumentos de entrada e saída.
+
+Agora, devemos começar a definir como interpretar os diferentes frames de bits que recebemos. Obviamente, usamos uma estrutura *switch-case* para definir quais serão os valores dos sinais de saída para determinados frames de entrada. Essa lógica não depende de clock, por isso é combinacional (*always_comb*). Observe os comentários.
+
 
 ```
 // Main Decoder
   
   always_comb
-  	case(Op)
-  	                        // Data processing immediate
+  	
+	case(Op)
+	
+	// Caso op = 00, temos dois casos: Funct[5] (bit I) = 1 ou 0 (que é o else)
+  	                        
+				// instrução de processamento de dados com imediato 
   	  2'b00: if (Funct[5])  controls = 10'b0000101001; 
   	                        
-				// Data processing register
+				// instrução de processamento de dados com redistrador
   	         else           controls = 10'b0000001001; 
   	                        
+				
+	// Caso op = 01, temos dois casos: Funct[0] = 1 ou 0 (que é o else)
+	
 				// LDR
   	  2'b01: if (Funct[0])  controls = 10'b0001111000; 
   	                        
@@ -174,6 +203,18 @@ Em geral, o módulo decodificador recebe várias entradas e as decodifica para d
 É constituído pelo *Main Decoder* que é o principal gerador de sinais para controle e o *ALUDecoder*, que usará o campo ${Funct}$ para determinar o tipo de instrução *Data-processing*. Há também um controle para atualizar o valor de PC, chamado ${PCSrc}$. Considerando que são circuitos combinacionais, temos a vantagem de poder usar tabelas-verdade para sua implementação.
 
 ### $\rightarrow$ condlogic
+
+## O significado de cada sinal de controller
+
+|Sinal       |Descrição                                                                 |
+|------------|--------------------------------------------------------------------------|
+|PCS:        |Controla se o PC deve ser atualizado.                                     |
+|RegW:       |Controla se o registrador deve ser escrito.                               |
+|MemW:       |Controla se a memória deve ser escrita.                                   |
+|Branch:     |Controla se deve haver desvio de fluxo de programa.                       |
+|ALUOp:      |Controla se a operação é uma operação de processamento de dados ou não.   |
+
+O módulo "condlogic" recebe os valores de "clk", "reset", "Instr[31:28]" ( $Cond$ ) e "ALUFlags como entradas, e as saídas de "FlagW", "PCS", "RegW" e "MemW" do módulo "decodificador" como entrada, ele também produz saídas: "PCSrc", "RegWrite" e "MemWrite".
 
 ![image](https://user-images.githubusercontent.com/66538880/211954925-7a64d87e-4e3c-4b9c-9315-55521cb3041b.png)
 
