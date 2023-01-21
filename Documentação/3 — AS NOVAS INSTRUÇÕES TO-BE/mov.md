@@ -16,6 +16,15 @@ Acontece que o nosso processador não oferece uma forma para podermos obter o va
 Para decodificar uma instrução MOV
 
 
+```
+4'b0101: begin
+  ALUControl = 3'b000; // ADD (mas é usado para movimentar)
+  NoWrite = 1'b0; // Escreva o resultado no registrador
+end
+```
+
+A instrução MOV move um operando para outro, então eu configurei o controlador ALU para realizar uma operação de adição (que é usada para copiar um operando para outro registrador), mas eu configurei a flag NoWrite para 0, para indicar que o resultado deve ser escrito em um registrador.
+
 
 
 |$\leftarrow$ [Lista de instruções](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/2%20%E2%80%94%20ARM%20SINGLE%20CYCLE%20AS-IS/Controller.md#controler) | [Sumário](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES#sum%C3%A1rio) |
