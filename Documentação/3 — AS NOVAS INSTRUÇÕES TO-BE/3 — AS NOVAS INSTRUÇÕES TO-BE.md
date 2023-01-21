@@ -34,13 +34,23 @@ Para pensar com clareza a respeito de como implementar essas instruções, é im
 
 > [Implementando MOV](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/3%20%E2%80%94%20AS%20NOVAS%20INSTRU%C3%87%C3%95ES%20TO-BE/mov.md#implementando-mov)
 
+> [Implementando CMP]()
 
-A Instrução [MOV](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/edit/main/Documenta%C3%A7%C3%A3o/1%20%E2%80%94%20INTRODU%C3%87%C3%83O%20e%20APENDICES/A%20%E2%80%94%20FRAME%20DAS%20NOVAS%20INSTRU%C3%87%C3%95ES.md#mov), move o valor de uma fonte para um destino. Assim, precisaremos configurar:
+> [Implementando TST]()
 
-- o ALUSrc para indicar que o operando da ALU é proveniente do registrador ou imediato;
-- configurar o RegWrite para indicar que o registrador deve ser escrito;
+> [Implementando MVN]()
 
-## Implementando CMP
+> [Implementando EOR]()
+
+> [Implementando LSL]()
+
+> [Implementando ASR]()
+
+> [Implementando LDRB]()
+
+> [Implementando STRB]()
+
+
 
 A Instrução [CMP](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/edit/main/Documenta%C3%A7%C3%A3o/1%20%E2%80%94%20INTRODU%C3%87%C3%83O%20e%20APENDICES/A%20%E2%80%94%20FRAME%20DAS%20NOVAS%20INSTRU%C3%87%C3%95ES.md#cmp) (compare), compara dois valores e atualiza os registradores de status N, Z e C para indicar se o primeiro é menor, igual ou maior que o segundo. Assim, precisaremos configurar:
 
