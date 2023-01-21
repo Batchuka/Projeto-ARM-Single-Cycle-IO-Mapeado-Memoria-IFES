@@ -54,22 +54,7 @@ Agora vamos para  principal diferença entre LDR e LDRB, e STR e STRB é que as 
 
 
 
-A Instrução [CMP](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/edit/main/Documenta%C3%A7%C3%A3o/1%20%E2%80%94%20INTRODU%C3%87%C3%83O%20e%20APENDICES/A%20%E2%80%94%20FRAME%20DAS%20NOVAS%20INSTRU%C3%87%C3%95ES.md#cmp) (compare), compara dois valores e atualiza os registradores de status N, Z e C para indicar se o primeiro é menor, igual ou maior que o segundo. Assim, precisaremos configurar:
 
-- o sinal $FlagW$ para indicar que as flags devem ser atualizadas;
-- o $ALUControl$ para realizar a operação de subtração;
-- o sinal $RegWrite$ para não atualizar o registrador e;
-- será bom assinalar o sinal $MemtoReg$ para '0', para garantir que o resultado da operação não seja escrito em um endereço de memória. 
-
-
-```
-4'b1010: begin
-  ALUControl = 3'b100; // CMP
-  NoWrite = 1'b1; // Não escreva o resultado no registrador
-end
-```
-
-A instrução CMP compara dois operandos e não armazena o resultado, por isso, eu configurei o controlador ALU para realizar uma operação de subtração (que é usada para comparar dois operandos) e configurei a flag NoWrite para 1, para indicar que o resultado não deve ser escrito em um registrador.
 
 ```
 4'b0101: begin
