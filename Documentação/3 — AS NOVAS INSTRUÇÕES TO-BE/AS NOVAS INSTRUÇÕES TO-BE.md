@@ -19,61 +19,34 @@ Para pensar com clareza a respeito de como implementar essas instruções, é im
 
 ## Implementando as funções
 
+Primeiro vamos acrescentar as [instruções de processamento de dados](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/1%20%E2%80%94%20INTRODU%C3%87%C3%83O%20e%20APENDICES/TIPOS%20DE%20INSTRU%C3%87%C3%95ES.md#instru%C3%A7%C3%B5es-de-processamento-de-dados), pois são mais fáceis — em muitos casos, verá que é uma extensão natural de outras instruções.
+
 > [Implementando MOV](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/3%20%E2%80%94%20AS%20NOVAS%20INSTRU%C3%87%C3%95ES%20TO-BE/mov.md#implementando-mov)
 
-> [Implementando CMP]()
+> [Implementando CMP](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/3%20%E2%80%94%20AS%20NOVAS%20INSTRU%C3%87%C3%95ES%20TO-BE/cmp.md#implementando-cmp)
 
-> [Implementando TST]()
+> [Implementando TST](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/3%20%E2%80%94%20AS%20NOVAS%20INSTRU%C3%87%C3%95ES%20TO-BE/tst.md#implementando-tst)
 
-> [Implementando MVN]()
+> [Implementando MVN](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/3%20%E2%80%94%20AS%20NOVAS%20INSTRU%C3%87%C3%95ES%20TO-BE/mvn.md#implementando-mvn)
 
-> [Implementando EOR]()
+> [Implementando EOR](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/3%20%E2%80%94%20AS%20NOVAS%20INSTRU%C3%87%C3%95ES%20TO-BE/eor.md#implementando-eor)
 
-Agora vamos para  principal diferença entre LDR e LDRB, e STR e STRB é que as instruções LDR e STR acessam 4 bytes de memória, enquanto LDRB e STRB acessam somente 1 byte.
+Agora vamos para as [instruções de memória](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/1%20%E2%80%94%20INTRODU%C3%87%C3%83O%20e%20APENDICES/TIPOS%20DE%20INSTRU%C3%87%C3%95ES.md#instru%C3%A7%C3%B5es-de-mem%C3%B3ria), que via de regra são mais delicadas. Isso porque precisam de lógica de deslocamento (shift), visto que os endereços de memória que podem ser expressos como um deslocamento a partir de um registrador base, isto é, em vez de especificar o endereço de memória exato, uma instrução de store ou load especifica um registrador base e um deslocamento para 'pivotar'. 
+
+A lógica de deslocamento permite que o processador desloque o valor contido em um registrador para a esquerda ou para a direita, e depois adicione ou subtraia o deslocamento. O deslocamento é geralmente especificado como um valor imediato, mas pode ser especificado como um valor contido em outro registrador. Isso é útil porque permite que o processador acesse diferentes endereços de memória com uma única instrução, enquanto economiza espaço de instrução. Além disso, isso também melhora a performance do sistema, pois o processador não precisa carregar o endereço exato antes de cada operação de store ou load. 
+
+> [Implementando modulo shift register](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/3%20%E2%80%94%20AS%20NOVAS%20INSTRU%C3%87%C3%95ES%20TO-BE/modulo%20shift%20register.md#implementando-modulo-shift-register)
 
 > [Implementando LSL]()
 
 > [Implementando ASR]()
 
+A principal diferença entre LDR e LDRB, e STR e STRB é que as instruções LDR e STR acessam 4 bytes de memória, enquanto LDRB e STRB acessam somente 1 byte.
+
 > [Implementando LDRB]()
 
 > [Implementando STRB]()
 
-
-
-
-```
-4'b0110: begin
-  ALUControl = 3'b010; // AND
-  NoWrite = 1'b1; // Não escreva o resultado no registrador
-end
-```
-
-A instrução TST realiza uma operação lógica AND entre dois operandos, mas não armazena o resultado, então eu configurei o controlador ALU para realizar uma operação AND e configurei a flag NoWrite para 1, para indicar que o resultado não deve ser escrito em um registrador.
-
-```
-4'b0111: begin
-  ALUControl = 3'b011; // ORR (com o operando 2 invertido)
-  NoWrite = 1'b0; // Escreva o resultado no registrador
-end
-```
-
-A instrução MVN inverta o operando e realiza uma operação ORR, então eu configurei o controlador ALU para realizar uma operação ORR com o operando 2 invertido e configurei a flag NoWrite para 0, para indicar que o resultado deve ser escrito em um registrador.
-
-```
-4'b1000: begin
-  ALUControl = 3'b110; // EOR
-  NoWrite = 1'b0; // Escreva o resultado no registrador
-end
-```
-
-A instrução EOR realiza uma operação lógica XOR entre dois operandos, então eu configurei o controlador ALU para realizar uma operação XOR e configurei a flag NoWrite para 0, para indicar que o resultado deve ser escrito em um registrador.
-
-
-
-Este módulo é um registrador deslocamento. Ele tem três entradas: Sh, Shnt e ScrB, e uma saída: shifted. A entrada Sh é usada para especificar se o deslocamento é para a esquerda (LSL) ou para a direita (ASR). A entrada Shnt é usada para especificar a quantidade de bits para deslocar. A entrada ScrB é o valor que será deslocado. A saída shifted é o resultado do deslocamento.
-
-O módulo usa uma lógica combinacional para realizar o deslocamento. Ele verifica se as entradas Sh e Shnt são diferentes de zero, se sim, ele usa um case statement para selecionar qual operação de deslocamento realizar, LSL ou ASR, de acordo com o valor de Sh. Se as entradas Sh e Shnt são igual a zero, ele passa o valor original de ScrB para a saída shifted.
 
 
 
