@@ -6,14 +6,14 @@
 ![image](https://user-images.githubusercontent.com/66538880/207986045-8486a762-1756-41bc-9d98-875c43237750.png)
 ![image](https://user-images.githubusercontent.com/66538880/207986076-de96426f-475c-4337-bf6b-989c94f26622.png)
 
-Acontece que o nosso processador não oferece uma forma para podermos obter o valor de um imediato, visto que o datapath sempre utiliza o ALUResult. Para resolver esse problema, adicionamos um mux que é controlado pela flag 'MovFlag'.
+```
+4'b0111: begin
+  ALUControl = 3'b011; // ORR (com o operando 2 invertido)
+  NoWrite = 1'b0; // Escreva o resultado no registrador
+end
+```
 
-* ${MovFlag = 0 \rightarrow }$ a saída a ser considerada é o ALUResult;
-* ${MovFlag = 1 \rightarrow }$ a saída a ser considerada é o imediato;
-
-![image](https://user-images.githubusercontent.com/66538880/213033234-13cf85dc-850b-4225-bde3-c3169649be90.png)
-
-Para decodificar uma instrução MOV
+A instrução MVN inverta o operando e realiza uma operação ORR, então eu configurei o controlador ALU para realizar uma operação ORR com o operando 2 invertido e configurei a flag NoWrite para 0, para indicar que o resultado deve ser escrito em um registrador.
 
 
 
