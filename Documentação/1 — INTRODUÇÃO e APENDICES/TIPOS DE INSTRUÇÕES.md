@@ -36,4 +36,5 @@ Onde os bits 25:20 formam o *funct* e podmeos modificar Src2b com base no fato d
 onde L define se teremos branch com Label ou não.
 
 
-
+| [Sumário](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES#sum%C3%A1rio) |
+|-| 
