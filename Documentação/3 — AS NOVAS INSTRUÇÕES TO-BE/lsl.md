@@ -1,4 +1,4 @@
-# Implementando MOV
+# Implementando LSL
 
 - **LSL** (logical shift left): desloca os bits de um operando para a esquerda por uma determinada quantidade, preenchendo os bits vazios com zeros.
 
