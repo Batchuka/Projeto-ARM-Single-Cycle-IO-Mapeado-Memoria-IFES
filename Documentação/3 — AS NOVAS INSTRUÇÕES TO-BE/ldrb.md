@@ -1,6 +1,4 @@
-# Implementando MOV
-
-
+# Implementando LDRB
 
 - **LDRB** (load byte): Carrega um byte da memória para um registrador. A localização de memória é especificada por um endereço e pode ser deslocada com base em um valor contido em outro registrador.
 
