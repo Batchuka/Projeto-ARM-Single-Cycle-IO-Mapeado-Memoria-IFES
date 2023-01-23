@@ -1,4 +1,4 @@
-# Implementando MOV
+# Implementando ASR
 
 A Instrução MOV, move o valor de uma fonte para um destino. A fonte pode ser um registrador ou o imediato, baseado no que indicar o bit 'I', como se vê no frame:
 
