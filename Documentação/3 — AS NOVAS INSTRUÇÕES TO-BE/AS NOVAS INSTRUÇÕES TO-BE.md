@@ -8,7 +8,7 @@ Agora temos tudo que precisamos para poder discutir as modificações necessári
 
 Além disso, é preciso ter em mente:
 
-4. Como é frame da instrução — para isso consulte o [Apêndice A](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/1%20%E2%80%94%20INTRODU%C3%87%C3%83O%20e%20APENDICES/A%20%E2%80%94%20FRAME%20DAS%20NOVAS%20INSTRU%C3%87%C3%95ES.md#a---novas-instru%C3%A7%C3%B5es)
+4. Como é frame da instrução;
 5. O que cada sinal de controller faz; e
 6. Talvez seja necessário adicionar sinais e até mesmo módulos.
 
