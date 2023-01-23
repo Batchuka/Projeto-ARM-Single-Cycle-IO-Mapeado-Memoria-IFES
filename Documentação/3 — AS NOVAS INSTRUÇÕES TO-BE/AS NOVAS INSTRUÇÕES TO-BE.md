@@ -31,15 +31,15 @@ Primeiro vamos acrescentar as [instruções de processamento de dados](https://g
 
 > [Implementando EOR](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/3%20%E2%80%94%20AS%20NOVAS%20INSTRU%C3%87%C3%95ES%20TO-BE/eor.md#implementando-eor)
 
-Agora vamos para as [instruções de memória](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/1%20%E2%80%94%20INTRODU%C3%87%C3%83O%20e%20APENDICES/TIPOS%20DE%20INSTRU%C3%87%C3%95ES.md#instru%C3%A7%C3%B5es-de-mem%C3%B3ria), que via de regra são mais delicadas. Isso porque precisam de lógica de deslocamento (shift), visto que os endereços de memória que podem ser expressos como um deslocamento a partir de um registrador base, isto é, em vez de especificar o endereço de memória exato, uma instrução de store ou load especifica um registrador base e um deslocamento para 'pivotar'. 
-
-A lógica de deslocamento permite que o processador desloque o valor contido em um registrador para a esquerda ou para a direita, e depois adicione ou subtraia o deslocamento. O deslocamento é geralmente especificado como um valor imediato, mas pode ser especificado como um valor contido em outro registrador. Isso é útil porque permite que o processador acesse diferentes endereços de memória com uma única instrução, enquanto economiza espaço de instrução. Além disso, isso também melhora a performance do sistema, pois o processador não precisa carregar o endereço exato antes de cada operação de store ou load. 
+Para as instruções LSL e ASR, precisaremos adicionar o módulo *Shift register*, lógica de deslocamento permite que o processador desloque o valor contido em um registrador para a esquerda ou para a direita e depois adicione ou subtraia o deslocamento. O deslocamento é geralmente especificado como um valor imediato, mas pode ser especificado como um valor contido em outro registrador. Isso é útil porque permite que o processador acesse diferentes endereços de memória com uma única instrução, enquanto economiza espaço de instrução. Além disso, isso também melhora a performance do sistema, pois o processador não precisa carregar o endereço exato antes de cada operação de store ou load. 
 
 > [Implementando modulo shift register](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/3%20%E2%80%94%20AS%20NOVAS%20INSTRU%C3%87%C3%95ES%20TO-BE/modulo%20shift%20register.md#implementando-modulo-shift-register)
 
 > [Implementando LSL](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/3%20%E2%80%94%20AS%20NOVAS%20INSTRU%C3%87%C3%95ES%20TO-BE/lsl.md)
 
 > [Implementando ASR](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/3%20%E2%80%94%20AS%20NOVAS%20INSTRU%C3%87%C3%95ES%20TO-BE/asr.md)
+
+Agora vamos para as [instruções de memória](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/1%20%E2%80%94%20INTRODU%C3%87%C3%83O%20e%20APENDICES/TIPOS%20DE%20INSTRU%C3%87%C3%95ES.md#instru%C3%A7%C3%B5es-de-mem%C3%B3ria), que via de regra são mais delicadas. Isso porque precisam de lógica de deslocamento (shift), visto que os endereços de memória que podem ser expressos como um deslocamento a partir de um registrador base, isto é, em vez de especificar o endereço de memória exato, uma instrução de store ou load especifica um registrador base e um deslocamento para 'pivotar'. 
 
 A principal diferença entre LDR e LDRB, e STR e STRB é que as instruções LDR e STR acessam 4 bytes de memória, enquanto LDRB e STRB acessam somente 1 byte.
 
