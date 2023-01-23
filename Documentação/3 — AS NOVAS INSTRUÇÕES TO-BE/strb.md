@@ -1,4 +1,4 @@
-# Implementando MOV
+# Implementando STRB
 
 
 - **STRB** (store byte): armazena o valor contido em um registrador em uma localização de memória especificada. A localização de memória é especificada por um endereço e pode ser deslocada com base em um valor contido em outro registrador.
