@@ -2,7 +2,9 @@
 
 Para entender o que acontece no módulo **datapath**, é necessário entender as macros que ele instancia, a saber:
 
-> ✩ DICA :  uma macro é uma espécie de atalho para um trecho de código que é usado comumente.
+✩ NOTA ✩
+
+> Uma macro é uma espécie de classe utilizada para instanciar objetos. É um trecho de código que representa o blueprint do componente. Assim, é possível replicar vários componentes do mesmo, basta invocar sua macro.
 
 
 ## Macros do Datapath
@@ -100,9 +102,9 @@ endmodule
 
 Essa é uma macro que estende um valor imediato de 24 bits para um valor de 32 bits. O tipo de extensão é determinado pelo sinal "ImmSrc", que pode assumir um de três valores:
 
-    2'b00: O valor imediato é estendido com zeros para os bits mais significativos, resultando em um valor imediato sem sinal de 8 bits.
-    2'b01: O valor imediato é estendido com zeros para os bits mais significativos, resultando em um valor imediato sem sinal de 12 bits.
-    2'b10: O valor imediato é estendido com o bit mais significativo duplicado para os bits mais significativos, resultando em um valor imediato com sinal de 24 bits.
+- 2'b00: O valor imediato é estendido com zeros para os bits mais significativos, resultando em um valor imediato sem sinal de 8 bits.
+- 2'b01: O valor imediato é estendido com zeros para os bits mais significativos, resultando em um valor imediato sem sinal de 12 bits.
+- 2'b10: O valor imediato é estendido com o bit mais significativo duplicado para os bits mais significativos, resultando em um valor imediato com sinal de 24 bits.
 
 Se o sinal "ImmSrc" assumir qualquer outro valor, o sinal de saída "ExtImm" é configurado para um valor indefinido ("x" na notação Verilog).
 
