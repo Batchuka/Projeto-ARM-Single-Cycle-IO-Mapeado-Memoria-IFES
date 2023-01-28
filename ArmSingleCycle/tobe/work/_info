@@ -1,0 +1,419 @@
+m255
+K4
+z2
+!s11f vlog 2019.2 2019.04, Apr 17 2019
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IFES/ArmSingleCycle/asis
+vadder
+Z0 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
+Z1 !s110 1674784086
+!i10b 1
+!s100 aQ@HMDHT;I>2YROTKK3FS0
+!s11b <C_L1[Io^:I3S6?W@lDgU3
+IG]1Y?de7FL`>Z7QW7KET42
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+S1
+Z3 dC:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IFES/ArmSingleCycle/tobe
+Z4 w1674784080
+Z5 8C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IFES/ArmSingleCycle/tobe/arm_single_TO_BE.sv
+Z6 FC:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IFES/ArmSingleCycle/tobe/arm_single_TO_BE.sv
+L0 420
+Z7 OV;L;2019.2;69
+r1
+!s85 0
+31
+Z8 !s108 1674784086.000000
+!s107 C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IFES/ArmSingleCycle/tobe/arm_single_TO_BE.sv|
+Z9 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IFES/ArmSingleCycle/tobe/arm_single_TO_BE.sv|
+!i113 1
+Z10 o-work work -sv
+Z11 tCvgOpt 0
+valu
+R0
+R1
+!i10b 1
+!s100 5@eMS8WhjhEgn;EeQGZD]0
+!s11b Wj=fDcIkeF[3IQm]O^eE<3
+IIGVkU;nFS2g2`IX2V4XS`2
+R2
+S1
+R3
+R4
+R5
+R6
+L0 455
+R7
+r1
+!s85 0
+31
+R8
+Z12 !s107 C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IFES/ArmSingleCycle/tobe/arm_single_TO_BE.sv|
+R9
+!i113 1
+R10
+R11
+varm
+R0
+R1
+!i10b 1
+!s100 o7;:D[B<YGk=`C@Ai_E1Z1
+!s11b TZ;I[N4R:Y]UmQ2]O6Zgk3
+ISi=MMRnnmHjzzGGQ6bVbi0
+R2
+S1
+R3
+R4
+R5
+R6
+L0 150
+R7
+r1
+!s85 0
+31
+R8
+R12
+R9
+!i113 1
+R10
+R11
+vcondcheck
+R0
+R1
+!i10b 1
+!s100 f<Q^4TlYCzDP;CAF`f:^E3
+!s11b Y6_SDG9hKM7CG_8zU@32o1
+IhdL9GE3T9egBDK8YQPKIZ3
+R2
+S1
+R3
+R4
+R5
+R6
+L0 313
+R7
+r1
+!s85 0
+31
+R8
+R12
+R9
+!i113 1
+R10
+R11
+vcondlogic
+R0
+R1
+!i10b 1
+!s100 @4HMg:8MRkeck<Ibm>bD42
+!s11b Jl2XP[<HlEf1ooQNcGUWW0
+I^iU7Ie;4HonOiZ^V>Vb6I0
+R2
+S1
+R3
+R4
+R5
+R6
+L0 288
+R7
+r1
+!s85 0
+31
+R8
+R12
+R9
+!i113 1
+R10
+R11
+vcontroller
+R0
+R1
+!i10b 1
+!s100 K1K1a74<YEB1dLZKS[K7I2
+!s11b lz@E4<nVBnb=EiNOkPgQj0
+IIX6md[dhSDlLUW`BgnS[b3
+R2
+S1
+R3
+R4
+R5
+R6
+L0 174
+R7
+r1
+!s85 0
+31
+R8
+R12
+R9
+!i113 1
+R10
+R11
+vdatapath
+R0
+R1
+!i10b 1
+!s100 `GoX0DZgQJkifKODkjhD:0
+!s11b iZN_P<9Na<9CaM<2l`VP72
+I]V^N^T]a6OTfjm@YYcl^i3
+R2
+S1
+R3
+R4
+R5
+R6
+L0 343
+R7
+r1
+!s85 0
+31
+R8
+R12
+R9
+!i113 1
+R10
+R11
+vdecoder
+R0
+R1
+!i10b 1
+!s100 JZhLU;?WXG5W?F7NH:=4[2
+!s11b VggQ<]H^5fPc2@oFLG>BP0
+IjRz8KI]M<O=Y7nc`IhnIE2
+R2
+S1
+R3
+R4
+R5
+R6
+L0 196
+R7
+r1
+!s85 0
+31
+R8
+R12
+R9
+!i113 1
+R10
+R11
+vdmem
+R0
+R1
+!i10b 1
+!s100 2?B?W_6C>5O@RY`]mbfW[1
+!s11b kDNl4mPeXVb_c534OBSVE0
+IVD]T_Ml8alAXF=RzM^9I50
+R2
+S1
+R3
+R4
+R5
+R6
+L0 126
+R7
+r1
+!s85 0
+31
+R8
+R12
+R9
+!i113 1
+R10
+R11
+vextend
+R0
+R1
+!i10b 1
+!s100 ;kfg7BLMFS[0K5G[[W0R[1
+!s11b ^9gSIg^JWGhTbF^E3R8:l0
+IPXKf9je??;oHJlPKhWYMc2
+R2
+S1
+R3
+R4
+R5
+R6
+L0 404
+R7
+r1
+!s85 0
+31
+R8
+R12
+R9
+!i113 1
+R10
+R11
+vflopenr
+R0
+R1
+!i10b 1
+!s100 L`PUEc]c]UgYcE<al7M5N3
+!s11b F1IzmbizX78JloX:j;Hj53
+IlNW<cEYR]S7MT<NBETzIL3
+R2
+S1
+R3
+R4
+R5
+R6
+L0 427
+R7
+r1
+!s85 0
+31
+R8
+R12
+R9
+!i113 1
+R10
+R11
+vflopr
+R0
+R1
+!i10b 1
+!s100 ibJ0S9naMhaXWTk4XIVRS1
+!s11b 8B49h]9L2InXag=il070E0
+IN6`GOQBW][5z<<>cW17on0
+R2
+S1
+R3
+R4
+R5
+R6
+L0 437
+R7
+r1
+!s85 0
+31
+R8
+R12
+R9
+!i113 1
+R10
+R11
+vimem
+R0
+R1
+!i10b 1
+!s100 V;2iLj:^k;;BDTV29n7R31
+!s11b gZTOH5Zh472^:>LcIMX@E0
+Imko_9IdGnnSB]K?l=@:8V2
+R2
+S1
+R3
+R4
+R5
+R6
+L0 138
+R7
+r1
+!s85 0
+31
+R8
+R12
+R9
+!i113 1
+R10
+R11
+vmux2
+R0
+R1
+!i10b 1
+!s100 SNz2N?Ro4G]hXiJ^>7Q6H0
+!s11b R@bfm9>GJH8n3[nPYL0nn3
+I7FK6:6R>`m?IY8UEKa1j_0
+R2
+S1
+R3
+R4
+R5
+R6
+L0 447
+R7
+r1
+!s85 0
+31
+R8
+R12
+R9
+!i113 1
+R10
+R11
+vregfile
+R0
+R1
+!i10b 1
+!s100 j0VmfJ4n28L0d@4KaHnnZ1
+!s11b Oc;L`XmFbCkFA^kKDiJQn1
+IM]HVB;ZKD3JjYjn68zYA20
+R2
+S1
+R3
+R4
+R5
+R6
+L0 384
+R7
+r1
+!s85 0
+31
+R8
+R12
+R9
+!i113 1
+R10
+R11
+vtestbench
+R0
+R1
+!i10b 1
+!s100 6^iJ5V_W>?ISgjOL8PZ>82
+!s11b l7H37FJzh2MlQS>i2`<8=3
+I[?iAEHV`QX`o>AD8LnnzB0
+R2
+S1
+R3
+R4
+R5
+R6
+L0 76
+R7
+r1
+!s85 0
+31
+R8
+R12
+R9
+!i113 1
+R10
+R11
+vtop
+R0
+R1
+!i10b 1
+!s100 aV;g2jCMPnHkbkKj4ZU5L1
+!s11b WOCoC7ieLVb3>;I49NWXL0
+In6d_09``2mKJPa7Lhf4GV2
+R2
+S1
+R3
+R4
+R5
+R6
+L0 114
+R7
+r1
+!s85 0
+31
+R8
+R12
+R9
+!i113 1
+R10
+R11

@@ -102,6 +102,7 @@ module testbench();
       if(MemWrite) begin
         if(DataAdr === 100 & WriteData === 7) begin
           $display("Simulation succeeded");
+
           $stop;
         end else if (DataAdr !== 96) begin
           $display("Simulation failed");
@@ -240,7 +241,7 @@ module decoder(input  logic [1:0] Op,
   	    4'b1100: ALUControl = 2'b11; // ORR
   	    default: ALUControl = 2'bx;  // unimplemented
       endcase
-      ]
+      
 	// update flags if S bit is set 
 	// (C & V only updated for arith instructions)
       FlagW[1]      = Funct[0]; // FlagW[1] = S-bit
