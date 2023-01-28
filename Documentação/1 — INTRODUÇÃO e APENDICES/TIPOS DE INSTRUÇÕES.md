@@ -1,4 +1,4 @@
-# C — TIPOS DE INSTRUÇÕES
+# TIPOS DE INSTRUÇÕES
 
 O *Instruction Memory* é uma memória que guarda as instruções a serem executadas. Para acessar essas instruções, devemos saber o endereço delas — fornecido pelo PC. O ato de imputar um endereço para obter o frame da instrução, dá-se o nome de *fetch* da instrução. O barramento de saída desta memória será chamado *Instr*. Muitos blocos utilizam este frame, cada uma deles se interessa por um pedaço específico dos 32 bits. Sendo assim, farei uma breve digressão para explicar os diferentes frames de instrução que podemos ter.
 
@@ -36,4 +36,5 @@ Onde os bits 25:20 formam o *funct* e podmeos modificar Src2b com base no fato d
 onde L define se teremos branch com Label ou não.
 
 
-
+| [Sumário](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES#sum%C3%A1rio) |
+|-| 

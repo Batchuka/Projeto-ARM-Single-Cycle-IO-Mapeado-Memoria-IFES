@@ -59,16 +59,23 @@ endmodule
 |-|-|
 
 
-## Macros do Controller
+## Modulo decoder
 
-### $\rightarrow$ decoder
+como entradas, o modulo tem:
+<div align="center">
+	
+|Sinal                      |Descrição                                                  |
+|---------------------------|-----------------------------------------------------------|
+|"Instr[27:26]" ( $Op$ )    |Indica o tipo de instrução específica está sendo executada |
+|"Instr[25:20]" ( $Funct$ ) |Indica informações adicionais sobre a instrução            |
+|"Instr[15:12]" ( $Rd$ )    | Registrador destino da instrução                          |
 
-O módulo "decoder" recebe os valores:
-- "Instr[27:26]" ( $Op$ ) 
-- "Instr[25:20]" ( $Funct$ ) e 
-- "Instr[15:12]" ( $Rd$ ) 
+>
+</div>
 
-como entradas, e produz várias saídas: 
+e produz várias saídas: 
+
+<div align="center">
 
 |Sinal       |Descrição                                                                 |
 |------------|--------------------------------------------------------------------------|
@@ -82,7 +89,21 @@ como entradas, e produz várias saídas:
 |RegSrc:     |Controla qual registrador deve ser usado como operando.                   |
 |ALUControl: |Controla qual operação a ALU deve realizar.                               |
 
+>
+</div>
 
+Além disso, temos os sinais internos do módulo:
+
+<div align="center">
+
+|Sinal       |Descrição                                                                 |
+|------------|--------------------------------------------------------------------------|
+|Branch:     |Controla se deve haver desvio de fluxo de programa.                       |
+|ALUOp:      |Controla se a operação é uma operação de processamento de dados ou não.   |
+
+>
+</div>
+	
 Então, primeiramente declaramos os sinais de entrada e saída, bem como os sinais internos.
 
 ```
@@ -98,7 +119,7 @@ module decoder(input  logic [1:0] Op,
   logic       Branch, ALUOp;
 ```
 
-Agora, devemos começar a definir como interpretar os diferentes frames de bits que recebemos. Obviamente, usamos uma estrutura *switch-case* para definir quais serão os valores dos sinais de saída para determinados frames de entrada. Essa lógica não depende de clock, por isso é combinacional (*always_comb*). Observe os comentários.
+Agora, devemos começar a definir como interpretar os diferentes frames de bits que recebemos. Obviamente, usamos uma estrutura *switch-case* para definir quais serão os 10 bits de saída em função das entradas. Essa lógica **não depende de clock**, por isso é combinacional, *always_comb*. Observe os comentários do código.
 
 
 ```
@@ -108,60 +129,58 @@ Agora, devemos começar a definir como interpretar os diferentes frames de bits 
   	
 	case(Op)
 	
-	// Caso op = 00, temos dois casos: Funct[5] (bit I) = 1 ou 0 (que é o else)
+	// Caso op = 00 (processamento de dados), temos dois casos: 
   	                        
-				// instrução de processamento de dados com imediato 
+				// Funct[5] (bit I) = 1 : instrução de processamento de dados com imediato 
   	  2'b00: if (Funct[5])  controls = 10'b0000101001; 
   	                        
-				// instrução de processamento de dados com redistrador
+				// ou 0 : instrução de processamento de dados com registrador
   	         else           controls = 10'b0000001001; 
   	                        
 				
-	// Caso op = 01, temos dois casos: Funct[0] = 1 ou 0 (que é o else)
+	// Caso op = 01 (memória), temos dois casos: Funct[0] = 1 ou 0 (que é o else)
 	
-				// LDR
+				// Funct[0] (bit L) = 1 : LDR
   	  2'b01: if (Funct[0])  controls = 10'b0001111000; 
   	                        
-				// STR
+				// ou 0 : STR
   	         else           controls = 10'b1001110100; 
   	                        
+	// Caso op = 10 (branch), temos um caso apenas: branch
+				
 				// B
   	  2'b10:                controls = 10'b0110100010; 
   	                        
+	// Finalmente, qualquer outro valor para OP será "não implementado", retornado 10 bits 'x'
+	
 				// Unimplemented
   	  default:              controls = 10'bx;          
   	endcase
+	
+// Aqui, destribuímos os bits nas saídas definidas em um array 'controls'
 
-  assign {RegSrc, ImmSrc, ALUSrc, MemtoReg, 
-          RegW, MemW, Branch, ALUOp} = controls; 
+  assign {RegSrc, ImmSrc, ALUSrc, MemtoReg, RegW, MemW, Branch, ALUOp} = controls; 
      
 ```
 
-Aqui temos uma parte muito importante — e na verdade, é por ela que devemos começar a conceber novas instruções. Este trecho de código implementa uma lógica combinacional para definir como interpretar as instruções.
+Outro componente sempre combinacional (*always_comb*) é o ALUControl, cujo objetivo é controlar o ALU para executar instruções aritméticas. 
 
-Ele usa o Opcode para determinar se é uma instrução de:
-- processamento de dados imediato, 
-- registrador, 
-- carregamento, 
-- armazenamento, 
-- salto, ou 
-- não implementada, 
 
-Dependendo do valor do Funct e do Opcode, ele atribui valores diferentes ao controls que são usados para controlar as operações do datapath do processador.
+<div align="center">
+    <img src= https://user-images.githubusercontent.com/66538880/213918754-0905861c-1e99-4996-b7e4-9896dfe7b505.png >
+</div>
 
-Ele também possui uma entrada de default (padrão) que é ativada quando nenhuma das outras entradas são ativadas, isso é usado para lidar com casos de instruções não implementadas e geralmente é configurado para atribuir um valor indeterminado (x) ao sinal de controle $controls$ nesses casos.
-
-A partir desses valores de $controls$ é possível determinar quais sinais de controle devem ser ativados para executar a instrução corretamente. O código faz isso através da linha de atribuição 
-```
-assign {RegSrc, ImmSrc, ALUSrc, MemtoReg, RegW, MemW, Branch, ALUOp} = controls;
-```
-Onde controls são usados para configurar esses sinais de controle que garantem que as instruções são executadas corretamente.
+Podemos ver que este esse bloco de lógica opera em função de $ALUop$ e $Funct$. Novamente, temos uma estrutura *switch-case*. Observe os comentários no código abaixo.
 
 ```
   // ALU Decoder 
             
   always_comb
-    if (ALUOp) begin                 // which DP Instr?
+    
+    // Se tivermos uma instrução de processamento de dados que envolva ALU, ALUop = 1
+    if (ALUOp) begin
+      
+      // Aqui, já sabemos que é uma instrução de ALU, precisamos saber qual é e atribuir à 'ALUControl'
       case(Funct[4:1]) 
   	    4'b0100: ALUControl = 2'b00; // ADD
   	    4'b0010: ALUControl = 2'b01; // SUB
@@ -169,55 +188,72 @@ Onde controls são usados para configurar esses sinais de controle que garantem 
   	    4'b1100: ALUControl = 2'b11; // ORR
   	    default: ALUControl = 2'bx;  // unimplemented
       endcase
-      // update flags if S bit is set 
-	// (C & V only updated for arith instructions)
-      FlagW[1]      = Funct[0]; // FlagW[1] = S-bit
-	// FlagW[0] = S-bit & (ADD | SUB)
-      FlagW[0]      = Funct[0] & 
-        (ALUControl == 2'b00 | ALUControl == 2'b01); 
+      
+      // Aqui, atribuímos ao bit FlagW[1] o valor do bit Funct[0], que é 'S' : 
+      // S = 1 —> guardar flags;
+      // S = 0 —> ñ guardar flags;
+      FlagW[1] = Funct[0];
+      
+      // Além disso, as flags podem ser obtidas com uma operação de SUB ou ADD;
+      // Isso fica armazenado no bit FlagW[0] = 'S-bit' AND ('ADD' OR 'SUB')
+      FlagW[0] = Funct[0] & (ALUControl == 2'b00 | ALUControl == 2'b01); 
+    
     end else begin
-      ALUControl = 2'b00; // add for non-DP instructions
-      FlagW      = 2'b00; // don't update Flags
+      
+      // Se não tivermos uma operação de ALU (ALUop = 0)
+      
+      ALUControl = 2'b00; // Definimos ALUControl em 'ADD';
+      FlagW      = 2'b00; // E não fazemos o update de flag;
+      
     end
 ```
+O sub-modulo 'PC Logic' é o último que falta. Nele, entramos com os 4 bits do $Rd$, com o bit de $Branch$ — proveniente do 'main decoder' — e o bit de $RegW$ — também proveniente de 'main decoder'. A saída é o único bit $PCS$, que indica se PC será atualizado ou não. Isso dependerá:
+
+- Se o valor de Rd é igual a 4'b1111 (15 em decimal) e a variável RegW é verdadeira.
+- ou Se a variável Branch é verdadeira
+
+<div align="center">
+    <img src= https://user-images.githubusercontent.com/66538880/213921301-2d8ef86d-c2f1-4407-a629-9f2faafc0265.png >
+</div>
+
+Existem várias maneiras de o valor do PC ser atualizado, como por exemplo, ao executar uma instrução de branch (desvio) ou retorno de chamada de subrotina. Se a instrução atual é um branch, então a variável Branch será verdadeira, e o PC será atualizado com o endereço especificado na instrução de branch. 
+
+Se a instrução atual é uma instrução de retorno de chamada de subrotina, então o registrador Rd terá o valor 4'b1111 e a variável RegW será verdadeira, e o PC será atualizado com o endereço de retorno armazenado em outro registrador.
 
 ```
   // PC Logic
+  
+  // Se Rd for o registrador 15 e tivermos permissão para escrever
+  // Se Branch = 1
+  
   assign PCS  = ((Rd == 4'b1111) & RegW) | Branch; 
 endmodul
 ```
 
-Este é um módulo Verilog chamado "decodificador", que recebe várias entradas: um vetor de 2 bits chamado "Op", um vetor de 6 bits chamado "Funct" e um vetor de 4 bits chamado "Rd". O módulo possui várias saídas: um vetor de 2 bits chamado "FlagW", 3 sinais de 1 bit chamados "PCS", "RegW" e "MemW", 3 sinais de 1 bit chamados "MemtoReg", "ALUSrc" e "RegSrc" e um sinal de 2 bits chamado "ALUControl".
+## Modulo condlogic
 
-O módulo possui um bloco always_comb que usa uma declaração case para decodificar o valor de "Op" e atribui o vetor de 10 bits "controls" um valor específico dependendo do valor de "Op" e "Funct" bem como um valor "não implementado" para o padrão.
+O módulo "condlogic" tem por objetivo comparar valores de flags para executar ou não instruções. Recebe os valores de "clk", "reset", pois agora queremos que haja sincronismo com as operações que ocorrem no datapath. Além disso, temos "Instr[31:28]" ( $Cond$ ) e "ALUFlags" como entradas principais, onde ALUFlags é justamente o retorno do módulo ALU.
 
-Depois disso, ele atribui várias saídas "RegSrc", "ImmSrc", "ALUSrc", "MemtoReg", "RegW", "MemW", "Branch", "ALUOp" a partir do vetor "controls".
+Os sinais obtidos do decoder, "FlagW", "PCS", "RegW" e "MemW", irão produzir as saídas: "PCSrc", "RegWrite" e "MemWrite", se as condições forem estabelecidas.
 
-Então, há outro bloco always_comb que usa outra declaração case dentro de uma declaração condicional que avalia o sinal "ALUOp" e "Funct[4:1]" para determinar o valor da saída "ALUControl". Ele também atribui valores à saída "FlagW" com base no valor de "Funct[0]", se é uma instrução de processamento de dados e se é uma operação de adição ou subtração.
-
-A última parte do módulo atribui o valor da saída "PCS" usando uma lógica combinatória baseada na entrada "Rd", "RegW" e "Branch"
-
-Em geral, o módulo decodificador recebe várias entradas e as decodifica para determinar vários sinais de controle que são usados para controlar o comportamento de outras partes do sistema.
-
-
-É constituído pelo *Main Decoder* que é o principal gerador de sinais para controle e o *ALUDecoder*, que usará o campo ${Funct}$ para determinar o tipo de instrução *Data-processing*. Há também um controle para atualizar o valor de PC, chamado ${PCSrc}$. Considerando que são circuitos combinacionais, temos a vantagem de poder usar tabelas-verdade para sua implementação.
-
-### $\rightarrow$ condlogic
-
-## O significado de cada sinal de controller
-
+<div align="center">
+	
 |Sinal       |Descrição                                                                 |
 |------------|--------------------------------------------------------------------------|
-|PCS:        |Controla se o PC deve ser atualizado.                                     |
-|RegW:       |Controla se o registrador deve ser escrito.                               |
-|MemW:       |Controla se a memória deve ser escrita.                                   |
-|Branch:     |Controla se deve haver desvio de fluxo de programa.                       |
-|ALUOp:      |Controla se a operação é uma operação de processamento de dados ou não.   |
+|PCSrc:        |Controla se o PC deve ser atualizado.                                   |
+|RegWrite:       |Controla se o registrador deve ser escrito.                           |
+|MemWrite:       |Controla se a memória deve ser escrita.                               |
+	
+>	
+</div>
 
-O módulo "condlogic" recebe os valores de "clk", "reset", "Instr[31:28]" ( $Cond$ ) e "ALUFlags como entradas, e as saídas de "FlagW", "PCS", "RegW" e "MemW" do módulo "decodificador" como entrada, ele também produz saídas: "PCSrc", "RegWrite" e "MemWrite".
+são basicamente os mesmos sinais que entraram, que só serão propagados se as condições forem cumpridas.
 
-![image](https://user-images.githubusercontent.com/66538880/211954925-7a64d87e-4e3c-4b9c-9315-55521cb3041b.png)
+<div align="center">
+    <img src= https://user-images.githubusercontent.com/66538880/213948155-bf3dd15e-b951-4c6c-8cbb-cf306c251bc6.png >
+</div>
 
+Primeiro, declaramos os sinais de entrada e saída, bem como os internos.
 
 ```
 module condlogic(input  logic       clk, reset,
@@ -230,35 +266,39 @@ module condlogic(input  logic       clk, reset,
   logic [1:0] FlagWrite;
   logic [3:0] Flags;
   logic       CondEx;
+```
+O módulo define primeiro um vetor de 2 bits chamado $FlagWrite$, um vetor de 4 bits chamado $Flags4 e um sinal de 1 bit chamado $CondEx$.
 
-  flopenr #(2)flagreg1(clk, reset, FlagWrite[1], 
-                       ALUFlags[3:2], Flags[3:2]);
-  flopenr #(2)flagreg0(clk, reset, FlagWrite[0], 
-                       ALUFlags[1:0], Flags[1:0]);
+Então ele instancia duas instâncias de um módulo chamado "flopenr", ambos com os mesmos inputs : "clk", "reset", "FlagWrite[0/1]", "ALUFlags[1:0/3:2]" e "Flags[1:0/3:2]". Essas duas instâncias são destinadas a atualizar o vetor "Flags".
+
+Depois invocaremos o módulo "condcheck", tendo como entrada "Cond" e "Flags" e produzindo a saída "CondEx".
+
+Em seguida, na linha seguinte, a saída "FlagWrite" é atribuída como a entrada "FlagW" AND com 2 cópias do sinal "CondEx". A saída "RegWrite" é atribuída como a entrada "RegW" AND com "CondEx" e a saída "MemWrite" é atribuída como a entrada "MemW" AND com "CondEx", a saída "PCSrc" é atribuída como a entrada "PCS" AND com "CondEx"
+
+```
+  
+  flopenr #(2)flagreg1(clk, reset, FlagWrite[1], ALUFlags[3:2], Flags[3:2]);
+  
+  flopenr #(2)flagreg0(clk, reset, FlagWrite[0], ALUFlags[1:0], Flags[1:0]);
 
   // write controls are conditional
+  
   condcheck cc(Cond, Flags, CondEx);
+  
   assign FlagWrite = FlagW & {2{CondEx}};
   assign RegWrite  = RegW  & CondEx;
   assign MemWrite  = MemW  & CondEx;
   assign PCSrc     = PCS   & CondEx;
+
 endmodule
 ```
-Este é um módulo Verilog chamado "condlogic" que recebe vários inputs: um sinal de clock (clk), um sinal de reset, um vetor de 4 bits chamado "Cond", um vetor de 4 bits chamado "ALUFlags", um vetor de 2 bits chamado "FlagW" e três sinais de 1 bit chamados "PCS", "RegW" e "MemW". Ele também tem quatro saídas: "PCSrc", "RegWrite", "MemWrite" e "CondEx".
-
-O módulo define primeiro um vetor de 2 bits chamado "FlagWrite", um vetor de 4 bits chamado "Flags" e um sinal de 1 bit chamado "CondEx".
-
-Então ele instancia duas instâncias de um módulo chamado "flopenr" que ambos tem os mesmos inputs como "clk", "reset", "FlagWrite[0/1]", "ALUFlags[1:0/3:2]" e "Flags[1:0/3:2]" respectivamente, essas duas instâncias são destinadas a atualizar o vetor "Flags".
-
-O módulo "condcheck" é então instanciado, tendo como entrada "Cond" e "Flags" e produzindo a saída "CondEx".
-
-Em seguida, na linha seguinte, a saída "FlagWrite" é atribuída como a entrada "FlagW" AND com 2 cópias do sinal "CondEx". A saída "RegWrite" é atribuída como a entrada "RegW" AND com "CondEx" e a saída "MemWrite" é atribuída como a entrada "MemW" AND com "CondEx", a saída "PCSrc" é atribuída como a entrada "PCS" AND com "CondEx"
 
 Este módulo está usando a entrada "Cond" para controlar se as saídas "FlagWrite", "RegWrite", "MemWrite" e "PCSrc" estão habilitadas ou não. Se "CondEx" for verdadeiro, então a saída correspondente é habilitada, caso contrário, ela é desabilitada.
 
-### $\rightarrow$ condcheck
+Vamos dar uma olhada no módulo 'condcheck'.
+
+### condcheck
 ```
-// Recebem dois inputs de 4 bits e um retorno de tamanho indefinido
 module condcheck(input  logic [3:0] Cond,
                  input  logic [3:0] Flags,
                  output logic       CondEx);
@@ -266,10 +306,15 @@ module condcheck(input  logic [3:0] Cond,
   // cinco sinais internos
   logic neg, zero, carry, overflow, ge;
   
-  // duas estruturas baseadas nos sinais. Uma chamada 'Flags' e outra 'ge' (greater or equal)
+
+  // aqui criamos as flags
   assign {neg, zero, carry, overflow} = Flags;
+  
+  // aqui criamos o bit 'greater or equal'
   assign ge = (neg == overflow);
-                  
+  
+  // lembrando que o cond é uma estrutura de 4 bits;
+  // abaixo temos a simples atribuição de valores;
   always_comb
     case(Cond)
       4'b0000: CondEx = zero;             // EQ
@@ -291,19 +336,27 @@ module condcheck(input  logic [3:0] Cond,
     endcase
 endmodule
 ```
-Este é um módulo Verilog chamado "condcheck", que recebe dois inputs: um vetor de 4 bits chamado "Cond" e um vetor de 4 bits chamado "Flags". Ele também tem uma saída: um sinal lógico de 1 bit chamado "CondEx".
+### flopenr
 
-O módulo primeiro atribui os bits individuais da entrada "Flags" para sinais lógicos separados chamados "neg", "zero", "carry" e "overflow". Ele também atribui o sinal "ge" como o resultado de "neg" ser igual a "overflow".
+Por último, mas não menos importante, o sub-modulo invocado duas vezes flopenr é uma implementação de um registrador de deslocamento. Tem uma entrada WIDTH como parâmetro, por padrão, é definido como 8, usado para identificar o tamanho dos sinais de entrada.
 
-No bloco always_comb, o módulo usa um comando case para avaliar a entrada "Cond" e atribui a saída "CondEx" com base no valor de "Cond". Dependendo do valor de 4 bits de "Cond", diferentes combinações dos sinais "neg", "zero", "carry", "overflow" e "ge" são usadas para determinar o valor de "CondEx".
+O registrador é implementado usando uma porta lógica always com uma cláusula de sincronização @(posedge clk, posedge reset). A porta lógica sempre verifica se o Clock e o reset estão em nível alto. Se o reset estiver em nível alto, o registrador é redefinido para 0. Caso contrário, se o en estiver em nível alto, o dado é escrito no registrador.
 
-A declaração case tem 16 opções possíveis para o valor de "Cond", cada uma das quais atribui um valor específico a "CondEx". A última opção é um caso padrão, que atribui "CondEx" o valor de 'x' quando o valor de "Cond" não é uma das definições.
+> ✩ DICA : 'always_ff' é usado para criar um bloco síncrono de código, sequêncial. Basicamente um flip-flop.
+
+As entradas são:
+
+- en : é um sinal de entrada lógico que habilita ou desabilita a escrita no registrador.
+- d : é um sinal de entrada de WIDTH bits, que contém o dado que será escrito no registrador.
+
+E as saídas são:
+
+- q : é um sinal de saída de WIDTH bits, que contém o dado armazenado no registrador.
 
 
-### $\rightarrow$ flopenr
 ```
 module flopenr #(parameter WIDTH = 8)
-                (input  logic             clk, reset, en,
+                (input  logic clk, reset, en,
                  input  logic [WIDTH-1:0] d, 
                  output logic [WIDTH-1:0] q);
 
@@ -313,26 +366,5 @@ module flopenr #(parameter WIDTH = 8)
 endmodule
 ```
 
-Este é um módulo chamado flopenr que tem uma entrada WIDTH como parâmetro, por padrão, é definido como 8. Este módulo tem várias entradas e saídas.
-
-As entradas são:
-
-- clk e reset : são sinais de entrada para o relógio e o reset do sistema, respectivamente.
-- en : é um sinal de entrada lógico que habilita ou desabilita a escrita no registrador.
-- d : é um sinal de entrada de WIDTH bits, que contém o dado que será escrito no registrador.
-
-E as saídas são:
-
-- q : é um sinal de saída de WIDTH bits, que contém o dado armazenado no registrador.
-
-> ✩ DICA : 'always_ff' é usado para criar um bloco síncrono de código, sequêncial. Já 'always_comb' é usado para a descrição de lógica puramente combinacional.
-
-O módulo flopenr é uma implementação de um registrador de deslocamento. O registrador contém uma porta de entrada para o dado, uma porta de entrada para o clock, e uma porta de entrada para o reset. A saída do registrador é conectada ao dado armazenado. O registrador é implementado usando uma porta lógica always com uma cláusula de sincronização @(posedge clk, posedge reset). 
-
-A porta lógica sempre verifica se o relógio e o reset estão em nível alto. Se o reset estiver em nível alto, o registrador é redefinido para 0. Caso contrário, se o en estiver em nível alto, o dado é escrito no registrador.
-
-
-
-
-|$\leftarrow$ [Datapath](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/2%20%E2%80%94%20ARM%20SINGLE%20CYCLE%20AS-IS/Datapath.md#datapath) | [Sumário](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES#sum%C3%A1rio) | [ARM NOVAS INSTRUÇÕES (TO-BE)](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/3%20%E2%80%94%20AS%20NOVAS%20INSTRU%C3%87%C3%95ES%20TO-BE/3%20%E2%80%94%20AS%20NOVAS%20INSTRU%C3%87%C3%95ES%20TO-BE.md#arm-novas-instru%C3%A7%C3%B5es-to-be) $\rightarrow$|
+|$\leftarrow$ [Datapath](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/2%20%E2%80%94%20ARM%20SINGLE%20CYCLE%20AS-IS/Datapath.md#datapath) | [Sumário](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES#sum%C3%A1rio) | [ARM NOVAS INSTRUÇÕES (TO-BE)](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/3%20%E2%80%94%20AS%20NOVAS%20INSTRU%C3%87%C3%95ES%20TO-BE/AS%20NOVAS%20INSTRU%C3%87%C3%95ES%20TO-BE.md#arm-novas-instru%C3%A7%C3%B5es-to-be) $\rightarrow$|
 |-|-|-|

@@ -2,7 +2,9 @@
 
 Para entender o que acontece no módulo **datapath**, é necessário entender as macros que ele instancia, a saber:
 
-> ✩ DICA :  uma macro é uma espécie de atalho para um trecho de código que é usado comumente.
+✩ NOTA ✩
+
+> Uma macro é uma espécie de classe utilizada para instanciar objetos. É um trecho de código que representa o blueprint do componente. Assim, é possível replicar vários componentes do mesmo, basta invocar sua macro.
 
 
 ## Macros do Datapath
@@ -100,9 +102,9 @@ endmodule
 
 Essa é uma macro que estende um valor imediato de 24 bits para um valor de 32 bits. O tipo de extensão é determinado pelo sinal "ImmSrc", que pode assumir um de três valores:
 
-    2'b00: O valor imediato é estendido com zeros para os bits mais significativos, resultando em um valor imediato sem sinal de 8 bits.
-    2'b01: O valor imediato é estendido com zeros para os bits mais significativos, resultando em um valor imediato sem sinal de 12 bits.
-    2'b10: O valor imediato é estendido com o bit mais significativo duplicado para os bits mais significativos, resultando em um valor imediato com sinal de 24 bits.
+- 2'b00: O valor imediato é estendido com zeros para os bits mais significativos, resultando em um valor imediato sem sinal de 8 bits.
+- 2'b01: O valor imediato é estendido com zeros para os bits mais significativos, resultando em um valor imediato sem sinal de 12 bits.
+- 2'b10: O valor imediato é estendido com o bit mais significativo duplicado para os bits mais significativos, resultando em um valor imediato com sinal de 24 bits.
 
 Se o sinal "ImmSrc" assumir qualquer outro valor, o sinal de saída "ExtImm" é configurado para um valor indefinido ("x" na notação Verilog).
 
@@ -226,5 +228,5 @@ A operação a ser realizada é determinada pelos dois bits menos significativos
 
 Além disso, o ALU também calcula algumas flags de estado baseadas no resultado da operação. A flag "neg" é "1" se o bit mais significativo de "Result" for "1", o que indica um número negativo. A flag "zero" é "1" se "Result" for igual a zero. A flag "carry" é "1" se houver um carry-out na operação de soma. A flag "overflow" é "1" se houver um overflow na operação de soma. Todas essas flags são armazenadas em "ALUFlags".
 
-$\leftarrow$ [Datapath](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/2%20%E2%80%94%20ARM%20SINGLE%20CYCLE%20AS-IS/2%20%E2%80%94%20ARM%20SINGLE%20CYCLE%20AS-IS.md#arm-single-cycle-as-is) | [sumário](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES#sum%C3%A1rio) | [Controller](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/2%20%E2%80%94%20ARM%20SINGLE%20CYCLE%20AS-IS/Controller.md#controler) $\rightarrow$
+$\leftarrow$ [Datapath](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/2%20%E2%80%94%20ARM%20SINGLE%20CYCLE%20AS-IS/ARM%20SINGLE%20CYCLE%20AS-IS.md#arm-single-cycle-as-is) | [sumário](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES#sum%C3%A1rio) | [Controller](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/2%20%E2%80%94%20ARM%20SINGLE%20CYCLE%20AS-IS/Controller.md#controler) $\rightarrow$
 |-|-|-|
