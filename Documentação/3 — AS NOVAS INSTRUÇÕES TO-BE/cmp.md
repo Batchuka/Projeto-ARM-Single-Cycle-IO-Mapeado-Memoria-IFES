@@ -1,6 +1,6 @@
 # Implementando CMP
 
-- **CMP** (compare): compara dois valores e atualiza os registradores de status N, Z e C para indicar se o primeiro é menor, igual ou maior que o segundo.
+**CMP** (compare), compara dois valores e atualiza os registradores de status N, Z e C para indicar se o primeiro é menor, igual ou maior que o segundo. Então, se eu quero ampliar a quantidade de operações que o meu hardware ALU executa, primeiro eu preciso aumentar a quantidade de operações que ele suporta. Isso significa que teremos que alterar a lógica do ALU Decoder para que um número maior de instruções possam ser decodificadas.
 
 ## CMP
 ![image](https://user-images.githubusercontent.com/66538880/207985785-60acf438-9fd4-4fd3-9a87-9004325fb854.png)
