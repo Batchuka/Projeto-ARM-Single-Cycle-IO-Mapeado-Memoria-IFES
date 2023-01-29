@@ -26,3 +26,7 @@ run -all
 # ** Note: $stop    : C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IFES/ArmSingleCycle/asis/arm_single_AS_IS.sv(106)
 #    Time: 205 ps  Iteration: 1  Instance: /testbench
 # Break in Module testbench at C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IFES/ArmSingleCycle/asis/arm_single_AS_IS.sv line 106
+quit -sim
+# End time: 20:04:00 on Jan 28,2023, Elapsed time: 46:19:29
+# Errors: 12, Warnings: 0
+project open C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IFES/ArmSingleCycle/tobe/ARM-ToBe
