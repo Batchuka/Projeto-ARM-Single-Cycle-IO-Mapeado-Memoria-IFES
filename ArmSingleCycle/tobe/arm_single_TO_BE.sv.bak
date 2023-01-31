@@ -1,4 +1,4 @@
-// arm_single.sv
+// arm_single.sv FEATURE
 // David_Harris@hmc.edu and Sarah_Harris@hmc.edu 25 June 2013
 // Single-cycle implementation of a subset of ARMv4
 // 
@@ -86,7 +86,13 @@ module testbench();
   
   initial@(posedge clk)
 	begin
-	$display("___________________");
+	$display(" ");
+	$display(" ");
+	$display("______ INÍCIO DO DISPOSITIVO ______");
+	$display("___________________________________");
+	$display(" ");
+	$display(" ");
+	$display("______ CLOCK + ______");
 	end
 
   // initialize test
@@ -99,12 +105,13 @@ module testbench();
   always
     begin
       clk <= 1; # 5; clk <= 0; # 5;
+	$display("______ CLOCK + ______");
     end
 
   // check results
   always @(negedge clk)
     begin
-	$display("___________________");
+	$display("______ CLOCK - ______");
       if(MemWrite) begin
         if(DataAdr === 100 & WriteData === 7) begin
           $display("Simulation succeeded");
@@ -147,8 +154,8 @@ module imem(input  logic [31:0] a,
   logic [31:0] RAM[63:0];
 
   initial
-      	$readmemh("memfile.dat",RAM);
-	//$readmemh("memfileMov.dat",RAM);
+      	//$readmemh("memfile.dat",RAM);
+	$readmemh("memfileMov.dat",RAM);
 
   assign rd = RAM[a[31:2]]; // word aligned
 endmodule
@@ -165,15 +172,20 @@ module arm(input  logic        clk, reset,
               ALUSrc, MemtoReg, PCSrc;
   logic [1:0] RegSrc, ImmSrc, ALUControl;
 
-	reg [7:0] counter = 8'b0;
-	
-	always@(negedge clk)
-	begin
-	counter <= counter+1;
-	$display("PC : %b",PC);
-	$display("INSTRUÇÃO %d: %b",counter,Instr);
-	$display("RESET : %b",reset);
-	end
+reg [7:0] counter = 8'b0;
+always@(negedge clk)
+begin
+counter <= counter+1;
+$display(" ");
+$display(" ");
+$display("____ saída do arm ____");
+$display("frame da instrução %d: %b",counter, Instr);
+$display("MovFlag : %b",MovFlag);
+$display("PCSrc   : %b",PCSrc);
+$display(" ");
+$display(" ");
+end
+
 
   controller c(clk, reset, Instr[31:12], ALUFlags, 
                RegSrc, RegWrite, ImmSrc, 
@@ -203,6 +215,17 @@ module controller(input  logic         clk, reset,
 
   	logic [1:0] FlagW;
   	logic       PCS, RegW, MemW, MovF;
+
+always@(negedge clk)
+begin
+$display(" ");
+$display(" ");
+$display("____ saída do controller ____");
+$display("MovFlag : %b",MovFlag);
+$display("PCS     : %b",PCS);
+$display(" ");
+$display(" ");
+end
 
   
   decoder dec(Instr[27:26], Instr[25:20], Instr[15:12],FlagW, PCS, RegW, MemW,MovF, MemtoReg, ALUSrc, ImmSrc, RegSrc, ALUControl);
@@ -235,7 +258,7 @@ module decoder(input  logic [1:0] Op,
 	2'b00:begin
 		
 		$display("INSTRUÇÃO : Processamento de dados");
-		$display("Funct: %b",Funct);
+		$display("Funct     : %b",Funct);
 	
 		case(Funct[5:0])
 		
@@ -274,7 +297,7 @@ module decoder(input  logic [1:0] Op,
 
 		endcase
 
-		$display("Controls: %b",controls); 
+		$display("Controls  : %b",controls); 
 	
 	end
 
@@ -282,7 +305,7 @@ module decoder(input  logic [1:0] Op,
   	2'b01:begin
 
 		$display("INSTRUÇÃO : Memória");
-		$display("Funct: %b",Funct);
+		$display("Funct     : %b",Funct);
 
 		case(Funct[0])
 			
@@ -296,7 +319,8 @@ module decoder(input  logic [1:0] Op,
 		default: controls = 11'bx;
 
 		endcase
-		$display("Controls: %b",controls); 
+
+		$display("Controls  : %b",controls); 
 		
   	end
 
@@ -304,7 +328,7 @@ module decoder(input  logic [1:0] Op,
   	2'b10:begin
 
 		$display("INSTRUÇÃO : Branch");
-		$display("Funct: %b",Funct);
+		$display("Funct     : %b",Funct);
 
 		//case(Funct[5:4])
 			
@@ -319,7 +343,7 @@ module decoder(input  logic [1:0] Op,
 
 		//endcase
 
-		$display("Controls: %b",controls);        
+		$display("Controls  : %b",controls);        
 
 	end
   	             
@@ -327,12 +351,12 @@ module decoder(input  logic [1:0] Op,
   	default:begin
 
 		$display("INSTRUÇÃO : Não implementada");
-		$display("Funct: %b",Funct);
+		$display("Funct     : %b",Funct);
               
 		// Unimplemented
 		controls = 10'bx;
 
-		$display("Controls: %b",controls); 
+		$display("Controls  : %b",controls); 
 	end          
   	endcase
 
@@ -344,7 +368,7 @@ module decoder(input  logic [1:0] Op,
   always_comb
     if (ALUOp) begin
 
-	$display("ALUOp: %b",ALUOp);                 
+	$display("ALUOp     : %b",ALUOp);                
 	
 	// Descobrir qual instrução de processamento de dados
       case(Funct[4:1]) 
@@ -355,7 +379,7 @@ module decoder(input  logic [1:0] Op,
   	    default: ALUControl = 2'bx;  // unimplemented
       endcase
 
-	$display("ALUControl: %b",ALUControl);
+	$display("ALUControl: %b",ALUControl); 
       
 	// update flags if S bit is set 
 	// (C & V only updated for arith instructions)
@@ -455,13 +479,6 @@ module datapath(input  logic        clk, reset,
   logic [31:0] ExtImm, SrcA, SrcB, Result, MovOrALUResult;
   logic [3:0]  RA1, RA2;
 
-	assign PCSrc     = 0;
-	always@(negedge clk)
-	begin
-	$display("MovFlag : %d",MovFlag);
-	$display("PCSrc : %d",PCSrc);
-	$display("PC : %b",PC);
-	end
 
   // next PC logic
   mux2 #(32)  pcmux(PCPlus4, Result, PCSrc, PCNext);

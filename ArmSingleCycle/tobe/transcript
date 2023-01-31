@@ -1,2 +1,1968 @@
 # Reading C:/intelFPGA_pro/19.4/modelsim_ase/tcl/vsim/pref.tcl
 # OpenFile C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IFES/ArmSingleCycle/tobe/arm_single_TO_BE.sv
+project open C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IFES/ArmSingleCycle/tobe/ARM-ToBe
+# Loading project ARM-ToBe
+vsim -gui work.testbench
+# vsim -gui work.testbench 
+# Start time: 22:42:21 on Jan 30,2023
+# Loading sv_std.std
+# Loading work.testbench
+# Loading work.top
+# Loading work.arm
+# Loading work.controller
+# Loading work.decoder
+# Loading work.condlogic
+# Loading work.flopenr
+# Loading work.condcheck
+# Loading work.datapath
+# Loading work.mux2
+# Loading work.flopr
+# Loading work.adder
+# Loading work.regfile
+# Loading work.extend
+# Loading work.alu
+# Loading work.imem
+# Loading work.dmem
+# Compile of arm_single_TO_BE.sv was successful.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.testbench
+# Loading work.top
+# Loading work.arm
+# Loading work.controller
+# Loading work.decoder
+# Loading work.condlogic
+# Loading work.flopenr
+# Loading work.condcheck
+# Loading work.datapath
+# Loading work.mux2
+# Loading work.flopr
+# Loading work.adder
+# Loading work.regfile
+# Loading work.extend
+# Loading work.alu
+# Loading work.imem
+# Loading work.dmem
+run
+# INSTRUÇÃO : Não implementada
+# Funct: xxxxxx
+# Controls: 0xxxxxxxxxx
+# ___________________
+# INSTRUÇÃO : Memória
+# Funct: 011000
+# Controls: 10011101000
+# PC : 00000000000000000000000000000000
+# INSTRUÇÃO   0: 11100101100000110111000001010100
+# RESET : 1
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 0
+# MovFlag : 0
+# PCSrc : 0
+# PC : 00000000000000000000000000000000
+# ___________________
+# Simulation failed
+# PC : 00000000000000000000000000000000
+# INSTRUÇÃO   1: 11100101100000110111000001010100
+# RESET : 1
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 0
+# MovFlag : 0
+# PCSrc : 0
+# PC : 00000000000000000000000000000000
+# ___________________
+# Simulation failed
+# PC : 00000000000000000000000000000000
+# INSTRUÇÃO   2: 11100101100000110111000001010100
+# RESET : 0
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 0
+# MovFlag : 0
+# PCSrc : 0
+# PC : 00000000000000000000000000000000
+# ___________________
+# Simulation failed
+# INSTRUÇÃO : Memória
+# Funct: 011001
+# Controls: 00011110000
+# PC : 00000000000000000000000000000100
+# INSTRUÇÃO   3: 11100101100100000010000001100000
+# RESET : 0
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 0
+# MovFlag : 0
+# PCSrc : 0
+# PC : 00000000000000000000000000000100
+# ___________________
+# INSTRUÇÃO : Processamento de dados
+# Funct: 001000
+# Controls: 00000010010
+# ALUOp: 1
+# ALUControl: 00
+# PC : 00000000000000000000000000001000
+# INSTRUÇÃO   4: 11100000100011111111000000000000
+# RESET : 0
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 1
+# MovFlag : 0
+# PCSrc : 1
+# PC : 00000000000000000000000000001000
+# ___________________
+# INSTRUÇÃO : Não implementada
+# Funct: xxxxxx
+# Controls: 0xxxxxxxxxx
+# ALUOp: 1
+# ALUControl: xx
+# PC : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# INSTRUÇÃO   5: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# RESET : 0
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+# MovFlag : x
+# PCSrc : x
+# PC : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ___________________
+# PC : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# INSTRUÇÃO   6: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# RESET : 0
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+# MovFlag : x
+# PCSrc : x
+# PC : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ___________________
+# PC : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# INSTRUÇÃO   7: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# RESET : 0
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+# MovFlag : x
+# PCSrc : x
+# PC : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ___________________
+# PC : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# INSTRUÇÃO   8: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# RESET : 0
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+# MovFlag : x
+# PCSrc : x
+# PC : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ___________________
+# PC : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# INSTRUÇÃO   9: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# RESET : 0
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+# MovFlag : x
+# PCSrc : x
+# PC : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ___________________
+# Compile of arm_single_TO_BE.sv was successful.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.testbench
+# Loading work.top
+# Loading work.arm
+# Loading work.controller
+# Loading work.decoder
+# Loading work.condlogic
+# Loading work.flopenr
+# Loading work.condcheck
+# Loading work.datapath
+# Loading work.mux2
+# Loading work.flopr
+# Loading work.adder
+# Loading work.regfile
+# Loading work.extend
+# Loading work.alu
+# Loading work.imem
+# Loading work.dmem
+run
+# INSTRUÇÃO : Não implementada
+# Funct: xxxxxx
+# Controls: 0xxxxxxxxxx
+# ______ CLOCK + ______
+# ______ INÍCIO DO DISPOSITIVO ______
+# INSTRUÇÃO : Memória
+# Funct: 011000
+# Controls: 10011101000
+# PC : 00000000000000000000000000000000
+# INSTRUÇÃO   0: 11100101100000110111000001010100
+# RESET : 1
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 0
+# MovFlag : 0
+# PCSrc : 0
+# PC : 00000000000000000000000000000000
+# ______ CLOCK + ______
+# Simulation failed
+# PC : 00000000000000000000000000000000
+# INSTRUÇÃO   1: 11100101100000110111000001010100
+# RESET : 1
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 0
+# MovFlag : 0
+# PCSrc : 0
+# PC : 00000000000000000000000000000000
+# ______ CLOCK + ______
+# Simulation failed
+# PC : 00000000000000000000000000000000
+# INSTRUÇÃO   2: 11100101100000110111000001010100
+# RESET : 0
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 0
+# MovFlag : 0
+# PCSrc : 0
+# PC : 00000000000000000000000000000000
+# ______ CLOCK + ______
+# Simulation failed
+# INSTRUÇÃO : Memória
+# Funct: 011001
+# Controls: 00011110000
+# PC : 00000000000000000000000000000100
+# INSTRUÇÃO   3: 11100101100100000010000001100000
+# RESET : 0
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 0
+# MovFlag : 0
+# PCSrc : 0
+# PC : 00000000000000000000000000000100
+# ______ CLOCK + ______
+# INSTRUÇÃO : Processamento de dados
+# Funct: 001000
+# Controls: 00000010010
+# ALUOp: 1
+# ALUControl: 00
+# PC : 00000000000000000000000000001000
+# INSTRUÇÃO   4: 11100000100011111111000000000000
+# RESET : 0
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 1
+# MovFlag : 0
+# PCSrc : 1
+# PC : 00000000000000000000000000001000
+# ______ CLOCK + ______
+# INSTRUÇÃO : Não implementada
+# Funct: xxxxxx
+# Controls: 0xxxxxxxxxx
+# ALUOp: 1
+# ALUControl: xx
+# PC : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# INSTRUÇÃO   5: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# RESET : 0
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+# MovFlag : x
+# PCSrc : x
+# PC : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ______ CLOCK + ______
+# PC : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# INSTRUÇÃO   6: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# RESET : 0
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+# MovFlag : x
+# PCSrc : x
+# PC : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ______ CLOCK + ______
+# PC : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# INSTRUÇÃO   7: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# RESET : 0
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+# MovFlag : x
+# PCSrc : x
+# PC : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ______ CLOCK + ______
+# PC : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# INSTRUÇÃO   8: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# RESET : 0
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+# MovFlag : x
+# PCSrc : x
+# PC : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ______ CLOCK + ______
+# PC : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# INSTRUÇÃO   9: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# RESET : 0
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+# MovFlag : x
+# PCSrc : x
+# PC : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ______ CLOCK + ______
+# Compile of arm_single_TO_BE.sv was successful.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.testbench
+# Loading work.top
+# Loading work.arm
+# Loading work.controller
+# Loading work.decoder
+# Loading work.condlogic
+# Loading work.flopenr
+# Loading work.condcheck
+# Loading work.datapath
+# Loading work.mux2
+# Loading work.flopr
+# Loading work.adder
+# Loading work.regfile
+# Loading work.extend
+# Loading work.alu
+# Loading work.imem
+# Loading work.dmem
+run
+# INSTRUÇÃO : Não implementada
+# Funct: xxxxxx
+# Controls: 0xxxxxxxxxx
+# ______ CLOCK + ______
+# ______ INÍCIO DO DISPOSITIVO ______
+# INSTRUÇÃO : Memória
+# Funct: 011000
+# Controls: 10011101000
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 0
+# MovFlag : 0
+# PCSrc : 0
+# PC : 00000000000000000000000000000000
+# ______ CLOCK + ______
+# Simulation failed
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 0
+# MovFlag : 0
+# PCSrc : 0
+# PC : 00000000000000000000000000000000
+# ______ CLOCK + ______
+# Simulation failed
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 0
+# MovFlag : 0
+# PCSrc : 0
+# PC : 00000000000000000000000000000000
+# ______ CLOCK + ______
+# Simulation failed
+# INSTRUÇÃO : Memória
+# Funct: 011001
+# Controls: 00011110000
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 0
+# MovFlag : 0
+# PCSrc : 0
+# PC : 00000000000000000000000000000100
+# ______ CLOCK + ______
+# INSTRUÇÃO : Processamento de dados
+# Funct: 001000
+# Controls: 00000010010
+# ALUOp: 1
+# ALUControl: 00
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 1
+# MovFlag : 0
+# PCSrc : 1
+# PC : 00000000000000000000000000001000
+# ______ CLOCK + ______
+# INSTRUÇÃO : Não implementada
+# Funct: xxxxxx
+# Controls: 0xxxxxxxxxx
+# ALUOp: 1
+# ALUControl: xx
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+# MovFlag : x
+# PCSrc : x
+# PC : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ______ CLOCK + ______
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+# MovFlag : x
+# PCSrc : x
+# PC : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ______ CLOCK + ______
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+# MovFlag : x
+# PCSrc : x
+# PC : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ______ CLOCK + ______
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+# MovFlag : x
+# PCSrc : x
+# PC : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ______ CLOCK + ______
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+# MovFlag : x
+# PCSrc : x
+# PC : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ______ CLOCK + ______
+# Compile of arm_single_TO_BE.sv was successful.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.testbench
+# Loading work.top
+# Loading work.arm
+# Loading work.controller
+# Loading work.decoder
+# Loading work.condlogic
+# Loading work.flopenr
+# Loading work.condcheck
+# Loading work.datapath
+# Loading work.mux2
+# Loading work.flopr
+# Loading work.adder
+# Loading work.regfile
+# Loading work.extend
+# Loading work.alu
+# Loading work.imem
+# Loading work.dmem
+run
+# INSTRUÇÃO : Não implementada
+# Funct: xxxxxx
+# Controls: 0xxxxxxxxxx
+# ______ CLOCK + ______
+# ______ INÍCIO DO DISPOSITIVO ______
+# ___________________________________
+# INSTRUÇÃO : Memória
+# Funct: 011000
+# Controls: 10011101000
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 0
+# MovFlag : 0
+# PCSrc : 0
+# PC : 00000000000000000000000000000000
+# ______ CLOCK + ______
+# Simulation failed
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 0
+# MovFlag : 0
+# PCSrc : 0
+# PC : 00000000000000000000000000000000
+# ______ CLOCK + ______
+# Simulation failed
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 0
+# MovFlag : 0
+# PCSrc : 0
+# PC : 00000000000000000000000000000000
+# ______ CLOCK + ______
+# Simulation failed
+# INSTRUÇÃO : Memória
+# Funct: 011001
+# Controls: 00011110000
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 0
+# MovFlag : 0
+# PCSrc : 0
+# PC : 00000000000000000000000000000100
+# ______ CLOCK + ______
+# INSTRUÇÃO : Processamento de dados
+# Funct: 001000
+# Controls: 00000010010
+# ALUOp: 1
+# ALUControl: 00
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 1
+# MovFlag : 0
+# PCSrc : 1
+# PC : 00000000000000000000000000001000
+# ______ CLOCK + ______
+# INSTRUÇÃO : Não implementada
+# Funct: xxxxxx
+# Controls: 0xxxxxxxxxx
+# ALUOp: 1
+# ALUControl: xx
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+# MovFlag : x
+# PCSrc : x
+# PC : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ______ CLOCK + ______
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+# MovFlag : x
+# PCSrc : x
+# PC : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ______ CLOCK + ______
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+# MovFlag : x
+# PCSrc : x
+# PC : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ______ CLOCK + ______
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+# MovFlag : x
+# PCSrc : x
+# PC : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ______ CLOCK + ______
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+# MovFlag : x
+# PCSrc : x
+# PC : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ______ CLOCK + ______
+# Compile of arm_single_TO_BE.sv was successful.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.testbench
+# Loading work.top
+# Loading work.arm
+# Loading work.controller
+# Loading work.decoder
+# Loading work.condlogic
+# Loading work.flopenr
+# Loading work.condcheck
+# Loading work.datapath
+# Loading work.mux2
+# Loading work.flopr
+# Loading work.adder
+# Loading work.regfile
+# Loading work.extend
+# Loading work.alu
+# Loading work.imem
+# Loading work.dmem
+run
+# INSTRUÇÃO : Não implementada
+# Funct: xxxxxx
+# Controls: 0xxxxxxxxxx
+# ______ CLOCK + ______
+# ______ INÍCIO DO DISPOSITIVO ______
+# ___________________________________
+#  
+#  
+# INSTRUÇÃO : Memória
+# Funct: 011000
+# Controls: 10011101000
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 0
+# MovFlag : 0
+# PCSrc : 0
+# PC : 00000000000000000000000000000000
+# ______ CLOCK + ______
+# Simulation failed
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 0
+# MovFlag : 0
+# PCSrc : 0
+# PC : 00000000000000000000000000000000
+# ______ CLOCK + ______
+# Simulation failed
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 0
+# MovFlag : 0
+# PCSrc : 0
+# PC : 00000000000000000000000000000000
+# ______ CLOCK + ______
+# Simulation failed
+# INSTRUÇÃO : Memória
+# Funct: 011001
+# Controls: 00011110000
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 0
+# MovFlag : 0
+# PCSrc : 0
+# PC : 00000000000000000000000000000100
+# ______ CLOCK + ______
+# INSTRUÇÃO : Processamento de dados
+# Funct: 001000
+# Controls: 00000010010
+# ALUOp: 1
+# ALUControl: 00
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 1
+# MovFlag : 0
+# PCSrc : 1
+# PC : 00000000000000000000000000001000
+# ______ CLOCK + ______
+# INSTRUÇÃO : Não implementada
+# Funct: xxxxxx
+# Controls: 0xxxxxxxxxx
+# ALUOp: 1
+# ALUControl: xx
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+# MovFlag : x
+# PCSrc : x
+# PC : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ______ CLOCK + ______
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+# MovFlag : x
+# PCSrc : x
+# PC : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ______ CLOCK + ______
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+# MovFlag : x
+# PCSrc : x
+# PC : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ______ CLOCK + ______
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+# MovFlag : x
+# PCSrc : x
+# PC : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ______ CLOCK + ______
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+# MovFlag : x
+# PCSrc : x
+# PC : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ______ CLOCK + ______
+# Compile of arm_single_TO_BE.sv was successful.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.testbench
+# Loading work.top
+# Loading work.arm
+# Loading work.controller
+# Loading work.decoder
+# Loading work.condlogic
+# Loading work.flopenr
+# Loading work.condcheck
+# Loading work.datapath
+# Loading work.mux2
+# Loading work.flopr
+# Loading work.adder
+# Loading work.regfile
+# Loading work.extend
+# Loading work.alu
+# Loading work.imem
+# Loading work.dmem
+run
+# INSTRUÇÃO : Não implementada
+# Funct: xxxxxx
+# Controls: 0xxxxxxxxxx
+# ______ CLOCK + ______
+#  
+#  
+# ______ INÍCIO DO DISPOSITIVO ______
+# ___________________________________
+#  
+#  
+# INSTRUÇÃO : Memória
+# Funct: 011000
+# Controls: 10011101000
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 0
+# ______ CLOCK + ______
+# Simulation failed
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 0
+# ______ CLOCK + ______
+# Simulation failed
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 0
+# ______ CLOCK + ______
+# Simulation failed
+# INSTRUÇÃO : Memória
+# Funct: 011001
+# Controls: 00011110000
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 0
+# ______ CLOCK + ______
+# INSTRUÇÃO : Processamento de dados
+# Funct: 001000
+# Controls: 00000010010
+# ALUOp: 1
+# ALUControl: 00
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 1
+# ______ CLOCK + ______
+# INSTRUÇÃO : Não implementada
+# Funct: xxxxxx
+# Controls: 0xxxxxxxxxx
+# ALUOp: 1
+# ALUControl: xx
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+# ______ CLOCK + ______
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+# ______ CLOCK + ______
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+# ______ CLOCK + ______
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+# ______ CLOCK + ______
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+# ______ CLOCK + ______
+# Compile of arm_single_TO_BE.sv was successful.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.testbench
+# Loading work.top
+# Loading work.arm
+# Loading work.controller
+# Loading work.decoder
+# Loading work.condlogic
+# Loading work.flopenr
+# Loading work.condcheck
+# Loading work.datapath
+# Loading work.mux2
+# Loading work.flopr
+# Loading work.adder
+# Loading work.regfile
+# Loading work.extend
+# Loading work.alu
+# Loading work.imem
+# Loading work.dmem
+run
+# INSTRUÇÃO : Não implementada
+# Funct: xxxxxx
+# Controls: 0xxxxxxxxxx
+#  SINAIS COMBINACIONAIS 
+# ______ CLOCK + ______
+#  
+#  
+# ______ INÍCIO DO DISPOSITIVO ______
+# ___________________________________
+#  
+#  
+# INSTRUÇÃO : Memória
+# Funct: 011000
+# Controls: 10011101000
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 0
+#  
+#  
+# ______ CLOCK + ______
+# Simulation failed
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 0
+#  
+#  
+# ______ CLOCK + ______
+# Simulation failed
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 0
+#  
+#  
+# ______ CLOCK + ______
+# Simulation failed
+# INSTRUÇÃO : Memória
+# Funct: 011001
+# Controls: 00011110000
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 0
+#  
+#  
+# ______ CLOCK + ______
+# INSTRUÇÃO : Processamento de dados
+# Funct: 001000
+# Controls: 00000010010
+# ALUOp: 1
+# ALUControl: 00
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 1
+#  
+#  
+# ______ CLOCK + ______
+# INSTRUÇÃO : Não implementada
+# Funct: xxxxxx
+# Controls: 0xxxxxxxxxx
+# ALUOp: 1
+# ALUControl: xx
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK + ______
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK + ______
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK + ______
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK + ______
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK + ______
+# Compile of arm_single_TO_BE.sv was successful.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.testbench
+# Loading work.top
+# Loading work.arm
+# Loading work.controller
+# Loading work.decoder
+# Loading work.condlogic
+# Loading work.flopenr
+# Loading work.condcheck
+# Loading work.datapath
+# Loading work.mux2
+# Loading work.flopr
+# Loading work.adder
+# Loading work.regfile
+# Loading work.extend
+# Loading work.alu
+# Loading work.imem
+# Loading work.dmem
+run
+# INSTRUÇÃO : Não implementada
+# Funct: xxxxxx
+# Controls: 0xxxxxxxxxx
+# ______ CLOCK + ______
+#  
+#  
+# ______ INÍCIO DO DISPOSITIVO ______
+# ___________________________________
+#  
+#  
+# INSTRUÇÃO : Memória
+# Funct: 011000
+# Controls: 10011101000
+# frame da instrução : 11100101100000110111000001010100
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 0
+#  
+#  
+# ______ CLOCK + ______
+# Simulation failed
+# frame da instrução : 11100101100000110111000001010100
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 0
+#  
+#  
+# ______ CLOCK + ______
+# Simulation failed
+# frame da instrução : 11100101100000110111000001010100
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 0
+#  
+#  
+# ______ CLOCK + ______
+# Simulation failed
+# INSTRUÇÃO : Memória
+# Funct: 011001
+# Controls: 00011110000
+# frame da instrução : 11100101100100000010000001100000
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 0
+#  
+#  
+# ______ CLOCK + ______
+# INSTRUÇÃO : Processamento de dados
+# Funct: 001000
+# Controls: 00000010010
+# ALUOp: 1
+# ALUControl: 00
+# frame da instrução : 11100000100011111111000000000000
+# ____ saída do controller ____
+# MovFlag : 0
+# PCS     : 1
+#  
+#  
+# ______ CLOCK + ______
+# INSTRUÇÃO : Não implementada
+# Funct: xxxxxx
+# Controls: 0xxxxxxxxxx
+# ALUOp: 1
+# ALUControl: xx
+# frame da instrução : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK + ______
+# frame da instrução : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK + ______
+# frame da instrução : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK + ______
+# frame da instrução : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK + ______
+# frame da instrução : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK + ______
+# Compile of arm_single_TO_BE.sv was successful.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.testbench
+# Loading work.top
+# Loading work.arm
+# Loading work.controller
+# Loading work.decoder
+# Loading work.condlogic
+# Loading work.flopenr
+# Loading work.condcheck
+# Loading work.datapath
+# Loading work.mux2
+# Loading work.flopr
+# Loading work.adder
+# Loading work.regfile
+# Loading work.extend
+# Loading work.alu
+# Loading work.imem
+# Loading work.dmem
+run
+# INSTRUÇÃO : Não implementada
+# Funct: xxxxxx
+# Controls: 0xxxxxxxxxx
+# ______ CLOCK + ______
+#  
+#  
+# ______ INÍCIO DO DISPOSITIVO ______
+# ___________________________________
+#  
+#  
+# INSTRUÇÃO : Processamento de dados
+# Funct: 111010
+# Controls: 00000010011
+# ALUOp: 1
+# ALUControl: xx
+# frame da instrução : 11100011101000000001000000000100
+# ____ saída do controller ____
+# MovFlag : 1
+# PCS     : 0
+#  
+#  
+# ______ CLOCK + ______
+# frame da instrução : 11100011101000000001000000000100
+# ____ saída do controller ____
+# MovFlag : 1
+# PCS     : 0
+#  
+#  
+# ______ CLOCK + ______
+# frame da instrução : 11100011101000000001000000000100
+# ____ saída do controller ____
+# MovFlag : 1
+# PCS     : 0
+#  
+#  
+# ______ CLOCK + ______
+# frame da instrução : 11100011101000000011000000000100
+# ____ saída do controller ____
+# MovFlag : 1
+# PCS     : 0
+#  
+#  
+# ______ CLOCK + ______
+# INSTRUÇÃO : Processamento de dados
+# Funct: 010101
+# Controls: xxxxxxxxxxx
+# ALUOp: 1
+# ALUControl: xx
+# frame da instrução : 11100001010100110000000000000001
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK + ______
+# INSTRUÇÃO : Não implementada
+# Funct: xxxxxx
+# Controls: 0xxxxxxxxxx
+# frame da instrução : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK + ______
+# frame da instrução : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK + ______
+# frame da instrução : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK + ______
+# frame da instrução : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK + ______
+# frame da instrução : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK + ______
+# Compile of arm_single_TO_BE.sv was successful.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.testbench
+# Loading work.top
+# Loading work.arm
+# Loading work.controller
+# Loading work.decoder
+# Loading work.condlogic
+# Loading work.flopenr
+# Loading work.condcheck
+# Loading work.datapath
+# Loading work.mux2
+# Loading work.flopr
+# Loading work.adder
+# Loading work.regfile
+# Loading work.extend
+# Loading work.alu
+# Loading work.imem
+# Loading work.dmem
+run
+# INSTRUÇÃO : Não implementada
+# Funct: xxxxxx
+# Controls: 0xxxxxxxxxx
+#  
+#  
+# ______ INÍCIO DO DISPOSITIVO ______
+# ___________________________________
+#  
+#  
+# INSTRUÇÃO : Processamento de dados
+# Funct: 111010
+# Controls: 00000010011
+# ALUOp: 1
+# ALUControl: xx
+# frame da instrução : 11100011101000000001000000000100
+# ____ saída do controller ____
+# MovFlag : 1
+# PCS     : 0
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+# frame da instrução : 11100011101000000001000000000100
+# ____ saída do controller ____
+# MovFlag : 1
+# PCS     : 0
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+# frame da instrução : 11100011101000000001000000000100
+# ____ saída do controller ____
+# MovFlag : 1
+# PCS     : 0
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+# frame da instrução : 11100011101000000011000000000100
+# ____ saída do controller ____
+# MovFlag : 1
+# PCS     : 0
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+# INSTRUÇÃO : Processamento de dados
+# Funct: 010101
+# Controls: xxxxxxxxxxx
+# ALUOp: 1
+# ALUControl: xx
+# frame da instrução : 11100001010100110000000000000001
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+# INSTRUÇÃO : Não implementada
+# Funct: xxxxxx
+# Controls: 0xxxxxxxxxx
+# frame da instrução : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+# frame da instrução : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+# frame da instrução : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+# frame da instrução : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+# frame da instrução : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+# Compile of arm_single_TO_BE.sv was successful.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.testbench
+# Loading work.top
+# Loading work.arm
+# Loading work.controller
+# Loading work.decoder
+# Loading work.condlogic
+# Loading work.flopenr
+# Loading work.condcheck
+# Loading work.datapath
+# Loading work.mux2
+# Loading work.flopr
+# Loading work.adder
+# Loading work.regfile
+# Loading work.extend
+# Loading work.alu
+# Loading work.imem
+# Loading work.dmem
+run
+# INSTRUÇÃO : Não implementada
+# Funct     : xxxxxx
+# Controls  : 0xxxxxxxxxx
+#  
+#  
+# ______ INÍCIO DO DISPOSITIVO ______
+# ___________________________________
+#  
+#  
+# INSTRUÇÃO : Processamento de dados
+# Funct     : 111010
+# Controls  : 00000010011
+# ALUOp     : 1
+# ALUControl: xx
+# frame da instrução : 11100011101000000001000000000100
+# ____ saída do controller ____
+# MovFlag : 1
+# PCS     : 0
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+# frame da instrução : 11100011101000000001000000000100
+# ____ saída do controller ____
+# MovFlag : 1
+# PCS     : 0
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+# frame da instrução : 11100011101000000001000000000100
+# ____ saída do controller ____
+# MovFlag : 1
+# PCS     : 0
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+# frame da instrução : 11100011101000000011000000000100
+# ____ saída do controller ____
+# MovFlag : 1
+# PCS     : 0
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+# INSTRUÇÃO : Processamento de dados
+# Funct     : 010101
+# Controls  : xxxxxxxxxxx
+# ALUOp     : 1
+# ALUControl: xx
+# frame da instrução : 11100001010100110000000000000001
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+# INSTRUÇÃO : Não implementada
+# Funct     : xxxxxx
+# Controls  : 0xxxxxxxxxx
+# frame da instrução : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+# frame da instrução : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+# frame da instrução : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+# frame da instrução : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+# frame da instrução : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+# Compile of arm_single_TO_BE.sv was successful.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.testbench
+# Loading work.top
+# Loading work.arm
+# Loading work.controller
+# Loading work.decoder
+# Loading work.condlogic
+# Loading work.flopenr
+# Loading work.condcheck
+# Loading work.datapath
+# Loading work.mux2
+# Loading work.flopr
+# Loading work.adder
+# Loading work.regfile
+# Loading work.extend
+# Loading work.alu
+# Loading work.imem
+# Loading work.dmem
+run
+# INSTRUÇÃO : Não implementada
+# Funct     : xxxxxx
+# Controls  : 0xxxxxxxxxx
+#  
+#  
+# ______ INÍCIO DO DISPOSITIVO ______
+# ___________________________________
+#  
+#  
+# ______ CLOCK + ______
+# INSTRUÇÃO : Processamento de dados
+# Funct     : 111010
+# Controls  : 00000010011
+# ALUOp     : 1
+# ALUControl: xx
+#  
+#  
+# ____ saída do arm ____
+# frame da instrução   0: 11100011101000000001000000000100
+# MovFlag : 1
+# PCSrc   : 0
+#  
+#  
+#  
+#  
+# ____ saída do controller ____
+# MovFlag : 1
+# PCS     : 0
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+#  
+#  
+# ____ saída do arm ____
+# frame da instrução   1: 11100011101000000001000000000100
+# MovFlag : 1
+# PCSrc   : 0
+#  
+#  
+#  
+#  
+# ____ saída do controller ____
+# MovFlag : 1
+# PCS     : 0
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+#  
+#  
+# ____ saída do arm ____
+# frame da instrução   2: 11100011101000000001000000000100
+# MovFlag : 1
+# PCSrc   : 0
+#  
+#  
+#  
+#  
+# ____ saída do controller ____
+# MovFlag : 1
+# PCS     : 0
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+#  
+#  
+# ____ saída do arm ____
+# frame da instrução   3: 11100011101000000011000000000100
+# MovFlag : 1
+# PCSrc   : 0
+#  
+#  
+#  
+#  
+# ____ saída do controller ____
+# MovFlag : 1
+# PCS     : 0
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+# INSTRUÇÃO : Processamento de dados
+# Funct     : 010101
+# Controls  : xxxxxxxxxxx
+# ALUOp     : 1
+# ALUControl: xx
+#  
+#  
+# ____ saída do arm ____
+# frame da instrução   4: 11100001010100110000000000000001
+# MovFlag : x
+# PCSrc   : x
+#  
+#  
+#  
+#  
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+# INSTRUÇÃO : Não implementada
+# Funct     : xxxxxx
+# Controls  : 0xxxxxxxxxx
+#  
+#  
+# ____ saída do arm ____
+# frame da instrução   5: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# MovFlag : x
+# PCSrc   : x
+#  
+#  
+#  
+#  
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+#  
+#  
+# ____ saída do arm ____
+# frame da instrução   6: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# MovFlag : x
+# PCSrc   : x
+#  
+#  
+#  
+#  
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+#  
+#  
+# ____ saída do arm ____
+# frame da instrução   7: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# MovFlag : x
+# PCSrc   : x
+#  
+#  
+#  
+#  
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+#  
+#  
+# ____ saída do arm ____
+# frame da instrução   8: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# MovFlag : x
+# PCSrc   : x
+#  
+#  
+#  
+#  
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+#  
+#  
+# ____ saída do arm ____
+# frame da instrução   9: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# MovFlag : x
+# PCSrc   : x
+#  
+#  
+#  
+#  
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+add wave -position end sim:/testbench/dut/arm/*
+restart -f
+run
+# INSTRUÇÃO : Não implementada
+# Funct     : xxxxxx
+# Controls  : 0xxxxxxxxxx
+#  
+#  
+# ______ INÍCIO DO DISPOSITIVO ______
+# ___________________________________
+#  
+#  
+# ______ CLOCK + ______
+# INSTRUÇÃO : Processamento de dados
+# Funct     : 111010
+# Controls  : 00000010011
+# ALUOp     : 1
+# ALUControl: xx
+#  
+#  
+# ____ saída do arm ____
+# frame da instrução   0: 11100011101000000001000000000100
+# MovFlag : 1
+# PCSrc   : 0
+#  
+#  
+#  
+#  
+# ____ saída do controller ____
+# MovFlag : 1
+# PCS     : 0
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+#  
+#  
+# ____ saída do arm ____
+# frame da instrução   1: 11100011101000000001000000000100
+# MovFlag : 1
+# PCSrc   : 0
+#  
+#  
+#  
+#  
+# ____ saída do controller ____
+# MovFlag : 1
+# PCS     : 0
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+#  
+#  
+# ____ saída do arm ____
+# frame da instrução   2: 11100011101000000001000000000100
+# MovFlag : 1
+# PCSrc   : 0
+#  
+#  
+#  
+#  
+# ____ saída do controller ____
+# MovFlag : 1
+# PCS     : 0
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+#  
+#  
+# ____ saída do arm ____
+# frame da instrução   3: 11100011101000000011000000000100
+# MovFlag : 1
+# PCSrc   : 0
+#  
+#  
+#  
+#  
+# ____ saída do controller ____
+# MovFlag : 1
+# PCS     : 0
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+# INSTRUÇÃO : Processamento de dados
+# Funct     : 010101
+# Controls  : xxxxxxxxxxx
+# ALUOp     : 1
+# ALUControl: xx
+#  
+#  
+# ____ saída do arm ____
+# frame da instrução   4: 11100001010100110000000000000001
+# MovFlag : x
+# PCSrc   : x
+#  
+#  
+#  
+#  
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+# INSTRUÇÃO : Não implementada
+# Funct     : xxxxxx
+# Controls  : 0xxxxxxxxxx
+#  
+#  
+# ____ saída do arm ____
+# frame da instrução   5: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# MovFlag : x
+# PCSrc   : x
+#  
+#  
+#  
+#  
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+#  
+#  
+# ____ saída do arm ____
+# frame da instrução   6: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# MovFlag : x
+# PCSrc   : x
+#  
+#  
+#  
+#  
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+#  
+#  
+# ____ saída do arm ____
+# frame da instrução   7: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# MovFlag : x
+# PCSrc   : x
+#  
+#  
+#  
+#  
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+#  
+#  
+# ____ saída do arm ____
+# frame da instrução   8: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# MovFlag : x
+# PCSrc   : x
+#  
+#  
+#  
+#  
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+#  
+#  
+# ____ saída do arm ____
+# frame da instrução   9: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# MovFlag : x
+# PCSrc   : x
+#  
+#  
+#  
+#  
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+# Compile of arm_single_TO_BE.sv was successful.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.testbench
+# Loading work.top
+# Loading work.arm
+# Loading work.controller
+# Loading work.decoder
+# Loading work.condlogic
+# Loading work.flopenr
+# Loading work.condcheck
+# Loading work.datapath
+# Loading work.mux2
+# Loading work.flopr
+# Loading work.adder
+# Loading work.regfile
+# Loading work.extend
+# Loading work.alu
+# Loading work.imem
+# Loading work.dmem
+run
+# INSTRUÇÃO : Não implementada
+# Funct     : xxxxxx
+# Controls  : 0xxxxxxxxxx
+#  
+#  
+# ______ INÍCIO DO DISPOSITIVO ______
+# ___________________________________
+#  
+#  
+# ______ CLOCK + ______
+# INSTRUÇÃO : Processamento de dados
+# Funct     : 111010
+# Controls  : 00000010011
+# ALUOp     : 1
+# ALUControl: xx
+#  
+#  
+# ____ saída do arm ____
+# frame da instrução   0: 11100011101000000001000000000100
+# MovFlag : 1
+# PCSrc   : 0
+#  
+#  
+#  
+#  
+# ____ saída do controller ____
+# MovFlag : 1
+# PCS     : 0
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+#  
+#  
+# ____ saída do arm ____
+# frame da instrução   1: 11100011101000000011000000000100
+# MovFlag : 1
+# PCSrc   : 0
+#  
+#  
+#  
+#  
+# ____ saída do controller ____
+# MovFlag : 1
+# PCS     : 0
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+# INSTRUÇÃO : Processamento de dados
+# Funct     : 010101
+# Controls  : xxxxxxxxxxx
+# ALUOp     : 1
+# ALUControl: xx
+#  
+#  
+# ____ saída do arm ____
+# frame da instrução   2: 11100001010100110000000000000001
+# MovFlag : x
+# PCSrc   : x
+#  
+#  
+#  
+#  
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+# INSTRUÇÃO : Não implementada
+# Funct     : xxxxxx
+# Controls  : 0xxxxxxxxxx
+#  
+#  
+# ____ saída do arm ____
+# frame da instrução   3: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# MovFlag : x
+# PCSrc   : x
+#  
+#  
+#  
+#  
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+#  
+#  
+# ____ saída do arm ____
+# frame da instrução   4: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# MovFlag : x
+# PCSrc   : x
+#  
+#  
+#  
+#  
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+#  
+#  
+# ____ saída do arm ____
+# frame da instrução   5: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# MovFlag : x
+# PCSrc   : x
+#  
+#  
+#  
+#  
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+#  
+#  
+# ____ saída do arm ____
+# frame da instrução   6: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# MovFlag : x
+# PCSrc   : x
+#  
+#  
+#  
+#  
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+#  
+#  
+# ____ saída do arm ____
+# frame da instrução   7: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# MovFlag : x
+# PCSrc   : x
+#  
+#  
+#  
+#  
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+#  
+#  
+# ____ saída do arm ____
+# frame da instrução   8: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# MovFlag : x
+# PCSrc   : x
+#  
+#  
+#  
+#  
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
+#  
+#  
+# ____ saída do arm ____
+# frame da instrução   9: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# MovFlag : x
+# PCSrc   : x
+#  
+#  
+#  
+#  
+# ____ saída do controller ____
+# MovFlag : x
+# PCS     : x
+#  
+#  
+# ______ CLOCK - ______
+# ______ CLOCK + ______
