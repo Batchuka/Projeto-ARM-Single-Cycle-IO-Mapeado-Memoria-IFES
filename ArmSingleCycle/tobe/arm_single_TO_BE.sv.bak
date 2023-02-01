@@ -98,7 +98,7 @@ module testbench();
   // initialize test
   initial
     begin
-      reset <= 1; # 22; reset <= 0;
+      reset <= 1; # 3; reset <= 0;
     end
 
   // generate clock to sequence tests
@@ -182,8 +182,6 @@ $display("____ saída do arm ____");
 $display("frame da instrução %d: %b",counter, Instr);
 $display("MovFlag : %b",MovFlag);
 $display("PCSrc   : %b",PCSrc);
-$display(" ");
-$display(" ");
 end
 
 
@@ -222,9 +220,8 @@ $display(" ");
 $display(" ");
 $display("____ saída do controller ____");
 $display("MovFlag : %b",MovFlag);
+$display("ALUSrc  : %b",ALUSrc);
 $display("PCS     : %b",PCS);
-$display(" ");
-$display(" ");
 end
 
   
@@ -286,11 +283,17 @@ module decoder(input  logic [1:0] Op,
 		// ORR immediate
 		6'b111000: controls = 11'b00000010010;
 			
-		// MOV immediate
-		6'b011010: controls = 11'b00001010011;
-
 		// MOV register
-		6'b111010: controls = 11'b00000010011;
+		6'b011010: controls = 11'b00000010011;
+
+		// MOV immediate
+		6'b111010: controls = 11'b00001010011;
+
+		// CMP register
+		6'b010101: controls = 11'b00000000010;
+
+		// CMP immediate
+		6'b110101: controls = 11'b00001000010;
 
 		// Unimplemented
 		default: controls = 11'bx;
@@ -376,6 +379,7 @@ module decoder(input  logic [1:0] Op,
   	    4'b0010: ALUControl = 2'b01; // SUB
             4'b0000: ALUControl = 2'b10; // AND
   	    4'b1100: ALUControl = 2'b11; // ORR
+  	    4'b1010: ALUControl = 2'b01; // SUB para MOV
   	    default: ALUControl = 2'bx;  // unimplemented
       endcase
 
@@ -476,9 +480,34 @@ module datapath(input  logic        clk, reset,
                 input  logic [31:0] ReadData);
 
   logic [31:0] PCNext, PCPlus4, PCPlus8;
-  logic [31:0] ExtImm, SrcA, SrcB, Result, MovOrALUResult;
+  logic [31:0] ExtImm, SrcA, SrcB, Result, SrcBOrALUResult;
   logic [3:0]  RA1, RA2;
 
+always@(negedge clk)
+begin
+$display(" ");
+$display(" ");
+$display("____ saída do datapath ____");
+$display("MovFlag : %b",MovFlag);
+$display("RegWrite: %b",RegWrite);
+$display("RegSrc  : %b",RegSrc);
+$display("RA1     : %b",RA1);
+$display("RA2     : %b",RA2);
+$display("Rn      : %b",Instr[19:16]);
+$display("Rd      : %b",Instr[15:12]);
+$display(" ");
+$display("Rm      : %b",Instr[3:0]);
+$display("ALURes  : %b",ALUResult);
+$display("SrcA    : %b",SrcA);
+$display("SrcB    : %b",SrcB);
+$display("WriteD  : %b",WriteData);
+$display("ExtImm  : %b",ExtImm);
+$display(" ");
+$display("ReadD   : %b",ReadData);
+$display("movmux  : %b",SrcBOrALUResult);
+$display("Result  : %b",Result);
+$display(" ");
+end
 
   // next PC logic
   mux2 #(32)  pcmux(PCPlus4, Result, PCSrc, PCNext);
@@ -489,8 +518,8 @@ module datapath(input  logic        clk, reset,
   // register file logic
   mux2 #(4)   ra1mux(Instr[19:16], 4'b1111, RegSrc[0], RA1);
   mux2 #(4)   ra2mux(Instr[3:0], Instr[15:12], RegSrc[1], RA2);
-  mux2 #(32)  movmux(ALUResult, SrcB, MovFlag, MovOrALUResult);
-  mux2 #(32)  resmux(MovOrALUResult, ReadData, MemtoReg, Result);
+  mux2 #(32)  movmux(ALUResult, SrcB, MovFlag, SrcBOrALUResult);
+  mux2 #(32)  resmux(SrcBOrALUResult, ReadData, MemtoReg, Result);
 
   regfile     rf(clk, RegWrite, RA1, RA2,Instr[15:12], Result, PCPlus8, SrcA, WriteData); 
   extend      ext(Instr[23:0], ImmSrc, ExtImm);
@@ -508,6 +537,18 @@ module regfile(input  logic        clk,
                output logic [31:0] rd1, rd2);
 
   logic [31:0] rf[14:0];
+
+always@(negedge clk)
+begin
+$display(" ");
+$display(" ");
+$display("____ saída do regfile ____");
+$display("we3 : %b",we3);
+$display("ra1: %b | ra2: %b | wa3 : %b",ra1,ra2,wa3);
+$display("wd3: %b",wd3);
+$display("rd1: %b",rd1);
+$display("rd2: %b",rd2);
+end
 
   // three ported register file
   // read two ports combinationally
