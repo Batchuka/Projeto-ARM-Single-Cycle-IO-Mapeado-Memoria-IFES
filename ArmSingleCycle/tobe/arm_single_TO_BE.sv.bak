@@ -220,6 +220,7 @@ $display(" ");
 $display(" ");
 $display("____ saída do controller ____");
 $display("ImmFlag : %b",ImmFlag);
+$display("FlagW   : %b",FlagW);
 $display("ALUSrc  : %b",ALUSrc);
 $display("PCS     : %b",PCS);
 end
@@ -244,14 +245,13 @@ module decoder(input  logic [1:0] Op,
                output logic [1:0] ImmSrc, RegSrc, 
                output logic [2:0] ALUControl);
 
-  logic [10:0] controls;
+  logic [9:0] controls;
   logic       Branch, ALUOp;
 	
 
   // Main Decoder
   
   always_comb
-	
 	
   	case(Op)
 
@@ -261,55 +261,61 @@ module decoder(input  logic [1:0] Op,
 		$display("INSTRUÇÃO : Processamento de dados");
 		$display("Funct     : %b",Funct);
 	
-		case(Funct[5:0])
+		case(Funct[5:1])
 		
 		// SUB register
-		6'b000100: controls = 11'b00000010010;
+		5'b00010: controls = 11'b00000010010;
 
 		// SUB immediate
-		6'b100100: controls = 11'b00000010010;
+		5'b10010: controls = 11'b00000010010;
 
 		// ADD register
-		6'b001000: controls = 11'b00000010010;
+		5'b00100: controls = 11'b00000010010;
 
 		// ADD immediate
-		6'b101000: controls = 11'b00000010010;
+		5'b10100: controls = 11'b00000010010;
 
 		// AND register
-		6'b000000: controls = 11'b00000010010;
+		5'b00000: controls = 11'b00000010010;
 
 		// AND immediate
-		6'b100000: controls = 11'b00000010010;
+		5'b10000: controls = 11'b00000010010;
 
 		// ORR register
-		6'b011000: controls = 11'b00000010010;
+		5'b01100: controls = 11'b00000010010;
 
 		// ORR immediate
-		6'b111000: controls = 11'b00000010010;
+		5'b11100: controls = 11'b00000010010;
 			
 		// MOV register
-		6'b011010: controls = 11'b00000010011;
+		5'b01101: controls = 11'b00000010011;
 
 		// MOV immediate
-		6'b111010: controls = 11'b00001010011;
+		5'b11101: controls = 11'b00001010011;
 
 		// CMP register
-		6'b010101: controls = 11'b00000000010;
+		5'b01010: controls = 11'b00000000010;
 
 		// CMP immediate
-		6'b110101: controls = 11'b00001000010;
+		5'b11010: controls = 11'b00001000010;
 
 		// TST register (Like CMP)
-		6'b010001: controls = 11'b00000000010;
+		5'b01000: controls = 11'b00000000010;
 
 		// TST immediate (Like CMP)
-		6'b110001: controls = 11'b00001000010;
+		5'b11000: controls = 11'b00001000010;
 
 		// MVN register (Like MOV)
-		6'b011110: controls = 11'b00000010011;
+		5'b01111: controls = 11'b00000010010;
 
 		// MVN immediate (Like MOV)
-		6'b111110: controls = 11'b00001010011;
+		5'b11111: controls = 11'b00001010010;
+
+		// EOR register (Like MOV)
+		5'b00001: controls = 11'b00000010010;
+
+		// EOR immediate (Like MOV)
+		5'b10001: controls = 11'b00001010010;
 
 		// Unimplemented
 		default: controls = 11'bx;
@@ -398,6 +404,7 @@ module decoder(input  logic [1:0] Op,
   	    4'b1010: ALUControl = 3'b001; // SUB (para o MOV)
             4'b1000: ALUControl = 3'b010; // AND (para o TST)
             4'b1111: ALUControl = 3'b100; // MVN
+            4'b0001: ALUControl = 3'b101; // EOR
   	    default: ALUControl = 3'bx;  // unimplemented
       endcase
 
@@ -652,6 +659,7 @@ module alu(input  logic [31:0] a, b,
       3'b010: Result = a & b;
       3'b011: Result = a | b;
       3'b100: Result = ~b;
+      3'b101: Result = a^b;
     endcase
 
   assign neg      = Result[31];
