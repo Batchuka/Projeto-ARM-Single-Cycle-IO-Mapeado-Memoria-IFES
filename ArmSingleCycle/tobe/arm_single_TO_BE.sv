@@ -155,7 +155,8 @@ module imem(input  logic [31:0] a,
 
   initial
       	//$readmemh("memfile.dat",RAM);
-	$readmemh("memfileMov.dat",RAM);
+	//$readmemh("memfile_MOV_CMP.dat",RAM);
+	$readmemh("memfile_TST_MVN_EOR.dat",RAM);
 
   assign rd = RAM[a[31:2]]; // word aligned
 endmodule
@@ -168,9 +169,9 @@ module arm(input  logic        clk, reset,
            input  logic [31:0] ReadData);
 
   logic [3:0] ALUFlags;
-  logic       RegWrite, MovFlag,
-              ALUSrc, MemtoReg, PCSrc;
-  logic [1:0] RegSrc, ImmSrc, ALUControl;
+  logic       RegWrite, ImmFlag,ALUSrc, MemtoReg, PCSrc;
+  logic [1:0] RegSrc, ImmSrc;
+  logic [2:0] ALUControl;
 
 reg [7:0] counter = 8'b0;
 always@(negedge clk)
@@ -179,20 +180,20 @@ counter <= counter+1;
 $display(" ");
 $display("____ saída do arm ____");
 $display("frame da instrução %d: %b",counter, Instr);
-$display("MovFlag : %b",MovFlag);
+$display("ImmFlag : %b",ImmFlag);
 $display("PCSrc   : %b",PCSrc);
 end
 
 
   controller c(clk, reset, Instr[31:12], ALUFlags, 
                RegSrc, RegWrite, ImmSrc, 
-               ALUSrc, ALUControl, MovFlag,
+               ALUSrc, ALUControl, ImmFlag,
                MemWrite, MemtoReg, PCSrc);
 
   datapath dp(clk, reset, 
               RegSrc, RegWrite, ImmSrc,
               ALUSrc, ALUControl,
-              MemtoReg, PCSrc, MovFlag,
+              MemtoReg, PCSrc, ImmFlag,
               ALUFlags, PC, Instr,
               ALUResult, WriteData, ReadData);
 endmodule
@@ -205,28 +206,31 @@ module controller(input  logic         clk, reset,
                   output logic         RegWrite,
                   output logic [1:0]   ImmSrc,
                   output logic         ALUSrc, 
-                  output logic [1:0]   ALUControl,
-		  output logic	       MovFlag,
+                  output logic [2:0]   ALUControl,
+		  output logic	       ImmFlag,
                   output logic         MemWrite, MemtoReg,
                   output logic         PCSrc);
 
   	logic [1:0] FlagW;
-  	logic       PCS, RegW, MemW, MovF;
+  	logic       PCS, RegW, MemW, ImmF;
 
 always@(negedge clk)
 begin
 $display(" ");
 $display(" ");
 $display("____ saída do controller ____");
-$display("MovFlag : %b",MovFlag);
+$display("ImmFlag : %b",ImmFlag);
 $display("ALUSrc  : %b",ALUSrc);
 $display("PCS     : %b",PCS);
 end
 
   
-  decoder dec(Instr[27:26], Instr[25:20], Instr[15:12],FlagW, PCS, RegW, MemW,MovF, MemtoReg, ALUSrc, ImmSrc, RegSrc, ALUControl);
+  decoder dec(Instr[27:26], Instr[25:20], 
+		Instr[15:12],FlagW, PCS, RegW, MemW,ImmF, 
+		MemtoReg, ALUSrc, ImmSrc, RegSrc, ALUControl);
 
-  condlogic cl(clk, reset, Instr[31:28], ALUFlags,FlagW, PCS, RegW, MemW,MovF, PCSrc, RegWrite, MemWrite, MovFlag);
+  condlogic cl(clk, reset, Instr[31:28], ALUFlags,FlagW, PCS, 
+		RegW, MemW,ImmF, PCSrc, RegWrite, MemWrite, ImmFlag);
 
 endmodule
 
@@ -235,9 +239,10 @@ module decoder(input  logic [1:0] Op,
                input  logic [3:0] Rd,
 
                output logic [1:0] FlagW,
-               output logic       PCS, RegW, MemW, MovF,
+               output logic       PCS, RegW, MemW, ImmF,
                output logic       MemtoReg, ALUSrc,
-               output logic [1:0] ImmSrc, RegSrc, ALUControl);
+               output logic [1:0] ImmSrc, RegSrc, 
+               output logic [2:0] ALUControl);
 
   logic [10:0] controls;
   logic       Branch, ALUOp;
@@ -293,6 +298,18 @@ module decoder(input  logic [1:0] Op,
 
 		// CMP immediate
 		6'b110101: controls = 11'b00001000010;
+
+		// TST register (Like CMP)
+		6'b010001: controls = 11'b00000000010;
+
+		// TST immediate (Like CMP)
+		6'b110001: controls = 11'b00001000010;
+
+		// MVN register (Like MOV)
+		6'b011110: controls = 11'b00000010010;
+
+		// MVN immediate (Like MOV)
+		6'b111110: controls = 11'b00001010010;
 
 		// Unimplemented
 		default: controls = 11'bx;
@@ -363,7 +380,7 @@ module decoder(input  logic [1:0] Op,
   	endcase
 
 
-  assign {RegSrc, ImmSrc, ALUSrc, MemtoReg, RegW, MemW, Branch, ALUOp, MovF} = controls; 
+  assign {RegSrc, ImmSrc, ALUSrc, MemtoReg, RegW, MemW, Branch, ALUOp, ImmF} = controls; 
     
   // ALU Decoder 
             
@@ -374,12 +391,14 @@ module decoder(input  logic [1:0] Op,
 	
 	// Descobrir qual instrução de processamento de dados
       case(Funct[4:1]) 
-  	    4'b0100: ALUControl = 2'b00; // ADD
-  	    4'b0010: ALUControl = 2'b01; // SUB
-            4'b0000: ALUControl = 2'b10; // AND
-  	    4'b1100: ALUControl = 2'b11; // ORR
-  	    4'b1010: ALUControl = 2'b01; // SUB para MOV
-  	    default: ALUControl = 2'bx;  // unimplemented
+  	    4'b0100: ALUControl = 3'b000; // ADD
+  	    4'b0010: ALUControl = 3'b001; // SUB
+            4'b0000: ALUControl = 3'b010; // AND
+  	    4'b1100: ALUControl = 3'b011; // ORR
+  	    4'b1010: ALUControl = 3'b001; // SUB (para o MOV)
+            4'b1000: ALUControl = 3'b010; // AND (para o TST)
+            4'b1111: ALUControl = 3'b100; // MVN
+  	    default: ALUControl = 3'bx;  // unimplemented
       endcase
 
 	$display("ALUControl: %b",ALUControl); 
@@ -390,11 +409,11 @@ module decoder(input  logic [1:0] Op,
       FlagW[1]      = Funct[0]; // FlagW[1] = S-bit
 
 	// FlagW[0] = S-bit & (ADD | SUB)
-      FlagW[0]      = Funct[0] & (ALUControl == 2'b00 | ALUControl == 2'b01);
+      FlagW[0]      = Funct[0] & (ALUControl == 3'b000 | ALUControl == 3'b001);
  
     end else begin
 
-      ALUControl = 2'b00; // add for non-DP instructions
+      ALUControl = 3'b000; // add for non-DP instructions
       FlagW      = 2'b00; // don't update Flags
 
     end
@@ -467,10 +486,10 @@ module datapath(input  logic        clk, reset,
                 input  logic        RegWrite,
                 input  logic [1:0]  ImmSrc,
                 input  logic        ALUSrc,
-                input  logic [1:0]  ALUControl,
+                input  logic [2:0]  ALUControl,
                 input  logic        MemtoReg,
                 input  logic        PCSrc,
-		input  logic	    MovFlag,
+		input  logic	    ImmFlag,
 
                 output logic [3:0]  ALUFlags,
                 output logic [31:0] PC,
@@ -488,7 +507,7 @@ $display(" ");
 $display(" ");
 $display("____ saída do datapath ____");
 $display(" ");
-$display("MovFlag : %b",MovFlag);
+$display("ImmFlag : %b",ImmFlag);
 $display("RegWrite: %b",RegWrite);
 $display("RegSrc  : %b",RegSrc);
 $display("ALUFlags: %b",ALUFlags);
@@ -499,7 +518,7 @@ $display("Rn      : %b",Instr[19:16]);
 $display("Rd      : %b",Instr[15:12]);
 $display(" ");
 $display("Rm      : %b",Instr[3:0]);
-$display("ALURes  : %b",ALUResult);
+$display("bS|alu  : %b",ALUResult);
 $display("SrcA    : %b",SrcA);
 $display("SrcB    : %b",SrcB);
 $display("WriteD  : %b",WriteData);
@@ -520,7 +539,7 @@ end
   // register file logic
   mux2 #(4)   ra1mux(Instr[19:16], 4'b1111, RegSrc[0], RA1);
   mux2 #(4)   ra2mux(Instr[3:0], Instr[15:12], RegSrc[1], RA2);
-  mux2 #(32)  movmux(ALUResult, SrcB, MovFlag, SrcBOrALUResult);
+  mux2 #(32)  immmux(ALUResult, SrcB, ImmFlag, SrcBOrALUResult);
   mux2 #(32)  resmux(SrcBOrALUResult, ReadData, MemtoReg, Result);
 
   regfile     rf(clk, RegWrite, RA1, RA2,Instr[15:12], Result, PCPlus8, SrcA, WriteData); 
@@ -616,7 +635,7 @@ module mux2 #(parameter WIDTH = 8)
 endmodule
 
 module alu(input  logic [31:0] a, b,
-           input  logic [1:0]  ALUControl,
+           input  logic [2:0]  ALUControl,
            output logic [31:0] Result,
            output logic [3:0]  ALUFlags);
 
@@ -628,19 +647,17 @@ module alu(input  logic [31:0] a, b,
   assign sum = a + condinvb + ALUControl[0];
 
   always_comb
-    casex (ALUControl[1:0])
-      2'b0?: Result = sum;
-      2'b10: Result = a & b;
-      2'b11: Result = a | b;
-	
-	// O que preciso adicionar aqui 
+    casex (ALUControl[2:0])
+      3'b0?: Result = sum;
+      3'b010: Result = a & b;
+      3'b011: Result = a | b;
+      3'b100: Result = ~b;
     endcase
 
   assign neg      = Result[31];
   assign zero     = (Result == 32'b0);
   assign carry    = (ALUControl[1] == 1'b0) & sum[32];
-  assign overflow = (ALUControl[1] == 1'b0) & 
-                    ~(a[31] ^ b[31] ^ ALUControl[0]) & 
-                    (a[31] ^ sum[31]); 
+  assign overflow = (ALUControl[1] == 1'b0) & ~(a[31] ^ b[31] ^ ALUControl[0]) & (a[31] ^ sum[31]); 
   assign ALUFlags    = {neg, zero, carry, overflow};
+
 endmodule

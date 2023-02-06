@@ -11,23 +11,23 @@ cModel Technology
 dC:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IFES/ArmSingleCycle/asis
 vadder
 Z0 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
-Z1 !s110 1675293225
+Z1 !s110 1675642563
 !i10b 1
-!s100 IgZje`@eBZ1X`?FWW:ezV3
+!s100 EB:7l8DTSo_>5ziBhgBJn1
 !s11b <C_L1[Io^:I3S6?W@lDgU3
-IUeYa8BK8EZI90BD?CZOUT2
+IVRZZ]@`H@XFI>mLE3M0A_2
 Z2 VDg1SIo80bB@j0V0VzS_@n1
 S1
 Z3 dC:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IFES/ArmSingleCycle/tobe
-Z4 w1675293131
+Z4 w1675642560
 Z5 8C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IFES/ArmSingleCycle/tobe/arm_single_TO_BE.sv
 Z6 FC:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IFES/ArmSingleCycle/tobe/arm_single_TO_BE.sv
-L0 583
+L0 602
 Z7 OV;L;2019.2;69
 r1
 !s85 0
 31
-Z8 !s108 1675293225.000000
+Z8 !s108 1675642563.000000
 !s107 C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IFES/ArmSingleCycle/tobe/arm_single_TO_BE.sv|
 Z9 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IFES/ArmSingleCycle/tobe/arm_single_TO_BE.sv|
 !i113 1
@@ -37,16 +37,16 @@ valu
 R0
 R1
 !i10b 1
-!s100 Ak^_bY0TmWHeio]6dehL[0
-!s11b Wj=fDcIkeF[3IQm]O^eE<3
-IbjAkGm=PJY1me4:<6eCKd1
+!s100 lFN<QW6?Hc:Wk`i6=`73c0
+!s11b Qeh_6AK5>`]:oC[Y2X4j53
+IYai<ZKDo>2mYE>fzD5QbI3
 R2
 S1
 R3
 R4
 R5
 R6
-L0 618
+L0 637
 R7
 r1
 !s85 0
@@ -61,16 +61,16 @@ varm
 R0
 R1
 !i10b 1
-!s100 F[zakWAVm0;kU67Fld5Fa3
-!s11b FKRYUh?19iWDfEU3@0A>P2
-IM2eaZDYQT_]XULlWF5o7C0
+!s100 ^JZhRm3YTibD@_Uc4Q[g<1
+!s11b Z7I_z9E8]RlUPXBl?PInf3
+ILJ>5hTGF_GPla4d3h6?642
 R2
 S1
 R3
 R4
 R5
 R6
-L0 163
+L0 164
 R7
 r1
 !s85 0
@@ -85,16 +85,16 @@ vcondcheck
 R0
 R1
 !i10b 1
-!s100 LI8fZ4HDEW7g0YMaPkOBc2
+!s100 E=@MT^bQLX[edCCLB8DlJ2
 !s11b Y6_SDG9hKM7CG_8zU@32o1
-I^48o1TPz3UOc;D<c@OI:I1
+IF_TXz2UJz8cSa=R^4Eh:X3
 R2
 S1
 R3
 R4
 R5
 R6
-L0 435
+L0 454
 R7
 r1
 !s85 0
@@ -109,16 +109,16 @@ vcondlogic
 R0
 R1
 !i10b 1
-!s100 [[>hJm]S0a<4Z[Y08zkQ22
+!s100 @mmjhJ^V3SMJDj7lYWK6<1
 !s11b Jl2XP[<HlEf1ooQNcGUWW0
-IW8ZZf2KS<?=HC1a=ShmSA0
+Ik?T1XTYa]OG4<@ei7C4FF3
 R2
 S1
 R3
 R4
 R5
 R6
-L0 408
+L0 427
 R7
 r1
 !s85 0
@@ -133,16 +133,16 @@ vcontroller
 R0
 R1
 !i10b 1
-!s100 9afLhGo1bQg=Ga`cWX>G32
-!s11b `_]7K;k^36^?iPbWA`RNL1
-Ihma_[KagQkJgnzgIlden03
+!s100 J:Z<[haEkj>7N9WbDWNCW1
+!s11b Q;JiDl?DNn>8WCAY2eOiR0
+IkCmf:n7kH>eDY7OcZ?P[43
 R2
 S1
 R3
 R4
 R5
 R6
-L0 200
+L0 201
 R7
 r1
 !s85 0
@@ -157,16 +157,16 @@ vdatapath
 R0
 R1
 !i10b 1
-!s100 ;?GG9C0XfLXHf8;XJh0SF2
-!s11b gMkKR^m1GZTeAJ3HazXn40
-In46>dH]<kn=9ZKT?i8:2F1
+!s100 h`36FjD_>c0BgSfX3FWb^3
+!s11b Nk16Ca;hV;l>lolh4U5Fh0
+IAakiR7YXhI^bINN7CcNAh0
 R2
 S1
 R3
 R4
 R5
 R6
-L0 465
+L0 484
 R7
 r1
 !s85 0
@@ -181,16 +181,16 @@ vdecoder
 R0
 R1
 !i10b 1
-!s100 ^?Gh5cK:7X3U9E;iZoEz^1
-!s11b dn=3DDN=eKE9fRVa@z;;S2
-IUIOEI_0DdR`]0fEzeW[9K2
+!s100 =G3dA`=Q_m;l63^]O508R3
+!s11b 49F0>:BAc@6zdBa]<QF8b0
+I7[7UNf4mgR:TBHdUd6e@32
 R2
 S1
 R3
 R4
 R5
 R6
-L0 233
+L0 237
 R7
 r1
 !s85 0
@@ -229,16 +229,16 @@ vextend
 R0
 R1
 !i10b 1
-!s100 :jfPU;edk7nNXf892<1Z_3
+!s100 ]7NjDRn3?^k3@nJ`VCGFz2
 !s11b ^9gSIg^JWGhTbF^E3R8:l0
-Ik6F6F5H7jLI]=UH6_[bOO3
+Ia73WKE6C]o_`Lz<gkCm1_3
 R2
 S1
 R3
 R4
 R5
 R6
-L0 567
+L0 586
 R7
 r1
 !s85 0
@@ -253,16 +253,16 @@ vflopenr
 R0
 R1
 !i10b 1
-!s100 [:cF7WRD<87Pd>OA4Nhz42
+!s100 4W?6zO>]hn806e@E<P8nL3
 !s11b F1IzmbizX78JloX:j;Hj53
-I[`2NUQ6kZ9dk^dg_8zmVT1
+I5gGT52GYG03TTe0cXbW681
 R2
 S1
 R3
 R4
 R5
 R6
-L0 590
+L0 609
 R7
 r1
 !s85 0
@@ -277,16 +277,16 @@ vflopr
 R0
 R1
 !i10b 1
-!s100 ^:3fZkHaBW>hE3MkIbkb^0
+!s100 >Y:PGCT4]WY=bn;]E2zkm1
 !s11b 8B49h]9L2InXag=il070E0
-IKR0:>_RCOL8]`DJMK6NeM0
+I?kjLA;Hn<d?bPhFOaL2MU2
 R2
 S1
 R3
 R4
 R5
 R6
-L0 600
+L0 619
 R7
 r1
 !s85 0
@@ -301,9 +301,9 @@ vimem
 R0
 R1
 !i10b 1
-!s100 @JJ6m0DI]9D87C`OK2bIU3
-!s11b gZTOH5Zh472^:>LcIMX@E0
-IJCEV[Gnz8z6YzGWWikFRQ3
+!s100 6mKegUz1WN@aJZn?c^UJL0
+!s11b ]cPbA@OBFZlf4_NGc__;Z2
+I<8``GLH1i`[3k?ImAlP^00
 R2
 S1
 R3
@@ -325,16 +325,16 @@ vmux2
 R0
 R1
 !i10b 1
-!s100 2CP^m@b65350K>R8QgF493
+!s100 Eoo1bP46]K7jMamba?DO@1
 !s11b R@bfm9>GJH8n3[nPYL0nn3
-IUGmC3MSF<ST^1RBb0@eiB1
+I^ZM2>m?@dhJLzS05`C[Om2
 R2
 S1
 R3
 R4
 R5
 R6
-L0 610
+L0 629
 R7
 r1
 !s85 0
@@ -349,16 +349,16 @@ vregfile
 R0
 R1
 !i10b 1
-!s100 GWeDQ3?^>Yd^eMPd:A4^e2
+!s100 ]XUYQ_:aTh`<OejjMJklO1
 !s11b Pl^RgT4T4K_j`U0U3>G3_1
-I:W`J6J:I=4L1cfHCUTf5e0
+IU<DRTFe5W_@d8=k=aB_[]3
 R2
 S1
 R3
 R4
 R5
 R6
-L0 535
+L0 554
 R7
 r1
 !s85 0
