@@ -156,7 +156,8 @@ module imem(input  logic [31:0] a,
   initial
       	//$readmemh("memfile.dat",RAM);
 	//$readmemh("memfile_MOV_CMP.dat",RAM);
-	$readmemh("memfile_TST_MVN_EOR.dat",RAM);
+	//$readmemh("memfile_TST_MVN_EOR.dat",RAM);
+	$readmemh("memfile_LSL_ASR.dat",RAM);
 
   assign rd = RAM[a[31:2]]; // word aligned
 endmodule
@@ -311,10 +312,10 @@ module decoder(input  logic [1:0] Op,
 		// MVN immediate (Like MOV)
 		5'b11111: controls = 11'b00001010010;
 
-		// EOR register (Like MOV)
+		// EOR register
 		5'b00001: controls = 11'b00000010010;
 
-		// EOR immediate (Like MOV)
+		// EOR immediate
 		5'b10001: controls = 11'b00001010010;
 
 		// Unimplemented
@@ -553,6 +554,7 @@ end
   extend      ext(Instr[23:0], ImmSrc, ExtImm);
 
   // ALU logic
+  shifter     s();
   mux2 #(32)  srcbmux(WriteData, ExtImm, ALUSrc, SrcB);
   alu         alu(SrcA, SrcB, ALUControl, ALUResult, ALUFlags);
 
@@ -588,6 +590,55 @@ end
 
   assign rd1 = (ra1 == 4'b1111) ? r15 : rf[ra1];
   assign rd2 = (ra2 == 4'b1111) ? r15 : rf[ra2];
+endmodule
+
+module shifter (
+  // Entrada de 2 bits para indicar o tipo de shift
+  input logic [1:0] Sh,
+  // Entrada de 5 bits para indicar o número de bits a serem deslocados
+  input logic [4:0] Shnt,
+  // Entrada de 32 bits com o valor a ser deslocado
+  input logic [31:0] ScrB,
+  // Saída de 32 bits com o resultado do deslocamento
+  output logic [31:0] shifted
+);
+
+// Variável para armazenar o resultado do deslocamento
+logic [31:0] result;
+
+// O código deve ser sempre combinacional, portanto, usamos always_comb
+always_comb
+
+begin
+
+  // Se Sh e Shnt não são nulos (0), realiza o deslocamento
+  if (Sh != 2'b0 & Shnt != 5'b0) begin
+
+    // Verifica o tipo de deslocamento a ser realizado
+    case (Sh)
+
+      // LSL - Logical Shift Left
+      2'b00: result = (ScrB << Shnt);
+ 
+      // ASR - Arithmetic Shift Right
+      2'b10: result = ($signed(ScrB) >>> Shnt); 
+
+      // Caso contrário, o resultado é o próprio ScrB
+      default: result = ScrB;
+
+    endcase
+
+  // Se Sh e Shnt são nulos (0), o resultado é o próprio ScrB
+  end else begin
+
+    result = ScrB;
+
+  end
+
+  // Atribui o resultado do deslocamento à saída shifted
+  assign shifted = result;
+
+end
 endmodule
 
 module extend(input  logic [23:0] Instr,
