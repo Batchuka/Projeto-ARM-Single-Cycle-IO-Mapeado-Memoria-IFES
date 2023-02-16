@@ -314,10 +314,10 @@ module decoder(input  logic [1:0] Op,
 		5'b10001: controls = 11'b00001010010;
 
 		// Shifters
-		5'bx1101: controls = 11'b00000010011;
+		5'bx1101: begin
 	
 			// MOV register
-			//5'b11101: controls = 11'b00000010011;
+			5'b1xxxx: controls = 11'b00000010011;
 
 			// MOV immediate
 			//5'b11101: controls = 11'b00001010011;
@@ -334,7 +334,7 @@ module decoder(input  logic [1:0] Op,
 			// ASR immediate
 			//5'b10001: controls = 11'bx;
 
-		//end
+		end
 
 
 		// Unimplemented
