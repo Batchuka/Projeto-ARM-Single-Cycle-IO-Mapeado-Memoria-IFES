@@ -6,6 +6,6 @@ O módulo usa uma lógica combinacional para realizar o deslocamento. Ele verifi
 
 
 
-|$\leftarrow$ [Lista de instruções](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES/blob/main/Documenta%C3%A7%C3%A3o/3%20%E2%80%94%20AS%20NOVAS%20INSTRU%C3%87%C3%95ES%20TO-BE/AS%20NOVAS%20INSTRU%C3%87%C3%95ES%20TO-BE.md#implementando-as-fun%C3%A7%C3%B5es) | [Sumário](https://github.com/Batchuka/Projeto-ARM-Single-Cycle-IFES#sum%C3%A1rio) |
+|$\leftarrow$ [Lista de instruções](AS%20NOVAS%20INSTRU%C3%87%C3%95ES%20TO-BE.md) | [Sumário](../../README.md) |
 |-|-|
 

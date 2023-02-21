@@ -1,4 +1,4 @@
-// arm_single.sv FEATURE
+// arm_single.sv MAIN
 // David_Harris@hmc.edu and Sarah_Harris@hmc.edu 25 June 2013
 // Single-cycle implementation of a subset of ARMv4
 // 
@@ -170,7 +170,7 @@ module arm(input  logic        clk, reset,
            input  logic [31:0] ReadData);
 
   logic [3:0] ALUFlags;
-  logic       RegWrite, ImmFlag,ALUSrc, MemtoReg, PCSrc;
+  logic       RegWrite, ALUBypass,ALUSrc, MemtoReg, PCSrc;
   logic [1:0] RegSrc, ImmSrc;
   logic [2:0] ALUControl;
 
@@ -189,13 +189,13 @@ end
 
   controller c(clk, reset, Instr[31:12], ALUFlags, 
                RegSrc, RegWrite, ImmSrc, 
-               ALUSrc, ALUControl, ImmFlag,
+               ALUSrc, ALUControl, ALUBypass,ShiftOp,
                MemWrite, MemtoReg, PCSrc);
 
   datapath dp(clk, reset, 
               RegSrc, RegWrite, ImmSrc,
               ALUSrc, ALUControl,
-              MemtoReg, PCSrc, ImmFlag,
+              MemtoReg, PCSrc, ALUBypass,ShiftOp,
               ALUFlags, PC, Instr,
               ALUResult, WriteData, ReadData);
 endmodule
@@ -209,31 +209,31 @@ module controller(input  logic         clk, reset,
                   output logic [1:0]   ImmSrc,
                   output logic         ALUSrc, 
                   output logic [2:0]   ALUControl,
-		  output logic	       ImmFlag,
+		  output logic	       ALUBypass,ShiftOp,
                   output logic         MemWrite, MemtoReg,
                   output logic         PCSrc);
 
   	logic [1:0] FlagW;
-  	logic       PCS, RegW, MemW, ImmF;
+  	logic       PCS, RegW, MemW, ALUBps;
 
 always@(negedge clk)
 begin
 $display(" ");
 $display(" ");
 $display("____ saída do controller ____");
-$display("ImmFlag : %b",ImmFlag);
-$display("FlagW   : %b",FlagW);
+$display("ALUBps  : %b",ALUBypass);
+$display("ShiftOp : %b",ShiftOp);
 $display("ALUSrc  : %b",ALUSrc);
 $display("PCS     : %b",PCS);
 end
 
   
   decoder dec(Instr[27:26], Instr[25:20], 
-		Instr[15:12],FlagW, PCS, RegW, MemW,ImmF, 
+		Instr[15:12],FlagW, PCS, RegW, MemW, ALUBps,ShiftOp, 
 		MemtoReg, ALUSrc, ImmSrc, RegSrc, ALUControl);
 
   condlogic cl(clk, reset, Instr[31:28], ALUFlags,FlagW, PCS, 
-		RegW, MemW,ImmF, PCSrc, RegWrite, MemWrite, ImmFlag);
+		RegW, MemW,ALUBps, PCSrc, RegWrite, MemWrite, ALUBypass);
 
 endmodule
 
@@ -242,7 +242,7 @@ module decoder(input  logic [1:0] Op,
                input  logic [3:0] Rd,
 
                output logic [1:0] FlagW,
-               output logic       PCS, RegW, MemW, ImmF,
+               output logic       PCS, RegW, MemW, ALUBps, ShiftOp,
                output logic       MemtoReg, ALUSrc,
                output logic [1:0] ImmSrc, RegSrc, 
                output logic [2:0] ALUControl);
@@ -266,79 +266,61 @@ module decoder(input  logic [1:0] Op,
 		case(Funct[5:1])
 		
 		// SUB register
-		5'b00010: controls = 11'b00000010010;
+		5'b00010: controls = 12'b000000100100;
 
 		// SUB immediate
-		5'b10010: controls = 11'b00000010010;
+		5'b10010: controls = 12'b000000100100;
 
 		// ADD register
-		5'b00100: controls = 11'b00000010010;
+		5'b00100: controls = 12'b000000100100;
 
 		// ADD immediate
-		5'b10100: controls = 11'b00000010010;
+		5'b10100: controls = 12'b000000100100;
 
 		// AND register
-		5'b00000: controls = 11'b00000010010;
+		5'b00000: controls = 12'b000000100100;
 
 		// AND immediate
-		5'b10000: controls = 11'b00000010010;
+		5'b10000: controls = 12'b000000100100;
 
 		// ORR register
-		5'b01100: controls = 11'b00000010010;
+		5'b01100: controls = 12'b000000100100;
 
 		// ORR immediate
-		5'b11100: controls = 11'b00000010010;
+		5'b11100: controls = 12'b000000100100;
 
 		// CMP register
-		5'b01010: controls = 11'b00000000010;
+		5'b01010: controls = 12'b000000000100;
 
 		// CMP immediate
-		5'b11010: controls = 11'b00001000010;
+		5'b11010: controls = 12'b000010000100;
 
 		// TST register (Like CMP)
-		5'b01000: controls = 11'b00000000010;
+		5'b01000: controls = 12'b000000000100;
 
 		// TST immediate (Like CMP)
-		5'b11000: controls = 11'b00001000010;
+		5'b11000: controls = 12'b000010000100;
 
-		// MVN register (Like MOV)
-		5'b01111: controls = 11'b00000010010;
+		// MVN register (Like MOV) VERIFICAR ERRO!
+		5'b01111: controls = 12'b000010100100;
 
 		// MVN immediate (Like MOV)
-		5'b11111: controls = 11'b00001010010;
+		5'b11111: controls = 12'b000010100100;
 
 		// EOR register
-		5'b00001: controls = 11'b00000010010;
+		5'b00001: controls = 12'b000000100100;
 
 		// EOR immediate
-		5'b10001: controls = 11'b00001010010;
+		5'b10001: controls = 12'b000010100100;
 
-		// Shifters
-		5'bx1101: controls = 11'b00000010011;
-	
-			// MOV register
-			//5'b11101: controls = 11'b00000010011;
+		// MOV immediate
+		5'b11101: controls = 12'b100010100010;
 
-			// MOV immediate
-			//5'b11101: controls = 11'b00001010011;
-
-			// LSL register
-			//5'b00001: controls = 11'bx;
-
-			// LSL immediate
-			//5'b10001: controls = 11'bx;
-
-			// ASR register
-			//5'b00001: controls = 11'bx;
-
-			// ASR immediate
-			//5'b10001: controls = 11'bx;
-
-		//end
-
+		// MOV, LSL, ASR register
+		5'b01101: controls = 12'b10xx00100011;
 
 		// Unimplemented
-		default: controls = 11'bx;
+		default: controls = 12'bx;
 
 		endcase
 
@@ -355,13 +337,13 @@ module decoder(input  logic [1:0] Op,
 		case(Funct[0])
 			
 		// LDR
-		1'b1: controls = 11'b00011110000; 
+		1'b1: controls = 12'b000111100000; 
 
 		// STR
-		1'b0: controls = 11'b10011101000; 
+		1'b0: controls = 12'b100111010000; 
 
 		// Unimplemented
-		default: controls = 11'bx;
+		default: controls = 12'bx;
 
 		endcase
 
@@ -378,13 +360,13 @@ module decoder(input  logic [1:0] Op,
 		//case(Funct[5:4])
 			
 		// B (2'b10)
-		controls = 11'b01101000100;
+		controls = 12'b011010001000;
 
 		// B Label
-		//2'b11: controls = 11'b01101000100;
+		//2'b12: controls = 11'b011010001000;
 
 		// Unimplemented
-		//default: controls = 11'bx;
+		//default: controls = 12'bx;
 
 		//endcase
 
@@ -399,14 +381,14 @@ module decoder(input  logic [1:0] Op,
 		$display("Funct     : %b",Funct);
               
 		// Unimplemented
-		controls = 10'bx;
+		controls = 12'bx;
 
 		$display("Controls  : %b",controls); 
 	end          
   	endcase
 
 
-  assign {RegSrc, ImmSrc, ALUSrc, MemtoReg, RegW, MemW, Branch, ALUOp, ImmF} = controls; 
+  assign {RegSrc, ImmSrc, ALUSrc, MemtoReg, RegW, MemW, Branch, ALUOp, ALUBps, ShiftOp} = controls; 
     
   // ALU Decoder 
             
@@ -516,7 +498,7 @@ module datapath(input  logic        clk, reset,
                 input  logic [2:0]  ALUControl,
                 input  logic        MemtoReg,
                 input  logic        PCSrc,
-		input  logic	    ImmFlag,
+		input  logic	    ALUBypass,ShiftOp,
 
                 output logic [3:0]  ALUFlags,
                 output logic [31:0] PC,
@@ -534,7 +516,7 @@ $display(" ");
 $display(" ");
 $display("____ saída do datapath ____");
 $display(" ");
-$display("ImmFlag : %b",ImmFlag);
+$display("ALUBps  : %b",ALUBypass);
 $display("RegWrite: %b",RegWrite);
 $display("RegSrc  : %b",RegSrc);
 $display("ALUFlags: %b",ALUFlags);
@@ -566,15 +548,15 @@ end
   // register file logic
   mux2 #(4)   ra1mux(Instr[19:16], 4'b1111, RegSrc[0], RA1);
   mux2 #(4)   ra2mux(Instr[3:0], Instr[15:12], RegSrc[1], RA2);
-  mux2 #(32)  immmux(ALUResult, SrcB, ImmFlag, SrcBOrALUResult);
+  mux2 #(32)  alubpsmux(ALUResult, SrcB, ALUBypass, SrcBOrALUResult);
   mux2 #(32)  resmux(SrcBOrALUResult, ReadData, MemtoReg, Result);
 
   regfile     rf(clk, RegWrite, RA1, RA2,Instr[15:12], Result, PCPlus8, SrcA, WriteData); 
   extend      ext(Instr[23:0], ImmSrc, ExtImm);
 
   // ALU logic
-  shifter     s(Instr[6:5], Instr[11:7], WriteData, Shifted);
-  mux2 #(32)  srcbmux(WriteData, ExtImm, ALUSrc, SrcB);
+  shifter     s(ShiftOp, Instr[6:5], Instr[11:7], WriteData, Shifted);
+  mux2 #(32)  srcbmux(Shifted, ExtImm, ALUSrc, SrcB);
   alu         alu(SrcA, SrcB, ALUControl, ALUResult, ALUFlags);
 
 endmodule
@@ -612,6 +594,8 @@ end
 endmodule
 
 module shifter (
+  // Entrada lógica para ativar ou não o modulo
+  input logic ShiftOp,
   // Entrada de 2 bits para indicar o tipo de shift
   input logic [1:0] Sh,
   // Entrada de 5 bits para indicar o número de bits a serem deslocados
@@ -631,7 +615,11 @@ always_comb
 begin
 
   // Se Sh e Shnt não são nulos (0), realiza o deslocamento
-  if (Sh != 2'b0 & Shnt != 5'b0) begin
+  if (ShiftOp) begin
+	
+	$display("in ScrB : %b",ScrB);
+
+	$display("shant5 : %b  | sh : %b", Shnt, Sh);
 
     // Verifica o tipo de deslocamento a ser realizado
     case (Sh)
