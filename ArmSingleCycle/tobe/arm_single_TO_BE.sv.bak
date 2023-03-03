@@ -129,23 +129,49 @@ module top(input  logic        clk, reset,
            output logic        MemWrite);
 
   logic [31:0] PC, Instr, ReadData;
+
+always@(negedge clk)
+begin
+$display(" ");
+$display("____ saída do top ____");
+$display("MemWrite  : %b",MemWrite);
+$display("B         : %b", Instr[22]);
+$display("DataAdr   : %b", DataAdr);
+$display("WriteData : %b", WriteData);
+$display("ReadData  : %b", ReadData);
+end
   
   // instantiate processor and memories
   arm arm(clk, reset, PC, Instr, MemWrite, DataAdr, WriteData, ReadData);
   imem imem(PC, Instr);
-  dmem dmem(clk, MemWrite, DataAdr, WriteData, ReadData);
+  dmem dmem(clk, MemWrite, Instr[22], DataAdr, WriteData, ReadData);
 endmodule
 
-module dmem(input  logic        clk, we,
+module dmem(input logic clk, we,
+	    input logic ByteFlag,
             input  logic [31:0] a, wd,
             output logic [31:0] rd);
 
   logic [31:0] RAM[63:0];
+  logic [31:0] wdb;
 
-  assign rd = RAM[a[31:2]]; // word aligned
+  always_comb
+	if (ByteFlag) begin
+		assign rd = RAM[a[31:2]] & 8'hFF;	
+	end else begin 
+		assign rd = RAM[a[31:2]]; // word aligned
+	end
 
   always_ff @(posedge clk)
-    if (we) RAM[a[31:2]] <= wd;
+    if (we) begin
+
+	if (ByteFlag) begin
+			assign wdb = wd & 8'hFF;
+			RAM[a[31:2]] <= wdb;
+		end else begin 
+			RAM[a[31:2]] <= wd;
+		end
+	end
 endmodule
 
 module imem(input  logic [31:0] a,
@@ -155,9 +181,10 @@ module imem(input  logic [31:0] a,
 
   initial
       	//$readmemh("memfile.dat",RAM);
-	//$readmemh("memfile_MOV_CMP.dat",RAM);
+	$readmemh("memfile_MOV_CMP.dat",RAM);
 	//$readmemh("memfile_TST_MVN_EOR.dat",RAM);
-	$readmemh("memfile_LSL_ASR.dat",RAM);
+	//$readmemh("memfile_LSL_ASR.dat",RAM);
+	//$readmemh("memfile_LDRB_STRB.dat",RAM);
 
   assign rd = RAM[a[31:2]]; // word aligned
 endmodule
@@ -181,7 +208,7 @@ counter <= counter+1;
 $display(" ");
 $display("____ saída do arm ____");
 $display("%dº INSTRUÇÂO",counter);
-$display("cond : %b | op   : %b | I    : %b | cmd  : %b | S    : %b",Instr[31:28],Instr[27:26],Instr[25],Instr[24:21], Instr[20]);
+$display("cond : %b | op   : %b | Funct   : %b ",Instr[31:28],Instr[27:26],Instr[25:20]);
 $display("Rn   : %b | Rd   : %b",Instr[19:16],Instr[15:12]);
 $display("Src2 : %b %b %b",Instr[11:8],Instr[7:4],Instr[3:0]);
 end
@@ -221,10 +248,7 @@ begin
 $display(" ");
 $display(" ");
 $display("____ saída do controller ____");
-$display("ALUBps  : %b",ALUBypass);
-$display("ShiftOp : %b",ShiftOp);
-$display("ALUSrc  : %b",ALUSrc);
-$display("PCS     : %b",PCS);
+$display("Instr  : %b",Instr);
 end
 
   
@@ -336,10 +360,16 @@ module decoder(input  logic [1:0] Op,
 
 		case(Funct[0])
 			
-		// LDR
+		// LDR 
 		1'b1: controls = 12'b000111100000; 
 
 		// STR
+		1'b0: controls = 12'b100111010000;
+
+		// LDRB
+		1'b1: controls = 12'b000111100000; 
+
+		// STRB
 		1'b0: controls = 12'b100111010000; 
 
 		// Unimplemented
@@ -555,8 +585,8 @@ end
   extend      ext(Instr[23:0], ImmSrc, ExtImm);
 
   // ALU logic
-  shifter     s(ShiftOp, Instr[6:5], Instr[11:7], WriteData, SrcB);
-  mux2 #(32)  srcbmux(WriteData, ExtImm, ALUSrc, SrcB);
+  shifter     s(ShiftOp, Instr[6:5], Instr[11:7], WriteData, Shifted);
+  mux2 #(32)  srcbmux(Shifted, ExtImm, ALUSrc, SrcB);
   alu         alu(SrcA, SrcB, ALUControl, ALUResult, ALUFlags);
 
 endmodule

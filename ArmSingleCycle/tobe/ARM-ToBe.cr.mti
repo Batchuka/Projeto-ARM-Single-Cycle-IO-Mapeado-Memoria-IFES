@@ -1,1 +1,25 @@
+C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IFES/ArmSingleCycle/tobe/arm_single_TO_BE.sv {1 {vlog -work work -sv -stats=none C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IFES/ArmSingleCycle/tobe/arm_single_TO_BE.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2019.2 Compiler 2019.04 Apr 17 2019
+-- Compiling module testbench
+-- Compiling module top
+-- Compiling module dmem
+-- Compiling module imem
+-- Compiling module arm
+-- Compiling module controller
+-- Compiling module decoder
+-- Compiling module condlogic
+-- Compiling module condcheck
+-- Compiling module datapath
+-- Compiling module regfile
+-- Compiling module shifter
+-- Compiling module extend
+-- Compiling module adder
+-- Compiling module flopenr
+-- Compiling module flopr
+-- Compiling module mux2
+-- Compiling module alu
 
+Top level modules:
+	testbench
+
+} {} {}}
