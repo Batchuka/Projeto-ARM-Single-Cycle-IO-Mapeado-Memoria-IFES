@@ -1,0 +1,27 @@
+C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IO-Mapeado-Memoria-IFES/ArmPipeCycle/arm_pipelined.sv {1 {vlog -work work -sv -stats=none C:/Users/Mathe/Desktop/projetos/Projeto-ARM-Single-Cycle-IO-Mapeado-Memoria-IFES/ArmPipeCycle/arm_pipelined.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2019.2 Compiler 2019.04 Apr 17 2019
+-- Compiling module testbench
+-- Compiling module top
+-- Compiling module dmem
+-- Compiling module imem
+-- Compiling module arm
+-- Compiling module controller
+-- Compiling module conditional
+-- Compiling module datapath
+-- Compiling module hazard
+-- Compiling module regfile
+-- Compiling module extend
+-- Compiling module alu
+-- Compiling module adder
+-- Compiling module flopenr
+-- Compiling module flopr
+-- Compiling module flopenrc
+-- Compiling module floprc
+-- Compiling module mux2
+-- Compiling module mux3
+-- Compiling module eqcmp
+
+Top level modules:
+	testbench
+
+} {} {}}
